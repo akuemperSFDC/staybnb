@@ -1,0 +1,344 @@
+.create-listing-container {
+  background: none;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.left-side-question-container {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3rem;
+  color: white;
+  font-size: 45px;
+  line-height: 4rem;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 9, 106, 1) 51%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.right-side-selection-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.right-side-bg-img {
+  position: absolute;
+  background: url('https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2020%2F02%2F06%2Fgoogle-maps-update-what-google-maps-can-do.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.7;
+}
+
+.answer-selection-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.bottom-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  background-color: #e4e4e4;
+  height: 75px;
+}
+
+.bottom-buttons {
+  user-select: none;
+}
+
+.back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 3rem;
+  background-color: rgba(230, 230, 230, 0);
+  margin-left: 4rem;
+  text-decoration: underline;
+  border-radius: 10px;
+}
+
+.back-btn:hover {
+  background-color: rgba(142, 142, 142, 0.098);
+}
+
+.next-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 3rem;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  margin-right: 4rem;
+  border-radius: 10px;
+}
+
+.next-btn:hover {
+  background-color: rgb(0, 0, 0);
+}
+
+.address-form-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  width: 75%;
+  background-color: white;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  position: relative;
+  padding-bottom: 30px;
+  box-shadow: 4px 4px 20px 1px rgba(0, 0, 0, 0.5);
+}
+
+.form-title {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  padding-bottom: 4rem;
+}
+
+.autocomplete-dropdown-container {
+  border: 1px solid #acacac;
+  position: absolute;
+  top: 35%;
+  width: 92%;
+  /* z-index: 1; */
+  border-bottom: none;
+  border-top: none;
+  /* color: #61c3ff; */
+}
+
+.suggestion-item,
+.suggestion-item--active {
+  border-bottom: 1px solid #acacac;
+  padding: 1rem;
+  /* z-index: 1; */
+}
+
+.suggestion-item:first-child,
+.suggestion-item--active:first-child {
+  border-top: 1px solid #acacac;
+  padding: 1rem;
+}
+
+.address-form-inputs {
+  width: 92%;
+  height: 50px;
+  padding: 1rem;
+}
+
+.address-form-inputs:focus {
+  outline: none;
+}
+
+.location-search-input {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.location-search-input,
+.apt-number-input,
+.city-input,
+.state-input {
+  border: 1px solid #acacac;
+  border-bottom: none;
+}
+
+.country-input {
+  border: 1px solid #acacac;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.suggestion-item:last-child,
+.autocomplete-dropdown-container {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.bottom-buttons {
+  cursor: pointer;
+}
+
+.answer-selection-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.choice-box {
+  width: 75%;
+  height: 90px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.379);
+  border: 2px solid #00000000;
+  text-align: left;
+  font-size: 20px;
+  padding-left: 1rem;
+  user-select: none;
+  transition: 0.35s;
+}
+
+.choice-box:hover {
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.choice-box.active {
+  border: 2px solid #000000;
+  cursor: pointer;
+
+  background-color: rgba(0, 0, 0, 0.071);
+}
+
+.minus-button,
+.plus-button {
+  height: 30px;
+  width: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.468);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  z-index: initial;
+  position: relative;
+  cursor: pointer;
+}
+
+.minus-button:hover,
+.plus-button:hover {
+  border: 1px solid rgba(19, 19, 19, 0.851);
+}
+
+.plus-icon {
+  font-size: 20px;
+}
+
+.count-selector-container {
+  display: flex;
+  width: 75%;
+  height: 80px;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.count-buttons {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  justify-content: space-between;
+}
+
+.choice-counter-text {
+  font-size: 28px;
+}
+
+.plus-icon,
+.minus-icon {
+  position: absolute;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.plus-button.inactive,
+.minus-button.inactive {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
+.plus-button.inactive:hover,
+.minus-button.inactive:hover {
+  cursor: not-allowed;
+  border: 1px solid rgba(0, 0, 0, 0.468);
+  opacity: 0.3;
+}
+
+.plus-button.inactive > *,
+.minus-button.inactive > * {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.minus-icon.inactive:hover,
+.plus-icon.inactive:hover {
+  cursor: not-allowed;
+}
+
+.amenity-selection-container {
+  display: flex;
+  height: 100%;
+  width: 75%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.amenity-square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 142px;
+  height: 142px;
+  background-color: transparent;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.379);
+  border: 2px solid #00000000;
+  user-select: none;
+  border-radius: 12px;
+  transition: 0.35s;
+}
+
+.amenity-square:hover,
+.amenity-square.active {
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.amenity-square.active {
+  background-color: rgba(0, 0, 0, 0.071);
+}
+
+.amenity-icon {
+  font-size: 40px;
+  padding-bottom: 10px;
+  z-index: -1;
+}
+
+.amenity-text {
+  z-index: -1;
+}

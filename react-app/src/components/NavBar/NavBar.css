@@ -6,6 +6,7 @@
   position: fixed;
   background: transparent;
   z-index: 1;
+  padding-top: 2rem;
 }
 
 .navbar-container-left {
@@ -22,6 +23,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-right: 7px;
 }
 
 .profile-button {
@@ -33,10 +35,72 @@
   align-items: center;
   justify-content: space-around;
   user-select: none;
+  position: relative;
+  cursor: pointer;
 }
 
 .site-name {
   color: white;
   font-size: 30px;
+  text-decoration: none;
 }
 
+.list-icon {
+  font-size: 20px;
+  margin-left: 7px;
+}
+
+.profile-dropdown {
+  background-color: white;
+  height: 300px;
+  width: 230px;
+  position: absolute;
+  right: 65px;
+  top: 85px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.link-decoration {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-decoration:visited {
+  color: inherit;
+}
+
+.profile-dropdown-element {
+  width: 100%;
+  height: 80px;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.profile-dropdown-element:first-child {
+  cursor: default;
+}
+
+.profile-links:hover {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.064);
+}
+
+.border-top-element {
+  border-top: 1px solid rgba(0, 0, 0, 0.221);
+}
+
+.profile-links:hover:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.profile-links:last-child {
+  color: rgba(255, 0, 0, 0.844);
+}

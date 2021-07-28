@@ -1,9 +1,8 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store/session';
 import ProfileButton from './ProfileButton';
-import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
 
 const NavBar = ({ loaded }) => {
@@ -40,34 +39,11 @@ const NavBar = ({ loaded }) => {
     <nav>
       <div className='navbar-container'>
         <div className='navbar-container-left'>
-          <div className='site-name'>staybnb</div>
+          <Link className='site-name' to='/'>
+            <div>staybnb</div>
+          </Link>
         </div>
-        <div className='navbar-container-right'>
-          {loaded && sessionLinks}
-          {/* <div>
-            <NavLink to='/' exact={true} activeClassName='active'>
-              Home
-            </NavLink>
-          </div>
-          <div>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-          </div>
-          <div>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-          </div>
-          <div>
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>
-          </div>
-          <div>
-            <LogoutButton />
-          </div> */}
-        </div>
+        <div className='navbar-container-right'>{loaded && sessionLinks}</div>
       </div>
     </nav>
   );

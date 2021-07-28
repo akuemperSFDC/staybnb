@@ -39,16 +39,29 @@ const ProfileButton = ({ user }) => {
       </div>
       <div className='profile-dropdown-container arrow-top'>
         {showMenu && (
-          <div className='profile-dropdown arrow-top content-decoration'>
-            <div>{user.email}</div>
-
-            <Link className='creat-listing' to='/create-listing'>
-              Create Listing
-            </Link>
-            <div>
-              <button className='btn-logout' onClick={logout}>
-                Log Out
-              </button>
+          <div className='profile-dropdown'>
+            <div className='profile-dropdown-element'>
+              <p>{user.email}</p>
+            </div>
+            <div className='border-top-element profile-dropdown-element profile-links'>
+              <Link className='link-decoration' to='/bookings'>
+                View bookings
+              </Link>
+            </div>
+            <div className='border-top-element profile-dropdown-element profile-links'>
+              <Link className='link-decoration' to='/create-listing/type'>
+                Create listing
+              </Link>
+            </div>
+            <div className='profile-dropdown-element profile-links'>
+              <Link className='link-decoration' to='/listings'>
+                View listings
+              </Link>
+            </div>
+            <div className='border-top-element profile-dropdown-element profile-links'>
+              <div className='btn-logout' onClick={logout}>
+                Log out
+              </div>
             </div>
           </div>
         )}

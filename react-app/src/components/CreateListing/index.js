@@ -21,37 +21,47 @@ const CreateListing = () => {
   const user = useSelector((state) => state.session.user);
   const [question, setQuestion] = useState(questions[0]);
   const [index, setIndex] = useState(0);
+  const [disable, setDisable] = useState('false');
 
   const handleNext = (e) => {
-    if (pathname === '/create-listing/type') {
+    if (pathname === '/create-listing/type' && listing?.type) {
+      setDisable('false');
       history.push('/create-listing/space');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/space') {
+    } else if (pathname === '/create-listing/space' && listing?.space) {
+      setDisable('false');
       history.push('/create-listing/address');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/address') {
+    } else if (pathname === '/create-listing/address' && listing?.address) {
+      setDisable('false');
       history.push('/create-listing/guests');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
     } else if (pathname === '/create-listing/guests') {
+      setDisable('false');
       history.push('/create-listing/amenities');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
     } else if (pathname === '/create-listing/amenities') {
+      setDisable('false');
       history.push('/create-listing/details');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/details') {
+    } else if (pathname === '/create-listing/details' && listing?.title) {
+      setDisable('false');
       history.push('/create-listing/photos');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
       e.target.innerHTML = 'Submit';
     } else if (pathname === '/create-listing/photos') {
+      setDisable('false');
       e.preventDefault();
       dispatch(createListing(listing));
       history.push('/listings');
+    } else {
+      setDisable('true');
     }
   };
 
@@ -146,8 +156,9 @@ const CreateListing = () => {
           </div>
           <div
             id='next'
-            className='bottom-buttons next-btn'
+            className={`bottom-buttons next-btn`}
             onClick={handleNext}
+            disabled={disable}
           >
             Next
           </div>

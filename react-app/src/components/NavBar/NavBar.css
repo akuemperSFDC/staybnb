@@ -3,7 +3,7 @@
   display: flex;
   padding: 1rem;
   justify-content: space-between;
-  position: fixed;
+  /* position: fixed; */
   background: transparent;
   z-index: 1;
   padding-top: 2rem;

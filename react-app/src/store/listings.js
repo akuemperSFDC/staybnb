@@ -27,7 +27,6 @@ const initialState = {};
 
 export default function reducer(state = initialState, action) {
   let newState;
-  console.log(action);
   switch (action.type) {
     case SET_LISTINGS:
       const { listings } = action.listings;

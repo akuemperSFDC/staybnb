@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from flask import request
 from sqlalchemy import func
 from app.forms import ListingForm
-from app.models import Listing, db
+from app.models import Listing, db, Listing_Image
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -20,36 +20,14 @@ def validation_errors_to_error_messages(validation_errors):
 @listing_routes.route('/')
 def listings():
     listings = Listing.query.all()
-    # listing_images = Listing_Image.query.all()
-    # listings = listings.to_dict()
-
-    # for listing in listings.listing_images:
-    #     print(listing.to_dict())
-
-    # print('-------------------------', listings.listing_images.to_dict())
-
-    # listing_with_images = []
-    # for listing in listings:
-    #     l = listing.to_dict()
-    #     for image in listing.listing_images:
-    #         # print('--------------------', image.to_dict())
-    #         l.update(image.to_dict())
-    #         listing_with_images.append(l)
-
-    # print('-------------------------', listing_with_images)
-
-    # print('----------------------------------', listing_with_images)
-
 
     return {'listings': [listing.to_dict() for listing in listings]}
-
 
 
 # Create a new listing
 @listing_routes.route('/', methods=['POST'])
 # @login_required
 def post_listing():
-    print('--------------------------------', request.json)
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -86,24 +64,29 @@ def post_listing():
     return {'errors': form.errors}
 
 
-
 # Get all listings based on user id
 @listing_routes.route('/users/<int:user_id>')
 def listings_from_user_id(user_id):
-    listings = Listing.query.filter(Listing.user_id == (user_id)).all()
 
-    return {'listings': [listing.to_dict() for listing in listings]}
+    listings = db.session.query(Listing).join(Listing_Image).filter(Listing.user_id == (user_id)).all()
+
+    my_listings = []
+    for listing in listings:
+        listing_dict = listing.to_dict()
+        listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_dict['listing_images'] = listing_images
+        my_listings.append(listing_dict)
+
+    return {'listings': my_listings}
 
 
 # Get listing for specified listing id
 @listing_routes.route('/<int:listing_id>')
 def listings_from_listing_id(listing_id):
     listing = Listing.query.get(listing_id)
-    print('--------------------------------', listing)
     listing = listing.to_dict()
 
     return {'listing': listing}
-
 
 
 # Returns listings for specified city and state
@@ -121,6 +104,7 @@ def listings_from_city(city, state):
 
 
     return {'listing': [listing.to_dict() for listing in same_listings]}
+
 
 # Update an exisiting listing
 @listing_routes.route('/<int:listing_id>', methods=['PUT'])
@@ -158,6 +142,7 @@ def edit_listing(listing_id):
         return exisiting_listing.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
 
 @listing_routes.route('/<int:listing_id>', methods=['DELETE'])
 # @login_required

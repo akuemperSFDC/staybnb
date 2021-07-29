@@ -97,6 +97,15 @@ const Guests = () => {
           bathrooms: bathroomCount,
         })
       );
+    } else {
+      dispatch(
+        setKey({
+          sleeps: guestCount,
+          beds: bedCount,
+          bedrooms: bedroomCount,
+          bathrooms: bathroomCount,
+        })
+      );
     }
   }, [guestCount, bedCount, bedroomCount, bathroomCount, dispatch, update]);
 

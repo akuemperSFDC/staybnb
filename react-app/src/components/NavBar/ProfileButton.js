@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import { BsList } from 'react-icons/bs';
 
+
 const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -41,21 +42,38 @@ const ProfileButton = ({ user }) => {
             <div className='profile-dropdown-element'>
               <p>{user.email}</p>
             </div>
-            <div className='border-top-element profile-dropdown-element profile-links'>
+            <Link
+              to='/'
+              className='border-top-element profile-dropdown-element profile-links'
+            >
+              <Link className='link-decoration' to='/'>
+                Home
+              </Link>
+            </Link>
+            <Link
+              to='/bookings'
+              className='border-top-element profile-dropdown-element profile-links'
+            >
               <Link className='link-decoration' to='/bookings'>
                 Manage bookings
               </Link>
-            </div>
-            <div className='border-top-element profile-dropdown-element profile-links'>
+            </Link>
+            <Link
+              to='/create-listing/type'
+              className='border-top-element profile-dropdown-element profile-links'
+            >
               <Link className='link-decoration' to='/create-listing/type'>
                 Create listing
               </Link>
-            </div>
-            <div className='profile-dropdown-element profile-links'>
+            </Link>
+            <Link
+              to='/listings'
+              className='profile-dropdown-element profile-links'
+            >
               <Link className='link-decoration' to='/listings'>
                 Manage listings
               </Link>
-            </div>
+            </Link>
             <div className='border-top-element profile-dropdown-element profile-links'>
               <div className='btn-logout' onClick={logout}>
                 Log out

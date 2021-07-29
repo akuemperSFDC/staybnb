@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getListings } from '../../store/listings';
 import { useEffect } from 'react';
-
+import ImageSlider from '../ImageSlider';
 import './ManageListings.css';
 
 const ManageListings = () => {
@@ -17,6 +17,7 @@ const ManageListings = () => {
 
   return (
     <div className='manage-listings-container'>
+      <ImageSlider />
       {listings?.map((listing, index) => (
         <div key={index} className='manage-listings-showcase'>
           <div className='title-header'>

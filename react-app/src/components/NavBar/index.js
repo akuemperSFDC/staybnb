@@ -1,7 +1,8 @@
-import React from 'react';
-import { NavLink, useHistory, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, useHistory, Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store/session';
+import { setState } from '../../store/componentStates';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
 
@@ -11,6 +12,18 @@ const NavBar = ({ loaded }) => {
   const history = useHistory();
   const email = 'demo@aa.io';
   const password = 'password';
+  const { pathname } = useLocation();
+
+  const [absolute, setAbsolute] = useState('');
+
+  useEffect(() => {
+    if (pathname === '/' || pathname.includes('/create-listing/')) {
+      setAbsolute('absolute');
+      dispatch(setState({ navbarStyling: 'absolute' }));
+    } else {
+      setAbsolute('');
+    }
+  }, [pathname, dispatch]);
 
   const onDemoSignIn = async (e) => {
     e.preventDefault();
@@ -37,7 +50,7 @@ const NavBar = ({ loaded }) => {
 
   return (
     <nav>
-      <div className='navbar-container'>
+      <div className={`navbar-container ${absolute}`}>
         <div className='navbar-container-left'>
           <Link className='site-name' to='/'>
             <div>staybnb</div>

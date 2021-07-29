@@ -67,7 +67,7 @@ const CreateListing = () => {
 
   useEffect(() => {
     listing.user_id = user.id;
-  }, [dispatch, listing, user.id]);
+  }, [dispatch, listing, user.id, pathname]);
 
   const handleBack = (e) => {
     if (pathname === '/create-listing/type') {

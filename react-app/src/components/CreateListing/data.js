@@ -4,6 +4,7 @@ export const questions = [
   "Where's your place located?",
   'How many guests would you like to welcome?',
   'Let guests know what your place has to offer',
+  'Help your guests out by filling in some details',
   "Next, let's add some photos of your place",
 ];
 

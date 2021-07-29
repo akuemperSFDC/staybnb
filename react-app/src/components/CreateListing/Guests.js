@@ -1,59 +1,104 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setKey } from '../../store/createListing';
 import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import './CreateListing.css';
 
 const Guests = () => {
-  const [guestCount, setGuestCount] = useState(4);
+  const dispatch = useDispatch();
+
+  const [guestCount, setGuestCount] = useState(1);
   const [bedCount, setBedCount] = useState(1);
   const [bedroomCount, setBedroomCount] = useState(1);
   const [bathroomCount, setBathroomCount] = useState(1);
+  const [update, setUpdate] = useState(false);
 
   const handleCountDown = (e) => {
     if (guestCount === 1) {
       setGuestCount(1);
+      setUpdate(true);
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount - 1);
+      setUpdate(true);
     }
     if (bedCount === 1) {
       setBedCount(1);
+      setUpdate(true);
     } else if (e.target.id === 'bed') {
       setBedCount((prevBedCount) => prevBedCount - 1);
+      setUpdate(true);
     }
     if (bedroomCount === 1) {
       setBedroomCount(1);
+      setUpdate(true);
     } else if (e.target.id === 'bedroom') {
       setBedroomCount((prevBedroomCount) => prevBedroomCount - 1);
+      setUpdate(true);
     }
     if (bathroomCount === 0.5) {
       setBathroomCount(0.5);
+      setUpdate(true);
     } else if (e.target.id === 'bathroom') {
       setBathroomCount((prevBathroomCount) => prevBathroomCount - 0.5);
+      setUpdate(true);
     }
   };
 
   const handleCountUp = (e) => {
     if (guestCount === 16) {
       setGuestCount(16);
+      setUpdate(true);
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount + 1);
+      setUpdate(true);
     }
     if (bedCount === 50) {
       setBedCount(50);
+      setUpdate(true);
     } else if (e.target.id === 'bed') {
       setBedCount((prevBedCount) => prevBedCount + 1);
+      setUpdate(true);
     }
     if (bedroomCount === 50) {
       setBedroomCount(50);
+      setUpdate(true);
     } else if (e.target.id === 'bedroom') {
       setBedroomCount((prevBedroomCount) => prevBedroomCount + 1);
+      setUpdate(true);
     }
     if (bathroomCount === 50) {
       setBathroomCount(50);
+      setUpdate(true);
     } else if (e.target.id === 'bathroom') {
       setBathroomCount((prevBathroomCount) => prevBathroomCount + 0.5);
+      setUpdate(true);
     }
   };
+
+  // const handleCounts = () => {
+  //   dispatch(
+  //     setKey({
+  //       sleeps: guestCount,
+  //       beds: bedCount,
+  //       bedrooms: bedroomCount,
+  //       bathrooms: bathroomCount,
+  //     })
+  //   );
+  // };
+
+  useEffect(() => {
+    if (update) {
+      dispatch(
+        setKey({
+          sleeps: guestCount,
+          beds: bedCount,
+          bedrooms: bedroomCount,
+          bathrooms: bathroomCount,
+        })
+      );
+    }
+  }, [guestCount, bedCount, bedroomCount, bathroomCount, dispatch, update]);
 
   return (
     <div className='answer-selection-container'>

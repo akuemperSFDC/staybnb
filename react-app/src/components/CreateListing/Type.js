@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { typeOfPlace } from './data';
+import { useDispatch, useSelector } from 'react-redux';
+import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
 const Type = () => {
+  const dispatch = useDispatch();
+  const { type } = useSelector((state) => state.createListing);
+
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState();
   const [active, setActive] = useState(null);
@@ -10,16 +15,19 @@ const Type = () => {
 
   const handleSelection = (e, i) => {
     if (i === Number(e.target.id)) {
+      console.log(e.target.value);
       setActive('active');
       setAriaChecked('true');
       setSelectedElementIndex(-1);
       e.target.id = selectedElementIndex;
+      dispatch(setKey({ type: e.target.value }));
     } else {
       setSelected();
       setActive('');
       setAriaChecked('false');
       setSelectedElementIndex(i);
       e.target.id = selectedElementIndex;
+      dispatch(removeKey({ type: e.target.value }));
     }
   };
 

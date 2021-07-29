@@ -2,8 +2,7 @@ from flask import Blueprint, jsonify
 from flask import request
 from sqlalchemy import func
 from app.forms import ListingForm
-from app.models import Listing, Listing_Image, db
-import random
+from app.models import Listing, db
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -45,47 +44,12 @@ def listings():
     return {'listings': [listing.to_dict() for listing in listings]}
 
 
-# Get all listings based on user id
-@listing_routes.route('/users/<int:user_id>')
-def listings_from_user_id(user_id):
-    listings = Listing.query.filter(Listing.user_id == (user_id)).all()
-
-    return {'listings': [listing.to_dict() for listing in listings]}
-
-
-# Get listing for specified listing id
-@listing_routes.route('/<int:listing_id>')
-def listings_from_listing_id(listing_id):
-    listing = Listing.query.get(listing_id)
-    print('--------------------------------', listing)
-    listing = listing.to_dict()
-
-    return {'listing': listing}
-
-
-
-# Returns listings for specified city and state
-@listing_routes.route('/<city>+<state>')
-def listings_from_city(city, state):
-    city = city.lower()
-    state = state.lower()
-    city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()
-    state_listings = Listing.query.filter(func.lower(Listing.state) == state).all()
-
-    city_listings = set(city_listings)
-    # Only include listings that are both in the city and state
-    same_listings = city_listings.intersection(state_listings)
-    same_listings = list(same_listings)
-
-
-    return {'listing': [listing.to_dict() for listing in same_listings]}
-
 
 # Create a new listing
 @listing_routes.route('/', methods=['POST'])
 # @login_required
 def post_listing():
-
+    print('--------------------------------', request.json)
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -121,6 +85,42 @@ def post_listing():
 
     return {'errors': form.errors}
 
+
+
+# Get all listings based on user id
+@listing_routes.route('/users/<int:user_id>')
+def listings_from_user_id(user_id):
+    listings = Listing.query.filter(Listing.user_id == (user_id)).all()
+
+    return {'listings': [listing.to_dict() for listing in listings]}
+
+
+# Get listing for specified listing id
+@listing_routes.route('/<int:listing_id>')
+def listings_from_listing_id(listing_id):
+    listing = Listing.query.get(listing_id)
+    print('--------------------------------', listing)
+    listing = listing.to_dict()
+
+    return {'listing': listing}
+
+
+
+# Returns listings for specified city and state
+@listing_routes.route('/<city>+<state>')
+def listings_from_city(city, state):
+    city = city.lower()
+    state = state.lower()
+    city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()
+    state_listings = Listing.query.filter(func.lower(Listing.state) == state).all()
+
+    city_listings = set(city_listings)
+    # Only include listings that are both in the city and state
+    same_listings = city_listings.intersection(state_listings)
+    same_listings = list(same_listings)
+
+
+    return {'listing': [listing.to_dict() for listing in same_listings]}
 
 # Update an exisiting listing
 @listing_routes.route('/<int:listing_id>', methods=['PUT'])

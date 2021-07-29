@@ -4,8 +4,10 @@ import ProtectedRoute from '../auth/ProtectedRoute';
 import Type from './Type';
 import Space from './Space';
 import Autocomplete from './Autocomplete';
-import Guests from './Guests'
-import Amenities from './Amenities'
+import Guests from './Guests';
+import Amenities from './Amenities';
+import Details from './Details';
+import { createListing } from '../../store/createListing';
 import { questions } from './data';
 import { useDispatch, useSelector } from 'react-redux';
 import './CreateListing.css';
@@ -13,7 +15,10 @@ import './CreateListing.css';
 const CreateListing = () => {
   const history = useHistory();
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
+  const listing = useSelector((state) => state.createListing);
+  const user = useSelector((state) => state.session.user);
   const [question, setQuestion] = useState(questions[0]);
   const [index, setIndex] = useState(0);
 
@@ -35,16 +40,26 @@ const CreateListing = () => {
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
     } else if (pathname === '/create-listing/amenities') {
+      history.push('/create-listing/details');
+      setIndex((prevIndex) => prevIndex + 1);
+      setQuestion(questions[index]);
+    } else if (pathname === '/create-listing/details') {
       history.push('/create-listing/photos');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
       e.target.innerHTML = 'Submit';
     } else if (pathname === '/create-listing/photos') {
+      e.preventDefault();
+      dispatch(createListing(listing));
       history.push('/listings');
     }
   };
 
-  const handleBack = () => {
+  useEffect(() => {
+    listing.user_id = user.id;
+  }, [dispatch, listing, user.id]);
+
+  const handleBack = (e) => {
     if (pathname === '/create-listing/type') {
       history.push('/');
       setIndex((prevIndex) => prevIndex - 1);
@@ -65,11 +80,21 @@ const CreateListing = () => {
       history.push('/create-listing/guests');
       setIndex((prevIndex) => prevIndex - 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/photos') {
+    } else if (pathname === '/create-listing/details') {
       history.push('/create-listing/amenities');
       setIndex((prevIndex) => prevIndex - 1);
       setQuestion(questions[index]);
+    } else if (pathname === '/create-listing/photos') {
+      history.push('/create-listing/details');
+      changeSubmitToNextOnBackButtonPress();
+      setIndex((prevIndex) => prevIndex - 1);
+      setQuestion(questions[index]);
     }
+  };
+
+  const changeSubmitToNextOnBackButtonPress = (e) => {
+    const next = document.getElementById('next');
+    if (next.innerHTML === 'Submit') next.innerHTML = 'Next';
   };
 
   useEffect(() => {
@@ -106,6 +131,11 @@ const CreateListing = () => {
           </ProtectedRoute>
         ) : null}
         {question === questions[5] ? (
+          <ProtectedRoute path='/create-listing/details'>
+            <Details />
+          </ProtectedRoute>
+        ) : null}
+        {question === questions[6] ? (
           <ProtectedRoute path='/create-listing/photos'>
             <div>Photos</div>
           </ProtectedRoute>
@@ -114,7 +144,11 @@ const CreateListing = () => {
           <div className='bottom-buttons back-btn' onClick={handleBack}>
             Back
           </div>
-          <div className='bottom-buttons next-btn' onClick={handleNext}>
+          <div
+            id='next'
+            className='bottom-buttons next-btn'
+            onClick={handleNext}
+          >
             Next
           </div>
         </div>

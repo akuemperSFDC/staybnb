@@ -19,17 +19,72 @@ export const removeKey = (data) => ({
 });
 
 export const createListing = (listing) => async (dispatch) => {
+  const {
+    user_id,
+    type,
+    space,
+    address,
+    city,
+    state,
+    country,
+    latitude,
+    longitude,
+    wifi,
+    air_conditioning,
+    heat,
+    title,
+    description,
+    pricePerNight,
+    cleaningFee,
+    checkInTime,
+    checkInType,
+    parking,
+    bedrooms,
+    beds,
+    bathrooms,
+    sleeps,
+  } = listing;
+
+  const cleaningFeeNum = Number(cleaningFee);
+  const pricePerNightNum = Number(pricePerNight);
+
+  console.log(listing);
   const response = await fetch('/api/listings/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(listing),
+    body: JSON.stringify({
+      user_id: user_id,
+      type: type,
+      space: space,
+      title: title,
+      description: description,
+      country: country,
+      city: city,
+      state: state,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      price_per_night: pricePerNightNum,
+      cleaning_fee: cleaningFeeNum,
+      check_in_time: checkInTime,
+      check_in_type: checkInType,
+      wifi: wifi,
+      air_conditioning: air_conditioning,
+      heat: heat,
+      parking: parking,
+      bedrooms: bedrooms,
+      beds: beds,
+      bathrooms: bathrooms,
+      sleeps: sleeps,
+    }),
   });
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(setListing(data));
+    const listing = await response.json();
+    console.log(listing);
+    dispatch(setListing(listing));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -47,10 +102,20 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_KEY:
-      newState = { ...state, ...action.key };
+      console.log(action.type);
+      newState = { ...state, ...action.data };
       return newState;
     case REMOVE_KEY:
-      return { user: null };
+      newState = { ...state };
+      const keys = Object.keys(action.data);
+      keys.forEach((key) => {
+        delete newState[key];
+      });
+      return newState;
+    case SET_LISTING:
+      console.log(action);
+      newState = { ...state, ...action.listing.listing };
+      return newState;
     default:
       return state;
   }

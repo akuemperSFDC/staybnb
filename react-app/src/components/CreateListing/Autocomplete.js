@@ -5,8 +5,12 @@ import {
   getLatLng,
 } from 'react-places-autocomplete';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setKey } from '../../store/createListing';
 
 const Autocomplete = () => {
+  const dispatch = useDispatch();
+
   const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState({
     lat: null,
@@ -22,6 +26,7 @@ const Autocomplete = () => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
+    const { lat, lng } = ll;
     const split = value.split(',');
     if (split.length === 3) {
       setAddress('');
@@ -29,12 +34,32 @@ const Autocomplete = () => {
       setState(split[1]);
       setCountry(split[2]);
       setCoordinates(ll);
+      dispatch(
+        setKey({
+          address: '',
+          city: split[0],
+          state: split[1],
+          country: split[2],
+          latitude: lat,
+          longitude: lng,
+        })
+      );
     } else {
       setAddress(split[0]);
       setCity(split[1]);
       setState(split[2]);
       setCountry(split[3]);
       setCoordinates(ll);
+      dispatch(
+        setKey({
+          address: split[0],
+          city: split[1],
+          state: split[2],
+          country: split[3],
+          latitude: lat,
+          longitude: lng,
+        })
+      );
     }
   };
 

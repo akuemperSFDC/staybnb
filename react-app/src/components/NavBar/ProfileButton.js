@@ -8,8 +8,6 @@ const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
-  console.log(user);
-
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -45,7 +43,7 @@ const ProfileButton = ({ user }) => {
             </div>
             <div className='border-top-element profile-dropdown-element profile-links'>
               <Link className='link-decoration' to='/bookings'>
-                View bookings
+                Manage bookings
               </Link>
             </div>
             <div className='border-top-element profile-dropdown-element profile-links'>
@@ -55,7 +53,7 @@ const ProfileButton = ({ user }) => {
             </div>
             <div className='profile-dropdown-element profile-links'>
               <Link className='link-decoration' to='/listings'>
-                View listings
+                Manage listings
               </Link>
             </div>
             <div className='border-top-element profile-dropdown-element profile-links'>

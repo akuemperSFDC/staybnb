@@ -17,7 +17,6 @@ const ManageListings = () => {
 
   const formatCheckinTime = (time) => {
     const [hour, minutes] = time.split(':');
-    console.log(Number(hour));
     if (Number(hour) === 12) {
       return '12:00 PM';
     } else if (Number(hour) > 12) {
@@ -63,7 +62,8 @@ const ManageListings = () => {
           <div className='photos-container'>
             <div className='top-border-info'></div>
             <div className='photos-heading '>Photos</div>
-            {listing?.listing_images.length >= 1 ? (
+            {listing?.listing_images.length &&
+            listing?.listing_images.length >= 1 ? (
               <ImageSlider
                 className='manage-listings-slider'
                 images={listing?.listing_images}

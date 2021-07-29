@@ -1,7 +1,7 @@
 // constants
-const SET_LISTINGS = 'createListing/SET_LISTINGS';
+const SET_LISTINGS = 'listings/SET_LISTINGS';
 
-const setListing = (listings) => ({
+const setListings = (listings) => ({
   type: SET_LISTINGS,
   listings,
 });
@@ -11,8 +11,7 @@ export const getListings = (id) => async (dispatch) => {
 
   if (response.ok) {
     const listings = await response.json();
-    console.log(listings);
-    dispatch(setListing(listings));
+    dispatch(setListings(listings));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();

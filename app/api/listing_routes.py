@@ -82,13 +82,17 @@ def listings_from_user_id(user_id):
     return {'listings': my_listings}
 
 
-# Get listing for specified listing id
+#Get listing by listingId
 @listing_routes.route('/<int:listing_id>')
 def listings_from_listing_id(listing_id):
-    listing = Listing.query.get(listing_id)
-    listing = listing.to_dict()
 
-    return {'listing': listing}
+    listing = Listing.query.get(listing_id)
+    listing_dict = listing.to_dict()
+    listing_images = [list.to_dict() for list in listing.listing_images]
+    listing_dict['listing_images'] = listing_images
+
+
+    return {'listing': listing_dict}
 
 
 # Returns listings for specified city and state
@@ -146,6 +150,7 @@ def edit_listing(listing_id):
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
+#Delete listing
 @listing_routes.route('/<int:listing_id>', methods=['DELETE'])
 # @login_required
 def delete_listing(listing_id):

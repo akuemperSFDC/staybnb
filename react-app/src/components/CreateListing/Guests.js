@@ -76,17 +76,6 @@ const Guests = () => {
     }
   };
 
-  // const handleCounts = () => {
-  //   dispatch(
-  //     setKey({
-  //       sleeps: guestCount,
-  //       beds: bedCount,
-  //       bedrooms: bedroomCount,
-  //       bathrooms: bathroomCount,
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     if (update) {
       dispatch(

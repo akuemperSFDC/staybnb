@@ -10,8 +10,8 @@ const Details = () => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [pricePerNight, setPricePerNight] = useState('0');
-  const [cleaningFee, setCleaningFee] = useState('0');
+  const [pricePerNight, setPricePerNight] = useState('1');
+  const [cleaningFee, setCleaningFee] = useState('1');
   const [checkInTime, setCheckInTime] = useState('15:00');
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
@@ -65,6 +65,7 @@ const Details = () => {
             className='details-inputs'
             type='number'
             placeholder='Nightly price'
+            max={99999}
           ></input>
           <input
             onChange={(e) => setCleaningFee(e.target.value)}
@@ -72,6 +73,7 @@ const Details = () => {
             className='details-inputs'
             type='number'
             placeholder='Cleaning fee'
+            min={1}
           ></input>
           {/* <input
             onChange={(e) => setCheckInTime(e.target.value)}

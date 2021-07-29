@@ -15,6 +15,19 @@ const ManageListings = () => {
 
   const user = useSelector((state) => state.session.user);
 
+  const formatCheckinTime = (time) => {
+    const [hour, minutes] = time.split(':');
+    console.log(Number(hour));
+    if (Number(hour) === 12) {
+      return '12:00 PM';
+    } else if (Number(hour) > 12) {
+      const pmTime = Number(hour) - 12;
+      return `${pmTime.toString()}:${minutes} PM`;
+    } else {
+      return time;
+    }
+  };
+
   useEffect(() => {
     dispatch(getListings(user.id));
   }, [dispatch, user.id]);
@@ -100,26 +113,33 @@ const ManageListings = () => {
               </div>
             </div>
           </div>
-          <div className='amenities-container'>
-            <div className='top-border-info'></div>
-            <div className='amenities-heading'>
-              <p>Amenities</p>
+          {listing?.air_condition === false &&
+          listing?.heat === false &&
+          listing?.wifi === false ? (
+            ''
+          ) : (
+            <div className='amenities-container'>
+              <div className='top-border-info'></div>
+              <div className='amenities-heading'>
+                <p>Amenities</p>
+              </div>
+              <div className='amenities-details-container'>
+                <div className='amenities-details'>
+                  {listing?.air_conditioning === true ? <IoIosSnow /> : null}
+                  <p>Air Conditioning</p>
+                </div>
+                <div className='amenities-details'>
+                  {listing?.heat === true ? <GiHeatHaze /> : null}
+                  <p>Heat</p>
+                </div>
+                <div className='amenities-details'>
+                  {listing?.wifi === true ? <AiOutlineWifi /> : null}
+                  <p>Wifi</p>
+                </div>
+              </div>
             </div>
-            <div className='amenities-details-container'>
-              <div className='amenities-details'>
-                {listing?.air_conditioning === true ? <IoIosSnow /> : null}
-                <p>Air Conditioning</p>
-              </div>
-              <div className='amenities-details'>
-                {listing?.heat === true ? <GiHeatHaze /> : null}
-                <p>Heat</p>
-              </div>
-              <div className='amenities-details'>
-                {listing?.wifi === true ? <AiOutlineWifi /> : null}
-                <p>Wifi</p>
-              </div>
-            </div>
-          </div>
+          )}
+
           <div className='checkin-fees-container'>
             <div className='top-border-info'></div>
             <div className='checkin-fees-headings-container'>
@@ -134,7 +154,8 @@ const ManageListings = () => {
               <div className='checkin-container-left'>
                 <div className='checkin-fees-details'>
                   <p>Check-in time: </p>
-                  {listing?.check_in_time}
+                  {formatCheckinTime(listing?.check_in_time)}
+                  {/* {Number(listing?.check_in_time) > 12 ? (listing?.check_in_time - 12 )'PM' : listing?.check_in_time 'AM'} */}
                 </div>
                 <div className='checkin-fees-details'>
                   <p>Check-in type: </p>

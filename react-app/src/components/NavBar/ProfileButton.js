@@ -46,33 +46,33 @@ const ProfileButton = ({ user }) => {
               to='/'
               className='border-top-element profile-dropdown-element profile-links'
             >
-              <Link className='link-decoration' to='/'>
+              <div className='link-decoration' to='/'>
                 Home
-              </Link>
+              </div>
             </Link>
             <Link
               to='/bookings'
               className='border-top-element profile-dropdown-element profile-links'
             >
-              <Link className='link-decoration' to='/bookings'>
+              <div className='link-decoration' to='/bookings'>
                 Manage bookings
-              </Link>
+              </div>
             </Link>
             <Link
               to='/create-listing/type'
               className='border-top-element profile-dropdown-element profile-links'
             >
-              <Link className='link-decoration' to='/create-listing/type'>
+              <div className='link-decoration' to='/create-listing/type'>
                 Create listing
-              </Link>
+              </div>
             </Link>
             <Link
               to='/listings'
               className='profile-dropdown-element profile-links'
             >
-              <Link className='link-decoration' to='/listings'>
+              <div className='link-decoration' to='/listings'>
                 Manage listings
-              </Link>
+              </div>
             </Link>
             <div className='border-top-element profile-dropdown-element profile-links'>
               <div className='btn-logout' onClick={logout}>

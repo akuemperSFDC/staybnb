@@ -11,6 +11,7 @@ export const getListings = (id) => async (dispatch) => {
 
   if (response.ok) {
     const listings = await response.json();
+    console.log(listings);
     dispatch(setListing(listings));
     return null;
   } else if (response.status < 500) {

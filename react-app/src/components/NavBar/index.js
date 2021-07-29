@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { NavLink, useHistory, Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store/session';
-import { setState } from '../../store/componentStates';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
 
@@ -19,7 +18,6 @@ const NavBar = ({ loaded }) => {
   useEffect(() => {
     if (pathname === '/' || pathname.includes('/create-listing/')) {
       setAbsolute('absolute');
-      dispatch(setState({ navbarStyling: 'absolute' }));
     } else {
       setAbsolute('');
     }

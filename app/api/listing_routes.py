@@ -28,6 +28,7 @@ def listings():
 @listing_routes.route('/', methods=['POST'])
 # @login_required
 def post_listing():
+
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -68,7 +69,8 @@ def post_listing():
 @listing_routes.route('/users/<int:user_id>')
 def listings_from_user_id(user_id):
 
-    listings = db.session.query(Listing).join(Listing_Image).filter(Listing.user_id == (user_id)).all()
+    # listings = db.session.query(Listing).join(Listing_Image).filter(Listing.user_id == (user_id)).all()
+    listings = Listing.query.filter(Listing.user_id == user_id).all()
 
     my_listings = []
     for listing in listings:

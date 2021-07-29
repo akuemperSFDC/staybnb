@@ -66,6 +66,7 @@
   flex-direction: column;
   justify-content: space-around;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.379);
+  z-index: 1;
 }
 
 .link-decoration {
@@ -92,6 +93,16 @@
 
 .profile-dropdown-element:first-child {
   cursor: default;
+}
+
+.profile-links {
+  background-color: white;
+  transition: 0.35s;
+}
+
+.profile-links:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .profile-links:hover {

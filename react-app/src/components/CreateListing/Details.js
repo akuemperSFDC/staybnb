@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';
+import TextField from '@material-ui/core/TextField';
 
 import './CreateListing.css';
 
@@ -9,9 +10,9 @@ const Details = () => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [pricePerNight, setPricePerNight] = useState('');
-  const [cleaningFee, setCleaningFee] = useState('');
-  const [checkInTime, setCheckInTime] = useState('');
+  const [pricePerNight, setPricePerNight] = useState('0');
+  const [cleaningFee, setCleaningFee] = useState('0');
+  const [checkInTime, setCheckInTime] = useState('15:00');
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
 
@@ -72,13 +73,28 @@ const Details = () => {
             type='number'
             placeholder='Cleaning fee'
           ></input>
-          <input
+          {/* <input
             onChange={(e) => setCheckInTime(e.target.value)}
             value={checkInTime}
             className='details-inputs'
             type='text'
             placeholder='Check-in time'
-          ></input>
+          ></input> */}
+          <TextField
+            id='time'
+            label='Check-in time'
+            type='time'
+            onChange={(e) => setCheckInTime(e.target.value)}
+            defaultValue='03:00 PM'
+            value={!checkInTime ? '15:00' : checkInTime}
+            className='details-inputs'
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 300, // 5 min
+            }}
+          />
         </div>
         <input
           onChange={(e) => setCheckInType(e.target.value)}

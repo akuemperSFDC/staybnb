@@ -48,7 +48,6 @@ export const createListing = (listing) => async (dispatch) => {
   const cleaningFeeNum = Number(cleaningFee);
   const pricePerNightNum = Number(pricePerNight);
 
-  console.log(listing);
   const response = await fetch('/api/listings/', {
     method: 'POST',
     headers: {
@@ -83,7 +82,6 @@ export const createListing = (listing) => async (dispatch) => {
 
   if (response.ok) {
     const listing = await response.json();
-    console.log(listing);
     dispatch(setListing(listing));
     return null;
   } else if (response.status < 500) {

@@ -5,8 +5,10 @@ const editStoreListing = (listing) => ({
   listing,
 });
 
-export const editListing = (listing) => async (dispatch) => {
+export const editListingThunk = (listing) => async (dispatch) => {
+  let { latitude, longitude } = listing;
   const {
+    id,
     user_id,
     type,
     space,
@@ -14,17 +16,15 @@ export const editListing = (listing) => async (dispatch) => {
     city,
     state,
     country,
-    latitude,
-    longitude,
     wifi,
     air_conditioning,
     heat,
     title,
     description,
-    pricePerNight,
-    cleaningFee,
-    checkInTime,
-    checkInType,
+    price_per_night,
+    cleaning_fee,
+    check_in_time,
+    check_in_type,
     parking,
     bedrooms,
     beds,
@@ -32,10 +32,15 @@ export const editListing = (listing) => async (dispatch) => {
     sleeps,
   } = listing;
 
-  const cleaningFeeNum = Number(cleaningFee);
-  const pricePerNightNum = Number(pricePerNight);
+  if (!latitude) latitude = '';
+  if (!longitude) longitude = '';
 
-  const response = await fetch('/api/listings/', {
+  console.log(listing);
+
+  const cleaningFeeNum = Number(cleaning_fee);
+  const pricePerNightNum = Number(price_per_night);
+
+  const response = await fetch(`/api/listings/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -52,10 +57,10 @@ export const editListing = (listing) => async (dispatch) => {
       address: address,
       latitude: latitude,
       longitude: longitude,
-      price_per_night: pricePerNightNum,
-      cleaning_fee: cleaningFeeNum,
-      check_in_time: checkInTime,
-      check_in_type: checkInType,
+      price_per_night: cleaningFeeNum,
+      cleaning_fee: pricePerNightNum,
+      check_in_time: check_in_time,
+      check_in_type: check_in_type,
       wifi: wifi,
       air_conditioning: air_conditioning,
       heat: heat,

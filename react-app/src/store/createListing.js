@@ -45,8 +45,8 @@ export const createListing = (listing) => async (dispatch) => {
     sleeps,
   } = listing;
 
-  const cleaningFeeNum = Number(cleaningFee);
-  const pricePerNightNum = Number(pricePerNight);
+  // const cleaningFeeNum = Number(cleaningFee);
+  // const pricePerNightNum = Number(pricePerNight);
 
   const response = await fetch('/api/listings/', {
     method: 'POST',
@@ -65,8 +65,8 @@ export const createListing = (listing) => async (dispatch) => {
       address: address,
       latitude: latitude,
       longitude: longitude,
-      price_per_night: pricePerNightNum,
-      cleaning_fee: cleaningFeeNum,
+      price_per_night: pricePerNight,
+      cleaning_fee: cleaningFee,
       check_in_time: checkInTime,
       check_in_type: checkInType,
       wifi: wifi,
@@ -100,7 +100,6 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_KEY:
-      console.log(action.type);
       newState = { ...state, ...action.data };
       return newState;
     case REMOVE_KEY:
@@ -111,7 +110,6 @@ export default function reducer(state = initialState, action) {
       });
       return newState;
     case SET_LISTING:
-      console.log(action);
       newState = { ...state, ...action.listing.listing };
       return newState;
     default:

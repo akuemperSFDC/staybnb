@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getListingByListingId } from '../../store/listing';
 import { setKey } from '../../store/createListing';
+import { editListingThunk } from '../../store/editListing';
 import EditType from './EditType';
 import EditSpace from './EditSpace';
 import EditGuests from './EditGuests';
@@ -16,9 +17,16 @@ const EditListing = () => {
   const history = useHistory();
 
   const listing = useSelector((state) => state.listing);
+  let editListing = useSelector((state) => state.createListing);
+
+  const listing_images = editListing.listing_images;
+
+  delete editListing['listing_images'];
 
   const handleEditListing = () => {
-    //
+    // e.preventDefault();
+    dispatch(editListingThunk(editListing));
+    history.push('/listings');
   };
 
   const handleDeleteListing = () => {
@@ -39,13 +47,13 @@ const EditListing = () => {
       <EditDetails />
       <div className='edit-form-button-container'>
         <div
-          onClick={handleEditListing}
+          onClick={handleDeleteListing}
           className='delete-button edit-form-buttons'
         >
           Delete
         </div>
         <div
-          onClick={handleDeleteListing}
+          onClick={handleEditListing}
           className='edit-button edit-form-buttons'
         >
           Submit

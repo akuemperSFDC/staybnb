@@ -14,44 +14,57 @@ const EditDetails = () => {
   const [description, setDescription] = useState('');
   const [pricePerNight, setPricePerNight] = useState();
   const [cleaningFee, setCleaningFee] = useState();
-  const [checkInTime, setCheckInTime] = useState('15:00');
+  const [checkInTime, setCheckInTime] = useState('14:00');
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
 
+  // const formatTimeBack = (time) => {
+  //   console.log(time);
+  //   const [hour, minutes] = time.split(':');
+  //   console.log(hour);
+  //   // if (time.contains('PM')) {
+  //   // }
+  // };
+
   useEffect(() => {
+    // setCheckInTime(listing.check_in_time);
     setTitle(listing.title);
     setDescription(listing.description);
     setPricePerNight(listing.price_per_night);
     setCleaningFee(listing.cleaning_fee);
-    setCheckInTime(listing.check_in_time);
     setCheckInType(listing.check_in_type);
     setParking(listing.parking);
+  }, [
+    listing.title,
+    listing.description,
+    listing.price_per_night,
+    listing.cleaning_fee,
+    listing.check_in_time,
+    listing.check_in_type,
+    listing.parking,
+  ]);
 
-    const formatTimeBack = (time) => {
-      //
-    };
-
+  useEffect(() => {
     dispatch(
       setKey({
         title: title,
         description: description,
-        pricePerNight: pricePerNight,
-        cleaningFee: cleaningFee,
-        checkInTime: checkInTime,
-        checkInType: checkInType,
+        price_per_night: pricePerNight,
+        cleaning_fee: cleaningFee,
+        check_in_time: checkInTime,
+        check_in_type: checkInType,
         parking: parking,
       })
     );
   }, [
+    dispatch,
     title,
-    setTitle,
     description,
     pricePerNight,
     cleaningFee,
     checkInTime,
     checkInType,
     parking,
-    dispatch,
   ]);
 
   return (
@@ -76,7 +89,7 @@ const EditDetails = () => {
           <input
             onChange={(e) => setPricePerNight(e.target.value)}
             value={pricePerNight}
-            className='details-inputs edit'
+            className='details-inputs edit cost-inputs'
             type='number'
             placeholder='Nightly price'
             max={99999}
@@ -84,18 +97,11 @@ const EditDetails = () => {
           <input
             onChange={(e) => setCleaningFee(e.target.value)}
             value={cleaningFee}
-            className='details-inputs edit'
+            className='details-inputs edit cost-inputs'
             type='number'
             placeholder='Cleaning fee'
             min={1}
           ></input>
-          {/* <input
-        onChange={(e) => setCheckInTime(e.target.value)}
-        value={checkInTime}
-        className='details-inputs edit'
-        type='text'
-        placeholder='Check-in time'
-      ></input> */}
           <TextField
             id='time'
             label='Check-in time'

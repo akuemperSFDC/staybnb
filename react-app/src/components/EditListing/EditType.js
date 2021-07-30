@@ -12,21 +12,19 @@ const EditType = () => {
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState('true');
   const [active, setActive] = useState('edit-active');
-  const [selectedElementIndex, setSelectedElementIndex] = useState();
 
   const handleSelection = (e, i) => {
     if (i === Number(e.target.id)) {
       setActive('edit-active');
       setAriaChecked('true');
-      setSelectedElementIndex(-1);
-      e.target.id = selectedElementIndex;
+      setSelected(-1);
+      e.target.id = -1;
       dispatch(setKey({ type: e.target.value }));
     } else {
-      setSelected();
+      setSelected(i);
       setActive('');
       setAriaChecked('false');
-      setSelectedElementIndex(i);
-      e.target.id = selectedElementIndex;
+      e.target.id = selected;
       dispatch(removeKey({ type: e.target.value }));
     }
   };
@@ -34,7 +32,7 @@ const EditType = () => {
   useLayoutEffect(() => {
     const matchingElement = (element) => element === listing.type;
     setSelected(typeOfPlace.findIndex(matchingElement));
-  }, [listing.type]);
+  }, [listing.type, setSelected]);
 
   return (
     <div className='edit-type-container'>
@@ -55,7 +53,7 @@ const EditType = () => {
             checked={true}
             className={`edit-type-choice-box ${selected === i ? active : ''}`}
             key={i}
-            id={selected === i ? selectedElementIndex : i}
+            id={selected === i ? -1 : i}
           >
             {place}
           </button>

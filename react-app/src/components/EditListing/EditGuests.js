@@ -84,7 +84,9 @@ const EditGuests = () => {
     setBedroomCount(listing.bedrooms);
     setBedCount(listing.beds);
     setBathroomCount(listing.bathrooms);
+  }, [listing.sleeps, listing.bedrooms, listing.beds, listing.bathrooms]);
 
+  useEffect(() => {
     if (update) {
       dispatch(
         setKey({
@@ -104,18 +106,7 @@ const EditGuests = () => {
         })
       );
     }
-  }, [
-    guestCount,
-    bedCount,
-    bedroomCount,
-    bathroomCount,
-    dispatch,
-    update,
-    listing.sleeps,
-    listing.bedrooms,
-    listing.beds,
-    listing.bathrooms,
-  ]);
+  }, [guestCount, bedCount, bedroomCount, bathroomCount, dispatch, update]);
 
   return (
     <div className='edit-guests-container'>

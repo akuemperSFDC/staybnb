@@ -12,21 +12,18 @@ const EditSpace = () => {
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState('true');
   const [active, setActive] = useState('edit-active');
-  const [selectedElementIndex, setSelectedElementIndex] = useState();
 
   const handleSelection = (e, i) => {
     if (i === Number(e.target.id)) {
       setActive('edit-active');
       setAriaChecked('true');
-      setSelectedElementIndex(-1);
-      e.target.id = selectedElementIndex;
+      e.target.id = -1;
       dispatch(setKey({ space: e.target.value }));
     } else {
-      setSelected();
+      setSelected(i);
       setActive('');
       setAriaChecked('false');
-      setSelectedElementIndex(i);
-      e.target.id = selectedElementIndex;
+      e.target.id = selected;
       dispatch(removeKey({ space: e.target.value }));
     }
   };
@@ -55,7 +52,7 @@ const EditSpace = () => {
             checked={true}
             className={`edit-space-choice-box ${selected === i ? active : ''}`}
             key={i}
-            id={selected === i ? selectedElementIndex : i}
+            id={selected === i ? -1 : i}
           >
             {space}
           </button>

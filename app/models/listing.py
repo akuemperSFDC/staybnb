@@ -4,7 +4,7 @@ class Listing(db.Model):
     __tablename__ = 'listings'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     type = db.Column(db.VARCHAR, nullable=False)
     space = db.Column(db.VARCHAR, nullable=False)
     title = db.Column(db.VARCHAR, nullable=False)
@@ -19,9 +19,9 @@ class Listing(db.Model):
     cleaning_fee = db.Column(db.Integer, nullable=False)
     check_in_time = db.Column(db.VARCHAR, nullable=False)
     check_in_type = db.Column(db.VARCHAR, nullable=False)
-    wifi = db.Column(db.Boolean, nullable=False, default=False)
-    air_conditioning = db.Column(db.Boolean, nullable=False, default=False)
-    heat = db.Column(db.Boolean, nullable=False, default=False)
+    wifi = db.Column(db.Integer, nullable=False, default=False)
+    air_conditioning = db.Column(db.Integer, nullable=False, default=False)
+    heat = db.Column(db.Integer, nullable=False, default=False)
     parking = db.Column(db.VARCHAR, nullable=False)
     bedrooms = db.Column(db.Integer, nullable=False)
     beds = db.Column(db.Integer, nullable=False)

@@ -9,44 +9,44 @@ import './CreateListing.css';
 const Amenities = () => {
   const dispatch = useDispatch();
 
-  const [ariaPressedWifi, setAriaPressedWifi] = useState('false');
-  const [ariaPressedAC, setAriaPressedAC] = useState('false');
-  const [ariaPressedHeat, setAriaPressedHeat] = useState('false');
+  const [ariaPressedWifi, setAriaPressedWifi] = useState(2);
+  const [ariaPressedAC, setAriaPressedAC] = useState(2);
+  const [ariaPressedHeat, setAriaPressedHeat] = useState(2);
 
   const handleAriaPress = (e) => {
     if (e.target.id === '1') {
-      setAriaPressedWifi('true');
+      setAriaPressedWifi(1);
       e.target.id = '-1';
-      dispatch(setKey({ wifi: 'True' }));
+      dispatch(setKey({ wifi: 1 }));
     } else if (e.target.id === '-1') {
-      setAriaPressedWifi('false');
+      setAriaPressedWifi(2);
       e.target.id = '1';
-      dispatch(setKey({ wifi: 'False' }));
+      dispatch(setKey({ wifi: 2 }));
     }
     if (e.target.id === '2') {
-      setAriaPressedAC('true');
+      setAriaPressedAC(1);
       e.target.id = '-2';
-      dispatch(setKey({ air_conditioning: 'True' }));
+      dispatch(setKey({ air_conditioning: 1 }));
     } else if (e.target.id === '-2') {
-      setAriaPressedAC('false');
+      setAriaPressedAC(2);
       e.target.id = '2';
-      dispatch(setKey({ air_conditioning: 'False' }));
+      dispatch(setKey({ air_conditioning: 2 }));
     }
     if (e.target.id === '3') {
-      setAriaPressedHeat('true');
+      setAriaPressedHeat(1);
       e.target.id = '-3';
-      dispatch(setKey({ heat: 'True' }));
+      dispatch(setKey({ heat: 1 }));
     } else if (e.target.id === '-3') {
-      setAriaPressedHeat('false');
+      setAriaPressedHeat(2);
       e.target.id = '3';
-      dispatch(setKey({ heat: 'False' }));
+      dispatch(setKey({ heat: 2 }));
     }
   };
 
   useEffect(() => {
-    dispatch(setKey({ wifi: 'False' }));
-    dispatch(setKey({ air_conditioning: 'False' }));
-    dispatch(setKey({ heat: 'False' }));
+    dispatch(setKey({ wifi: 2 }));
+    dispatch(setKey({ air_conditioning: 2 }));
+    dispatch(setKey({ heat: 2 }));
   }, [dispatch]);
 
   return (
@@ -55,9 +55,7 @@ const Amenities = () => {
         aria-pressed={ariaPressedWifi}
         id='1'
         onClick={handleAriaPress}
-        className={`amenity-square ${
-          ariaPressedWifi === 'true' ? 'active' : ''
-        }`}
+        className={`amenity-square ${ariaPressedWifi === 1 ? 'active' : ''}`}
       >
         <AiOutlineWifi className='amenity-icon' />
         <div className='amenity-text'>Wifi</div>
@@ -66,7 +64,7 @@ const Amenities = () => {
         aria-pressed={ariaPressedAC}
         id='2'
         onClick={handleAriaPress}
-        className={`amenity-square ${ariaPressedAC === 'true' ? 'active' : ''}`}
+        className={`amenity-square ${ariaPressedAC === 1 ? 'active' : ''}`}
       >
         <IoIosSnow className='amenity-icon' />
         <div className='amenity-text'>Air Conditioning</div>
@@ -75,9 +73,7 @@ const Amenities = () => {
         aria-pressed={ariaPressedHeat}
         id='3'
         onClick={handleAriaPress}
-        className={`amenity-square ${
-          ariaPressedHeat === 'true' ? 'active' : ''
-        }`}
+        className={`amenity-square ${ariaPressedHeat === 1 ? 'active' : ''}`}
       >
         <GiHeatHaze className='amenity-icon' />
         <div className='amenity-text'>Heat</div>

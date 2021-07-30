@@ -113,9 +113,9 @@ const ManageListings = () => {
               </div>
             </div>
           </div>
-          {listing?.air_condition === false &&
-          listing?.heat === false &&
-          listing?.wifi === false ? (
+          {listing?.air_conditioning === 2 &&
+          listing?.heat === 2 &&
+          listing?.wifi === 2 ? (
             ''
           ) : (
             <div className='amenities-container'>
@@ -124,22 +124,27 @@ const ManageListings = () => {
                 <p>Amenities</p>
               </div>
               <div className='amenities-details-container'>
-                <div className='amenities-details'>
-                  {listing?.air_conditioning === true ? <IoIosSnow /> : null}
-                  <p>Air Conditioning</p>
-                </div>
-                <div className='amenities-details'>
-                  {listing?.heat === true ? <GiHeatHaze /> : null}
-                  <p>Heat</p>
-                </div>
-                <div className='amenities-details'>
-                  {listing?.wifi === true ? <AiOutlineWifi /> : null}
-                  <p>Wifi</p>
-                </div>
+                {listing?.air_conditioning === 1 ? (
+                  <div className='amenities-details'>
+                    <IoIosSnow />
+                    <p>Air Conditioning</p>
+                  </div>
+                ) : null}
+                {listing?.heat === 1 ? (
+                  <div className='amenities-details'>
+                    <GiHeatHaze />
+                    <p>Heat</p>
+                  </div>
+                ) : null}
+                {listing?.wifi === 1 ? (
+                  <div className='amenities-details'>
+                    <AiOutlineWifi />
+                    <p>Wifi</p>
+                  </div>
+                ) : null}
               </div>
             </div>
           )}
-
           <div className='checkin-fees-container'>
             <div className='top-border-info'></div>
             <div className='checkin-fees-headings-container'>

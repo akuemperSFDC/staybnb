@@ -156,9 +156,9 @@
 .amenities-details-container {
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: auto;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .amenities-details {
@@ -168,6 +168,7 @@
   font-weight: 300;
   font-size: 20px;
   color: rgba(0, 0, 0, 0.708);
+  margin-bottom: 30px;
 }
 
 .amenities-details > p {

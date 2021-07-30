@@ -10,6 +10,7 @@ import Details from './Details';
 import { createListing } from '../../store/createListing';
 import { questions } from './data';
 import { useDispatch, useSelector } from 'react-redux';
+import { getListings } from '../../store/listings';
 import './CreateListing.css';
 
 const CreateListing = () => {
@@ -21,47 +22,38 @@ const CreateListing = () => {
   const user = useSelector((state) => state.session.user);
   const [question, setQuestion] = useState(questions[0]);
   const [index, setIndex] = useState(0);
-  const [disable, setDisable] = useState('false');
 
   const handleNext = (e) => {
-    if (pathname === '/create-listing/type' && listing?.type) {
-      setDisable('false');
+    if (pathname === '/create-listing/type') {
       history.push('/create-listing/space');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/space' && listing?.space) {
-      setDisable('false');
+    } else if (pathname === '/create-listing/space') {
       history.push('/create-listing/address');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/address' && listing?.address) {
-      setDisable('false');
+    } else if (pathname === '/create-listing/address') {
       history.push('/create-listing/guests');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
     } else if (pathname === '/create-listing/guests') {
-      setDisable('false');
       history.push('/create-listing/amenities');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
     } else if (pathname === '/create-listing/amenities') {
-      setDisable('false');
       history.push('/create-listing/details');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/details' && listing?.title) {
-      setDisable('false');
+    } else if (pathname === '/create-listing/details') {
       history.push('/create-listing/photos');
       setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
       e.target.innerHTML = 'Submit';
     } else if (pathname === '/create-listing/photos') {
-      setDisable('false');
       e.preventDefault();
       dispatch(createListing(listing));
+      dispatch(getListings(user.id));
       history.push('/listings');
-    } else {
-      setDisable('true');
     }
   };
 
@@ -158,7 +150,6 @@ const CreateListing = () => {
             id='next'
             className={`bottom-buttons next-btn`}
             onClick={handleNext}
-            disabled={disable}
           >
             Next
           </div>

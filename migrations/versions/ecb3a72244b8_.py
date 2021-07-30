@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5e477ca05cd5
+Revision ID: ecb3a72244b8
 Revises: 
-Create Date: 2021-07-27 13:24:18.606538
+Create Date: 2021-07-29 19:02:51.338256
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5e477ca05cd5'
+revision = 'ecb3a72244b8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,7 +30,7 @@ def upgrade():
     )
     op.create_table('listings',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('type', sa.VARCHAR(), nullable=False),
     sa.Column('space', sa.VARCHAR(), nullable=False),
     sa.Column('title', sa.VARCHAR(), nullable=False),
@@ -45,9 +45,9 @@ def upgrade():
     sa.Column('cleaning_fee', sa.Integer(), nullable=False),
     sa.Column('check_in_time', sa.VARCHAR(), nullable=False),
     sa.Column('check_in_type', sa.VARCHAR(), nullable=False),
-    sa.Column('wifi', sa.Boolean(), nullable=False),
-    sa.Column('air_conditioning', sa.Boolean(), nullable=False),
-    sa.Column('heat', sa.Boolean(), nullable=False),
+    sa.Column('wifi', sa.Integer(), nullable=False),
+    sa.Column('air_conditioning', sa.Integer(), nullable=False),
+    sa.Column('heat', sa.Integer(), nullable=False),
     sa.Column('parking', sa.VARCHAR(), nullable=False),
     sa.Column('bedrooms', sa.Integer(), nullable=False),
     sa.Column('beds', sa.Integer(), nullable=False),

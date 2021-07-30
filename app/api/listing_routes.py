@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify
 from flask import request
 from sqlalchemy import func
 from app.forms import ListingForm
-from app.models import Listing, db, Listing_Image
+from app.forms import UpdateListingForm
+from app.models import Listing, db
+# from flask_login import current_user, login_user, logout_user, login_required
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -64,6 +66,44 @@ def post_listing():
 
     return {'errors': form.errors}
 
+# Update an exisiting listing
+@listing_routes.route('/<int:listing_id>', methods=['PUT'])
+# @login_required
+def edit_listing(listing_id):
+
+    form = UpdateListingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.is_submitted():
+        exisiting_listing = Listing.query.get(listing_id)
+        form.populate_obj(exisiting_listing)
+        exisiting_listing.user_id = form.data['user_id']
+        exisiting_listing.type = form.data['type']
+        exisiting_listing.space = form.data['space']
+        exisiting_listing.title = form.data['title']
+        exisiting_listing.description = form.data['description']
+        exisiting_listing.country = form.data['country']
+        exisiting_listing.city = form.data['city']
+        exisiting_listing.state = form.data['state']
+        exisiting_listing.address = form.data['address']
+        exisiting_listing.latitude = form.data['latitude']
+        exisiting_listing.longitude = form.data['longitude']
+        exisiting_listing.price_per_night = form.data['price_per_night']
+        exisiting_listing.cleaning_fee = form.data['cleaning_fee']
+        exisiting_listing.check_in_time = form.data['check_in_time']
+        exisiting_listing.check_in_type = form.data['check_in_type']
+        exisiting_listing.wifi = form.data['wifi']
+        exisiting_listing.air_conditioning = form.data['air_conditioning']
+        exisiting_listing.heat = form.data['heat']
+        exisiting_listing.parking = form.data['parking']
+        exisiting_listing.bedrooms = form.data['bedrooms']
+        exisiting_listing.beds = form.data['beds']
+        exisiting_listing.bathrooms = form.data['bathrooms']
+        exisiting_listing.sleeps = form.data['sleeps']
+
+        db.session.commit()
+        return exisiting_listing.to_dict()
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 # Get all listings based on user id
 @listing_routes.route('/users/<int:user_id>')
@@ -112,42 +152,6 @@ def listings_from_city(city, state):
     return {'listing': [listing.to_dict() for listing in same_listings]}
 
 
-# Update an exisiting listing
-@listing_routes.route('/<int:listing_id>', methods=['PUT'])
-# @login_required
-def edit_listing(listing_id):
-
-    form = ListingForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        exisiting_listing = Listing.query.get(listing_id)
-        exisiting_listing.type = form.data['type']
-        exisiting_listing.space = form.data['space']
-        exisiting_listing.title = form.data['title']
-        exisiting_listing.description = form.data['description']
-        exisiting_listing.country = form.data['country']
-        exisiting_listing.city = form.data['city']
-        exisiting_listing.state = form.data['state']
-        exisiting_listing.address = form.data['address']
-        exisiting_listing.latitude = form.data['latitude']
-        exisiting_listing.longitude = form.data['longitude']
-        exisiting_listing.price_per_night = form.data['price_per_night']
-        exisiting_listing.cleaning_fee = form.data['cleaning_fee']
-        exisiting_listing.check_in_time = form.data['check_in_time']
-        exisiting_listing.check_in_type = form.data['check_in_type']
-        exisiting_listing.wifi = form.data['wifi']
-        exisiting_listing.air_conditioning = form.data['air_conditioning']
-        exisiting_listing.heat = form.data['heat']
-        exisiting_listing.parking = form.data['parking']
-        exisiting_listing.bedrooms = form.data['bedrooms']
-        exisiting_listing.beds = form.data['beds']
-        exisiting_listing.bathrooms = form.data['bathrooms']
-        exisiting_listing.sleeps = form.data['sleeps']
-
-        db.session.commit()
-        return exisiting_listing.to_dict()
-
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
 #Delete listing

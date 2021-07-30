@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, IntegerField, FloatField
+from wtforms.fields import StringField, IntegerField, BooleanField, FloatField
 from wtforms.validators import DataRequired
 
-class ListingForm(FlaskForm):
+class UpdateListingForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     type = StringField('type', validators=[DataRequired()])
     space = StringField('space', validators=[DataRequired()])

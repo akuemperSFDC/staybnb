@@ -155,6 +155,10 @@
   margin-bottom: 1rem;
 }
 
+.cost-inputs {
+  text-align: center;
+}
+
 .edit-form-button-container {
   display: flex;
   width: 20%;

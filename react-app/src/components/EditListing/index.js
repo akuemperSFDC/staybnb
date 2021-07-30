@@ -39,7 +39,7 @@ const EditListing = () => {
   useEffect(() => {
     dispatch(getListingByListingId(listingId));
     dispatch(setKey(listing));
-  }, [dispatch, listing.type, listingId, listing]);
+  }, [dispatch, listing.type, listingId]);
 
   return (
     <div className='edit-listing-container'>

@@ -17,8 +17,6 @@ const EditAmenities = () => {
   const [ariaPressedAC, setAriaPressedAC] = useState(listing.air_conditioning);
   const [ariaPressedHeat, setAriaPressedHeat] = useState(listing.heat);
 
-  console.log(ariaPressedAC);
-
   const handleAriaPress = (e) => {
     if (e.target.id === '1') {
       setAriaPressedWifi(1);

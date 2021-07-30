@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getListingByListingId } from '../../store/listing';
 import { setKey } from '../../store/createListing';
 import { editListingThunk } from '../../store/editListing';
+import { deleteListing } from '../../store/listings';
 import EditType from './EditType';
 import EditSpace from './EditSpace';
 import EditGuests from './EditGuests';
@@ -30,13 +31,15 @@ const EditListing = () => {
   };
 
   const handleDeleteListing = () => {
-    //
+    dispatch(deleteListing(listingId));
+    history.push('/listings');
+    dispatch(getListingByListingId(listingId));
   };
 
   useEffect(() => {
     dispatch(getListingByListingId(listingId));
     dispatch(setKey(listing));
-  }, [dispatch, listing.type]);
+  }, [dispatch, listing.type, listingId, listing]);
 
   return (
     <div className='edit-listing-container'>

@@ -89,6 +89,7 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  user-select: none;
 }
 
 .profile-dropdown-element:first-child {

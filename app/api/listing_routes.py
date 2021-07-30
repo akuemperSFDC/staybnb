@@ -163,4 +163,4 @@ def delete_listing(listing_id):
     db.session.delete(listing)
     db.session.commit()
 
-    return {"success": 'deleted listing'}
+    return {"listing": listing.to_dict()}

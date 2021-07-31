@@ -125,6 +125,11 @@
   border-radius: 0.3rem;
 }
 
-.react-datepicker__day--001 {
+.react-datepicker__day--disabled:hover {
+  background-color: rgba(0, 0, 0, 0.173);
+}
+
+.react-datepicker__day--today {
+  background-color: white;
   color: black;
 }

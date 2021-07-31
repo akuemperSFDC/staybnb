@@ -59,20 +59,11 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     }
   }, [clickedOutside, setShowDatePicker]);
 
-  // useEffect(() => {
-  //   dispatch(
-  //     setBooking({
-  //       start_date: startDate,
-  //       end_date: endDate,
-  //     })
-  //   );
-  // }, []);
-
   return (
     <>
       <div className='react-datepicker-calendar-container'>
         <DatePicker
-          selected={bookings.start_date}
+          selected={null}
           // shouldCloseOnSelect={false}
           monthsShown={2}
           onChange={onChange}
@@ -86,6 +77,7 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
           onClickOutside={handleClickOutside}
           calendarClassName='calendar-css'
           dayClassName={() => 'calendar-days'}
+          dateFormat='dd/MM/yyyy'
         />
         <div
           className='react-calendar-submit-button'

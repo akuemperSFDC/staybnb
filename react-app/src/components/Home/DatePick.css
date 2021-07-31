@@ -71,6 +71,7 @@
   align-items: center;
   width: 45px;
   height: 45px;
+  font-size: 16px;
 }
 
 .react-calendar-submit-button {
@@ -114,9 +115,10 @@
 }
 
 .react-datepicker__current-month {
-  color: #ff385c;
+  /* color: #ff385c; */
   margin-bottom: 15px;
   margin-top: 15px;
+  font-size: 16px;
 }
 
 .react-datepicker__day--outside-month {
@@ -132,4 +134,9 @@
 .react-datepicker__day--today {
   background-color: white;
   color: black;
+}
+
+.react-datepicker__day-name {
+  font-size: 18px;
+  color: #ff385d;
 }

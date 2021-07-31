@@ -36,9 +36,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_BOOKING:
       const { start_date, end_date } = action.booking;
-      console.log(action.booking);
       newState = { ...state, ...action.booking };
-      console.log(newState);
       return newState;
     default:
       return state;

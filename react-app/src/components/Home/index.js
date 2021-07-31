@@ -15,6 +15,8 @@ const Home = () => {
   const [checkOutDateVerticleDiv, setCheckOutDateVerticleDiv] = useState('');
   const [guestsDateVerticleDiv, setGuestsDateVerticleDiv] = useState('');
 
+  const options = { month: 'long', day: 'numeric' };
+
   const handleFocus = (e) => {
     if (focus === 'focus') {
       setOnFocus('');
@@ -68,10 +70,14 @@ const Home = () => {
             onClick={handleShowDatePicker}
           >
             <div className='start-label search-bar-label'>Check in</div>
-            <div className='start-button search-bar-placeholder-label'>
-              {/* {bookings.start_date === true && bookings.end_date === true
-                ? bookings.start_date
-                : 'Add dates'} */}
+            <div
+              className={`start-button search-bar-placeholder-label ${
+                bookings.start_date && bookings.start_date ? 'bold' : null
+              }`}
+            >
+              {bookings.start_date && bookings.start_date
+                ? bookings.start_date.toLocaleDateString('en-US', options)
+                : 'Add dates'}
             </div>
           </div>
           <div
@@ -83,8 +89,14 @@ const Home = () => {
             onMouseLeave={() => setCheckOutDateVerticleDiv('')}
           >
             <div className='end-label search-bar-label'>Check out</div>
-            <div className='end-button search-bar-placeholder-label'>
-              Add dates
+            <div
+              className={`end-button search-bar-placeholder-label ${
+                bookings.end_date && bookings.end_date ? 'bold' : null
+              }`}
+            >
+              {bookings.end_date && bookings.end_date
+                ? bookings.end_date.toLocaleDateString('en-US', options)
+                : 'Add dates'}
             </div>
           </label>
         </div>

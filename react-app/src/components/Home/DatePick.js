@@ -65,8 +65,9 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
         <DatePicker
           selected={null}
           // shouldCloseOnSelect={false}
+          value={parseISO(bookings.start_date)}
           monthsShown={2}
-          onChange={onChange}
+          onChange={(dates) => onChange(dates)}
           startDate={bookings.start_date}
           endDate={bookings.end_date}
           selectsRange

@@ -117,7 +117,7 @@
 .search-input-guests-container:hover,
 .search-input-guests-container:active {
   border-radius: 50px;
-  box-shadow: 4px 4px 20px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 .search-button-container {
@@ -159,4 +159,9 @@
 .end-date-container,
 .search-input-guests-container {
   cursor: pointer;
+}
+
+.end-button.bold,
+.start-button.bold {
+  color: black;
 }

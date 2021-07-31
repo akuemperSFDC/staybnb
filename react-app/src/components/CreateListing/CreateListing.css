@@ -397,3 +397,14 @@
 .details-inputs:focus {
   outline: none;
 }
+
+.ant-input-number-input {
+  width: 85%;
+  height: 55px;
+  font-size: 14px;
+  padding: 0.7rem;
+  border: 1px solid #acacac62;
+  border-radius: 10px;
+}
+
+

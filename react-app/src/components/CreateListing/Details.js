@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';
 import TextField from '@material-ui/core/TextField';
+import { InputNumber } from 'antd';
 
 import './CreateListing.css';
 
@@ -59,6 +60,19 @@ const Details = () => {
           placeholder='Describe your property'
         ></textarea>
         <div className='costs-container'>
+          {/* <InputNumber
+            className='ant-input-number-handler'
+            min={1}
+            max={99999}
+            // defaultValue={100}
+            value={pricePerNight}
+            placeholder='Nightly price'
+            formatter={(value) =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+            onChange={(e) => setPricePerNight(e.value)}
+          /> */}
           <input
             onChange={(e) => setPricePerNight(e.target.value)}
             value={pricePerNight}
@@ -75,13 +89,6 @@ const Details = () => {
             placeholder='Cleaning fee'
             min={1}
           ></input>
-          {/* <input
-            onChange={(e) => setCheckInTime(e.target.value)}
-            value={checkInTime}
-            className='details-inputs'
-            type='text'
-            placeholder='Check-in time'
-          ></input> */}
           <TextField
             id='time'
             label='Check-in time'

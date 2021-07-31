@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { CgSearch } from 'react-icons/cg';
+import AutocompleteCityState from './AutocompleteCityState';
 
 import DatePick from './DatePick';
+import '../CreateListing/CreateListing.css';
 import './Home.css';
 
 const Home = () => {
@@ -54,10 +56,7 @@ const Home = () => {
           onBlur={handleFocus}
         >
           <div className='location-label search-bar-label'>Location</div>
-          <input
-            className='location-input'
-            placeholder='Where are you going?'
-          ></input>
+          <AutocompleteCityState setShowDatePicker={setShowDatePicker} />
         </div>
         <div
           className={`verticle-divider ${checkInDateVerticleDiv} ${locationVerticleDiv}`}

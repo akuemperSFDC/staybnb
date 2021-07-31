@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';
 
-const Autocomplete = () => {
+const AutocompleteCityState = () => {
   const dispatch = useDispatch();
 
   const [address, setAddress] = useState('');
@@ -19,9 +19,6 @@ const Autocomplete = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-
-  // console.log(address);
-  // console.log(coordinates);
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -135,4 +132,4 @@ const Autocomplete = () => {
   );
 };
 
-export default Autocomplete;
+export default AutocompleteCityState;

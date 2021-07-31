@@ -183,6 +183,12 @@
   border-bottom-right-radius: 10px;
 }
 
+.suggestion-item:hover:last-child,
+.autocomplete-dropdown-container {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 .bottom-buttons {
   cursor: pointer;
 }
@@ -406,5 +412,3 @@
   border: 1px solid #acacac62;
   border-radius: 10px;
 }
-
-

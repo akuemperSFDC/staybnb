@@ -165,3 +165,38 @@
 .start-button.bold {
   color: black;
 }
+
+.home-search-autocomplete-container {
+  position: relative;
+}
+
+.home-autocomplete-dropdown-container {
+  position: absolute;
+  top: 60px;
+  left: -25px;
+}
+
+.suggestion-item.search,
+.suggestion-item--active.search {
+  border-bottom: 1px solid #acacac;
+  padding: 1rem;
+}
+
+.suggestion-item.search:first-child,
+.suggestion-item--active.search:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1rem;
+}
+
+.suggestion-item.search:last-child,
+.autocomplete-dropdown-container.search {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.suggestion-item.search:hover:last-child,
+.autocomplete-dropdown-container.search {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

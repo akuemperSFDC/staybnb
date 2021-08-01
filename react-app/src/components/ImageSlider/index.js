@@ -29,7 +29,7 @@ const ImageSlider = ({ images }) => {
   // }, [dispatch, user.id]);
 
   return (
-    <div className='slider'>
+    <div className='slider search_results-slider'>
       <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
       <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
       {images?.map((img, i) => (

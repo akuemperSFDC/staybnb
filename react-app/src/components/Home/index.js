@@ -29,7 +29,7 @@ const Home = () => {
   const [showGuestSelect, setShowGuestSelect] = useState('false');
 
   const options = { month: 'long', day: 'numeric' };
-
+  const guests = bookings.guestCount;
   const cityState = bookings.cityState;
   const city = bookings.city;
   const state = bookings.state;
@@ -77,13 +77,14 @@ const Home = () => {
   };
 
   const handleSearch = () => {
-    // if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
-    //   dispatch(searchListingsCityState(bookings));
-    // } else if (!bookings.start_date && !bookings.end_date) {
-    //   dispatch(searchListingsCityStateGuests(bookings));
-    // }
-    dispatch(searchListingsCityStateGuestsStartDateEndDate(bookings));
-    history.push(`/search/${city}--${state}`);
+    if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
+      dispatch(searchListingsCityState(bookings));
+      history.push(`/search/${city}--${state}`);
+    } else if (!bookings.start_date && !bookings.end_date) {
+      dispatch(searchListingsCityStateGuests(bookings));
+      history.push(`/search/${city}--${state}/guests=${guests}`);
+    }
+    // dispatch(searchListingsCityStateGuestsStartDateEndDate(bookings));
   };
 
   return (

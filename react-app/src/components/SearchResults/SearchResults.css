@@ -19,7 +19,7 @@
 }
 
 .search-results__heading-container {
-  padding: 50px 20px;
+  padding: 20px 20px;
 }
 
 .search-results__heading-details {
@@ -44,19 +44,27 @@
   width: 95%;
   height: 200px;
   margin: 0 2.5%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .search-results__listing-photo-container {
-  width: 40%;
+  width: 45%;
+  height: auto;
 }
 
-.search-results__listing-photo {
-  width: 300px;
-  height: 200;
+.listing-image {
+  max-width: 300px;
+  max-height: 200px;
+}
+
+.search_results-listings-slider {
+  max-width: 300px;
+  max-height: 200px;
 }
 
 .search-results__listing-details {
-  width: 60%;
+  width: 55%;
 }
 
 .search-results__listing-header {

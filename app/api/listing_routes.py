@@ -4,6 +4,7 @@ from sqlalchemy import func
 from app.forms import ListingForm
 from app.forms import UpdateListingForm
 from app.models import Listing, db
+from datetime import datetime
 # from flask_login import current_user, login_user, logout_user, login_required
 
 listing_routes = Blueprint('listings', __name__)
@@ -153,6 +154,8 @@ def listings_search_city_state(city, state):
         listing_dict = listing.to_dict()
         listing_images = [list.to_dict() for list in listing.listing_images]
         listing_dict['listing_images'] = listing_images
+        listing_bookings = [list.to_dict() for list in listing.bookings]
+        listing_dict['listing_bookings'] = listing_bookings
         my_listings.append(listing_dict)
 
     return {'listings': my_listings}
@@ -179,6 +182,8 @@ def listings_search_city_state_num_guests(city, state, num_guests):
         listing_dict = listing.to_dict()
         listing_images = [list.to_dict() for list in listing.listing_images]
         listing_dict['listing_images'] = listing_images
+        listing_bookings = [list.to_dict() for list in listing.bookings]
+        listing_dict['listing_bookings'] = listing_bookings
         my_listings.append(listing_dict)
 
     if (my_listings):
@@ -190,16 +195,9 @@ def listings_search_city_state_num_guests(city, state, num_guests):
 # Returns listings for specified city, state, start date, end date, and number of guests
 @listing_routes.route('/<city>+<state>/<start_date>+<end_date>/<num_guests>')
 def listings_search_all_params(city, state, start_date, end_date, num_guests):
-    start_split = start_date.split('-')
-    end_split = end_date.split('-')
-    in_day = start_split[0]
-    in_month = start_split[1]
-    in_year = start_split[2]
-    out_day = end_split[0]
-    out_month = end_split[1]
-    out_year = end_split[2]
-    print('------------------------------------------------', in_day, in_month, in_year)
-    print('------------------------------------------------', out_day, out_month, out_year)
+    start_dtm = datetime.strptime(start_date, '%y%m%d')
+    end_dtm = datetime.strptime(end_date, '%y%m%d')
+
     city = city.lower()
     state = state.lower()
     guests = int(num_guests)
@@ -217,9 +215,40 @@ def listings_search_all_params(city, state, start_date, end_date, num_guests):
     my_listings = []
     for listing in same_listings:
         listing_dict = listing.to_dict()
+        listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_dict['listing_images'] = listing_images
         listing_bookings = [list.to_dict() for list in listing.bookings]
         listing_dict['listing_bookings'] = listing_bookings
-        my_listings.append(listing_dict)
+        conflict_found = False
+        for booking in listing_bookings:
+            booking_start = datetime(booking['check_in_year'], booking['check_in_month'], booking['check_in_day'])
+            booking_end = datetime(booking['check_out_year'], booking['check_out_month'], booking['check_out_day'])
+
+            print('--------------------------------------', booking_start, booking_end)
+
+
+            if (start_dtm < booking_start < end_dtm) or (start_dtm < booking_end < end_dtm):
+                conflict_found = True
+                break
+
+        if not conflict_found:
+            my_listings.append(listing_dict)
+
+
+
+
+
+
+
+
+        #         my_listings.append(listing_dict)
+
+        # if all([booking['check_in_month'] == in_month and booking['check_out_month'] == out_month for booking in listing_bookings]):
+        #     if all([booking['check_in_day'] <= in_day and booking['check_in_day'] >= in_day for booking in listing_bookings]):
+        #         print('True')
+
+        # for booking in listing_bookings:
+        #     if not booking['check_in_month'] == in_month and booking['check_out_month'] == out_month and in_day >= booking['check_out_day']:
 
     # for listing in my_listings:
     #     for booking in listing_bookings:

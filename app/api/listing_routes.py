@@ -190,6 +190,16 @@ def listings_search_city_state_num_guests(city, state, num_guests):
 # Returns listings for specified city, state, start date, end date, and number of guests
 @listing_routes.route('/<city>+<state>/<start_date>+<end_date>/<num_guests>')
 def listings_search_all_params(city, state, start_date, end_date, num_guests):
+    start_split = start_date.split('-')
+    end_split = end_date.split('-')
+    in_day = start_split[0]
+    in_month = start_split[1]
+    in_year = start_split[2]
+    out_day = end_split[0]
+    out_month = end_split[1]
+    out_year = end_split[2]
+    print('------------------------------------------------', in_day, in_month, in_year)
+    print('------------------------------------------------', out_day, out_month, out_year)
     city = city.lower()
     state = state.lower()
     guests = int(num_guests)
@@ -212,6 +222,9 @@ def listings_search_all_params(city, state, start_date, end_date, num_guests):
         my_listings.append(listing_dict)
 
     # for listing in my_listings:
+    #     for booking in listing_bookings:
+    #         if in_year > booking.check_in_year:
+
 
     if (my_listings):
         return {'listings': my_listings}

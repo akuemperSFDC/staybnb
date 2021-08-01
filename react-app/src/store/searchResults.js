@@ -50,8 +50,8 @@ export const searchListingsCityStateGuestsStartDateEndDate =
     const { city, state, guestCount } = search;
     console.log(search);
     let { start_date, end_date } = search;
-    start_date = start_date.split('/').join('');
-    end_date = end_date.split('/').join('');
+    start_date = start_date.split('/').join('-');
+    end_date = end_date.split('/').join('-');
     const response = await fetch(
       `/api/listings/${city}+${state}/${start_date}+${end_date}/${guestCount}`
     );

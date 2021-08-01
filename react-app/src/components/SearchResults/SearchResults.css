@@ -1,0 +1,151 @@
+.search_results__container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.search-results__listings_container {
+  width: 60%;
+  max-width: 800px;
+  height: 100%;
+  border-right: 1px solid black;
+}
+
+.search-results__bottom-divider {
+  width: 95%;
+  border-top: 1px solid var(--divider-color);
+  margin-left: 2.5%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.search-results__heading-container {
+  padding: 50px 20px;
+}
+
+.search-results__heading-details {
+  font-size: 14px;
+  color: var(--light-text-color);
+  margin-bottom: 20px;
+}
+
+.search-results__heading-city {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.search-results__listings-container {
+  width: 100%;
+}
+
+.search-results__listings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 200px;
+  margin: 0 2.5%;
+}
+
+.search-results__listing-photo-container {
+  width: 40%;
+}
+
+.search-results__listing-photo {
+  width: 300px;
+  height: 200;
+}
+
+.search-results__listing-details {
+  width: 60%;
+}
+
+.search-results__listing-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results__listing-type-city {
+  font-size: 14px;
+  color: var(--light-text-color);
+}
+
+.search-results__listing-small-divider {
+  width: 8%;
+  border-top: 1px solid var(--divider-color);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.search-results__listing-type-city,
+.search-results_listing-guest-bed-bath,
+.search-results_listing-amenities,
+.search-results__listing-next-available-dates,
+.search-results_listing-dates-container,
+.search-results__listing-price-container {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.search-results__listing-info-text {
+  color: var(--light-text-color);
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.search-results__listing-next-available-dates {
+  border: 1px solid var(--divider-color);
+  font-size: 14px;
+  padding: 2px 3px;
+}
+
+.search-results__listing-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.amount-text {
+  font-weight: 500;
+}
+
+.price-text {
+  margin-left: 3px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.price-divider {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.night-text {
+  font-weight: 300;
+}
+
+.search-results__listing-rating-total-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-results__listing-ratings-container {
+  display: flex;
+}
+
+.search-results__listing-ratings-text,
+.search-results__listing-total-text {
+  font-size: 14px;
+  margin-right: 3px;
+}
+
+.search-results__listing-star-icon {
+  color: red;
+}
+
+.search-results__listing-rating {
+  color: black;
+}
+
+.search-results__listing-total-reviews {
+  color: var(--light-text-color);
+}

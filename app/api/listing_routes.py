@@ -137,7 +137,7 @@ def listings_from_listing_id(listing_id):
 
 # Returns listings for specified city and state
 @listing_routes.route('/<city>+<state>')
-def listings_from_city(city, state):
+def listings_search_city_state(city, state):
     city = city.lower()
     state = state.lower()
     city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()
@@ -148,9 +148,75 @@ def listings_from_city(city, state):
     same_listings = city_listings.intersection(state_listings)
     same_listings = list(same_listings)
 
+    my_listings = []
+    for listing in same_listings:
+        listing_dict = listing.to_dict()
+        listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_dict['listing_images'] = listing_images
+        my_listings.append(listing_dict)
 
-    return {'listing': [listing.to_dict() for listing in same_listings]}
+    return {'listings': my_listings}
 
+
+# Returns listings for specified city, state, and number of guests
+@listing_routes.route('/<city>+<state>/<num_guests>')
+def listings_search_city_state_num_guests(city, state, num_guests):
+    city = city.lower()
+    state = state.lower()
+    guests = int(num_guests)
+    city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()
+    state_listings = Listing.query.filter(func.lower(Listing.state) == state).all()
+    guest_listings = Listing.query.filter(Listing.sleeps >= guests).all()
+
+    city_listings = set(city_listings)
+    # Only include listings that are both in the city and state
+    same_listings = city_listings.intersection(state_listings)
+    same_listings = city_listings.intersection(guest_listings)
+    same_listings = list(same_listings)
+
+    my_listings = []
+    for listing in same_listings:
+        listing_dict = listing.to_dict()
+        listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_dict['listing_images'] = listing_images
+        my_listings.append(listing_dict)
+
+    if (my_listings):
+        return {'listings': my_listings}
+    else:
+        return {'listings': -1}
+
+
+# Returns listings for specified city, state, start date, end date, and number of guests
+@listing_routes.route('/<city>+<state>/<start_date>+<end_date>/<num_guests>')
+def listings_search_all_params(city, state, start_date, end_date, num_guests):
+    city = city.lower()
+    state = state.lower()
+    guests = int(num_guests)
+    city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()
+    state_listings = Listing.query.filter(func.lower(Listing.state) == state).all()
+    guest_listings = Listing.query.filter(Listing.sleeps >= guests).all()
+
+
+    city_listings = set(city_listings)
+    # Only include listings that are both in the city and state
+    same_listings = city_listings.intersection(state_listings)
+    same_listings = city_listings.intersection(guest_listings)
+    same_listings = list(same_listings)
+
+    my_listings = []
+    for listing in same_listings:
+        listing_dict = listing.to_dict()
+        listing_bookings = [list.to_dict() for list in listing.bookings]
+        listing_dict['listing_bookings'] = listing_bookings
+        my_listings.append(listing_dict)
+
+    # for listing in my_listings:
+
+    if (my_listings):
+        return {'listings': my_listings}
+    else:
+        return {'listings': -1}
 
 
 

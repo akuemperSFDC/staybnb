@@ -6,6 +6,7 @@ import listings from './listings';
 import listing from './listing';
 import editListing from './editListing';
 import bookings from './bookings';
+import searchResults from './searchResults';
 
 const rootReducer = combineReducers({
   session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   listing,
   editListing,
   bookings,
+  searchResults,
 });
 
 let enhancer;

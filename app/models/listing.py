@@ -31,7 +31,7 @@ class Listing(db.Model):
     users = db.relationship("User", back_populates="listings")
     reviews = db.relationship('Review', back_populates='listing')
     listing_images = db.relationship('Listing_Image', backref='listings')
-    bookings = db.relationship('Booking', back_populates='listing', uselist=False)
+    bookings = db.relationship('Booking', backref='listing')
 
     def to_dict(self):
         return {

@@ -88,7 +88,7 @@
 
 .top-border-info {
   width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.255);
+  border-top: 1px solid var(--divider-color);
   margin-top: 20px;
 }
 

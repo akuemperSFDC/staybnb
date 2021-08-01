@@ -6,11 +6,13 @@ import {
 } from 'react-places-autocomplete';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setKey } from '../../store/createListing';
+import { setBooking } from '../../store/bookings';
 
 const AutocompleteCityState = ({ setShowDatePicker }) => {
   const dispatch = useDispatch();
   const [cityState, setCityState] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -18,8 +20,20 @@ const AutocompleteCityState = ({ setShowDatePicker }) => {
     if (split.length === 0) return;
     if (split.length === 3) {
       setCityState(`${split[0]}, ${split[1]}`);
+      setCity(split[0]);
+      setState(split[1]);
+      dispatch(
+        setBooking({ cityState: `${split[0].trim()}, ${split[1].trim()}` })
+      );
+      dispatch(setBooking({ city: split[0].trim() }));
+      dispatch(setBooking({ state: split[1].trim() }));
     } else {
       setCityState(`${split[1]}, ${split[2]}`);
+      setCity(split[1]);
+      setState(split[2]);
+      dispatch(setBooking({ cityState }));
+      dispatch(setBooking({ city: split[1].trim() }));
+      dispatch(setBooking({ state: split[2].trim() }));
     }
   };
 
@@ -29,6 +43,12 @@ const AutocompleteCityState = ({ setShowDatePicker }) => {
       setShowDatePicker('true');
     }
   };
+
+  useEffect(() => {
+    dispatch(setBooking({ cityState }));
+    // dispatch(setBooking({ city }));
+    // dispatch(setBooking({ state }));
+  }, [dispatch, cityState]);
 
   return (
     <PlacesAutocomplete

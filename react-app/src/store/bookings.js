@@ -35,7 +35,24 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_BOOKING:
-      const { start_date, end_date } = action.booking;
+      const options = {
+        day: 'numeric',
+        year: '2-digit',
+        month: 'numeric',
+      };
+      const { start_date_object, end_date_object } = action.booking;
+      if (start_date_object) {
+        action.booking['start_date'] = start_date_object.toLocaleDateString(
+          'en-us',
+          options
+        );
+      }
+      if (end_date_object) {
+        action.booking['end_date'] = end_date_object.toLocaleDateString(
+          'en-us',
+          options
+        );
+      }
       newState = { ...state, ...action.booking };
       return newState;
     default:

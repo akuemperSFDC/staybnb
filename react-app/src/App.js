@@ -11,6 +11,7 @@ import Home from './components/Home';
 import EditListing from './components/EditListing';
 import ManageListings from './components/ManageListings';
 import CreateListing from './components/CreateListing';
+import SearchResults from './components/SearchResults';
 import { authenticate } from './store/session';
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/listings'>
           <ManageListings />
+        </ProtectedRoute>
+        <ProtectedRoute path='/search/:cityName--:stateName/'>
+          <SearchResults />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true}>
           <Home />

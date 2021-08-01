@@ -1,13 +1,23 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CgSearch } from 'react-icons/cg';
+import { useHistory } from 'react-router-dom';
+import {
+  searchListingsCityState,
+  searchListingsCityStateGuests,
+  searchListingsCityStateGuestsStartDateEndDate,
+} from '../../store/searchResults';
 import AutocompleteCityState from './AutocompleteCityState';
+import Guests from './Guests';
 
 import DatePick from './DatePick';
 import '../CreateListing/CreateListing.css';
 import './Home.css';
 
 const Home = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const bookings = useSelector((state) => state.bookings);
 
   const [showDatePicker, setShowDatePicker] = useState('false');
@@ -16,8 +26,20 @@ const Home = () => {
   const [checkInDateVerticleDiv, setCheckInDateVerticleDiv] = useState('');
   const [checkOutDateVerticleDiv, setCheckOutDateVerticleDiv] = useState('');
   const [guestsDateVerticleDiv, setGuestsDateVerticleDiv] = useState('');
+  const [showGuestSelect, setShowGuestSelect] = useState('false');
 
   const options = { month: 'long', day: 'numeric' };
+
+  const cityState = bookings.cityState;
+  const city = bookings.city;
+  const state = bookings.state;
+
+  // let splitStart;
+  // let splitEnd;
+  // if (bookings.start_date && bookings.end_date) {
+  //   splitStart = bookings?.start_date.split(',').trim();
+  //   splitEnd = bookings?.end_date.split(',').trim();
+  // }
 
   const handleFocus = (e) => {
     if (focus === 'focus') {
@@ -43,6 +65,25 @@ const Home = () => {
     } else {
       setShowDatePicker('false');
     }
+  };
+
+  const handleShowGuests = () => {
+    console.log('triggered handleShowGuests');
+    if (showGuestSelect === 'false') {
+      setShowGuestSelect('true');
+    } else {
+      setShowGuestSelect('false');
+    }
+  };
+
+  const handleSearch = () => {
+    // if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
+    //   dispatch(searchListingsCityState(bookings));
+    // } else if (!bookings.start_date && !bookings.end_date) {
+    //   dispatch(searchListingsCityStateGuests(bookings));
+    // }
+    dispatch(searchListingsCityStateGuestsStartDateEndDate(bookings));
+    history.push(`/search/${city}--${state}`);
   };
 
   return (
@@ -74,8 +115,11 @@ const Home = () => {
                 bookings.start_date && bookings.start_date ? 'bold' : null
               }`}
             >
-              {bookings.start_date && bookings.start_date
-                ? bookings.start_date.toLocaleDateString('en-US', options)
+              {bookings.start_date_object && bookings.start_date_object
+                ? bookings.start_date_object.toLocaleDateString(
+                    'en-us',
+                    options
+                  )
                 : 'Add dates'}
             </div>
           </div>
@@ -93,8 +137,8 @@ const Home = () => {
                 bookings.end_date && bookings.end_date ? 'bold' : null
               }`}
             >
-              {bookings.end_date && bookings.end_date
-                ? bookings.end_date.toLocaleDateString('en-US', options)
+              {bookings.end_date_object && bookings.end_date_object
+                ? bookings?.end_date_object.toLocaleDateString('en-us', options)
                 : 'Add dates'}
             </div>
           </label>
@@ -106,14 +150,25 @@ const Home = () => {
           className='search-input-guests-container'
           onMouseEnter={() => setGuestsDateVerticleDiv('hidden')}
           onMouseLeave={() => setGuestsDateVerticleDiv('')}
+          onClick={handleShowGuests}
         >
           <div className='guests-label search-bar-label'>Guests</div>
-          <div className='guests-placeholder search-bar-placeholder-label'>
-            Add guests
+          <div
+            className={`end-button search-bar-placeholder-label ${
+              bookings.guestCount && bookings.guestCount ? 'bold' : null
+            }`}
+          >
+            {bookings.guestCount && bookings.guestCount
+              ? `${
+                  bookings.guestCount === 1
+                    ? `${bookings.guestCount} guest`
+                    : `${bookings.guestCount} guests`
+                }`
+              : 'Add guests'}
           </div>
         </div>
         <div className='search-button-wrapper'>
-          <div className='search-button-container'>
+          <div onClick={handleSearch} className='search-button-container'>
             <CgSearch className='search-button-icon' />
           </div>
         </div>
@@ -124,6 +179,7 @@ const Home = () => {
           setShowDatePicker={setShowDatePicker}
         />
       ) : null}
+      {showGuestSelect === 'true' ? <Guests /> : null}
     </div>
   );
 };

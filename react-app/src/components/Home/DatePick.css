@@ -19,7 +19,7 @@
   margin-top: 30px;
   width: 850px;
   height: 450px;
-  border: 2px solid white;
+  border: 2px solid rgb(255, 255, 255);
 }
 
 .react-datepicker__month-container {
@@ -139,4 +139,14 @@
 .react-datepicker__day-name {
   font-size: 18px;
   color: #ff385d;
+}
+
+.react-datepicker__day--today.react-datepicker__day--in-range {
+  background-color: #216ba5;
+  color: white;
+  font-weight: 400;
+}
+
+.react-datepicker__day--today.react-datepicker__day--selecting-range-start {
+  background-color: #ff385d;
 }

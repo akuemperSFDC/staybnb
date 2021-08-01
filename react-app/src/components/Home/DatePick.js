@@ -11,7 +11,6 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
 
   const bookings = useSelector((state) => state.bookings);
 
-  console.log(bookings);
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -19,11 +18,13 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
 
   const onChange = (dates) => {
     const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+    if (start && end) {
+      setStartDate(start);
+      setEndDate(end);
+    }
     const dateRange = {
-      start_date: start,
-      end_date: end,
+      start_date_object: start,
+      end_date_object: end,
     };
     dispatch(setBooking(dateRange));
   };
@@ -32,20 +33,18 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     if (!clickedOutside) {
       setClickedOutside(!clickedOutside);
     }
-  };
 
-  // const handleShowDatePicker = () => {
-  //   if (showDatePicker === 'false') {
-  //     setShowDatePicker('true');
-  //   } else {
-  //     setShowDatePicker('false');
-  //   }
-  // };
+    const dates = {
+      start_date_object: startDate,
+      end_date_object: endDate,
+    };
+    dispatch(setBooking(dates));
+  };
 
   const handleDates = () => {
     const dates = {
-      start_date: startDate,
-      end_date: endDate,
+      start_date_object: startDate,
+      end_date_object: endDate,
     };
     dispatch(setBooking(dates));
   };
@@ -64,12 +63,12 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
       <div className='react-datepicker-calendar-container'>
         <DatePicker
           selected={null}
-          // shouldCloseOnSelect={false}
-          value={parseISO(bookings.start_date)}
+          // shouldCloseOnSelect={true}
+          value={bookings.start_date_object}
           monthsShown={2}
           onChange={(dates) => onChange(dates)}
-          startDate={bookings.start_date}
-          endDate={bookings.end_date}
+          startDate={bookings.start_date_object}
+          endDate={bookings.end_date_object}
           selectsRange
           inline
           onCalendarClose={handleDates}

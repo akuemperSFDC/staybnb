@@ -53,17 +53,9 @@
   height: auto;
 }
 
-.listing-image {
-  max-width: 300px;
-  max-height: 200px;
-}
-
-.search_results-listings-slider {
-  max-width: 300px;
-  max-height: 200px;
-}
-
 .search-results__listing-details {
+  text-decoration: none;
+  color: inherit;
   width: 55%;
 }
 

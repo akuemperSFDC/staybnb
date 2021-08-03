@@ -266,3 +266,22 @@
 .search-plus-icon.inactive:hover {
   cursor: not-allowed;
 }
+
+.clear-button {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.105);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+  border-radius: 50%;
+  z-index: 1;
+  transition: 0.35s;
+}
+
+.clear-button:hover {
+  background-color: #ff385c;
+  color: white;
+}

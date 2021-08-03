@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 
 import './ImageSlider.css';
 
-const ImageSlider = ({ images, listing }) => {
+const LargeImageSlider = ({ images, listing }) => {
   const [current, setCurrent] = useState(0);
   const length = images?.length;
 
@@ -20,15 +19,13 @@ const ImageSlider = ({ images, listing }) => {
   };
 
   return (
-    <div className='slider search_results-slider'>
+    <div className='large-slider'>
       <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
       <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
       {images?.map((img, i) => (
         <div className={i === current ? 'slide-active' : 'slide'} key={i}>
           {i === current && (
-            <Link to={`/listings/view/${listing.title}/${listing.id}`}>
-              <img src={img.img_url} alt='' className='listing-image' />
-            </Link>
+            <img src={img.img_url} alt='' className='large-listing-image' />
           )}
         </div>
       ))}
@@ -36,4 +33,4 @@ const ImageSlider = ({ images, listing }) => {
   );
 };
 
-export default ImageSlider;
+export default LargeImageSlider;

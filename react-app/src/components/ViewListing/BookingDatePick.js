@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBooking } from '../../store/bookings';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './DatePick.css';
+import '../Home/DatePick.css';
+import { format, parseISO } from 'date-fns/esm';
 
 const DatePick = ({ showDatePicker, setShowDatePicker }) => {
   const dispatch = useDispatch();
@@ -28,16 +29,6 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
   };
 
   const handleClickOutside = (e) => {
-    // const concernedElement = document.querySelector('.home-page-container');
-    // console.log(e);
-
-    // document.addEventListener('mousedown', (e) => {
-    //   console.log(e);
-    //   if (concernedElement.includes(e.target)) {
-    //     setClickedOutside(!clickedOutside);
-    //   }
-    // });
-
     if (!clickedOutside) {
       setClickedOutside(!clickedOutside);
     }
@@ -61,8 +52,6 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     const dateRange = {
       start_date_object: '',
       end_date_object: '',
-      start_date: '',
-      end_date: '',
     };
     dispatch(setBooking(dateRange));
     setClickedOutside(!clickedOutside);
@@ -75,13 +64,11 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
         setShowDatePicker('false');
       }, 100);
     }
-  }, [clickedOutside, setShowDatePicker]);
+  }, [clickedOutside, setShowDatePicker, dispatch]);
 
   return (
     <>
-      <div
-        className='react-datepicker-calendar-container'
-      >
+      <div className='react-datepicker-calendar-container-bookings'>
         <DatePicker
           selected={null}
           // shouldCloseOnSelect={true}
@@ -95,20 +82,19 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
           onCalendarClose={handleDates}
           // onCalendarOpen={handleShowDatePicker}
           minDate={new Date()}
-          // onClickOutside={handleClickOutside}
-          calendarClassName='calendar-css'
+          onClickOutside={handleClickOutside}
+          calendarClassName='booking-calendar'
           dayClassName={() => 'calendar-days'}
           dateFormat='dd/MM/yyyy'
-          isClearable={true}
         />
         <div
-          className='react-datepicker-calendar-container react-calendar-submit-button'
+          className='react-datepicker-calendar-container react-calendar-submit-button-bookings'
           onClick={() => setClickedOutside(!clickedOutside)}
         >
           Submit
         </div>
         <div
-          className='react-datepicker-calendar-container react-calendar-clear-button'
+          className='react-datepicker-calendar-container react-calendar-clear-button-bookings'
           onClick={handleClearDates}
         >
           Clear

@@ -6,9 +6,37 @@
   align-items: center;
 }
 
+.large-slider {
+  position: relative;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .small-photo-slider {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 .listing-image {
   width: 700px;
   height: 400px;
+  border-radius: 10px;
+}
+
+.small-listing-image {
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.large-listing-image {
+  width: 1120px;
+  height: 630px;
   border-radius: 10px;
 }
 

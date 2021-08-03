@@ -6,9 +6,11 @@
 
 .react-datepicker-calendar-container {
   display: flex;
+  height: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .calendar-css {
@@ -18,7 +20,7 @@
   border-radius: 20px;
   margin-top: 30px;
   width: 850px;
-  height: 450px;
+  height: 475px;
   border: 2px solid rgb(255, 255, 255);
 }
 
@@ -75,10 +77,10 @@
 }
 
 .react-calendar-submit-button {
-  background-color: #ff385c;
-  border: 1px solid #ff385c;
+  background-color: #32cd32;
+  border: 1px solid #32cd32;
   color: white;
-  width: 70px;
+  width: 80px;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -88,9 +90,37 @@
   user-select: none;
   cursor: pointer;
   transition: 0.35s;
+  position: absolute;
+  bottom: 10px;
+  left: 315px;
+}
+
+.react-calendar-clear-button {
+  background-color: #ff385c;
+  border: 1px solid #ff385c;
+  color: white;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin-top: 10px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.35s;
+  position: absolute;
+  bottom: 10px;
+  right: 315px;
 }
 
 .react-calendar-submit-button:hover {
+  background-color: white;
+  border: 1px solid #32cd32;
+  color: #32cd32;
+}
+
+.react-calendar-clear-button:hover {
   background-color: white;
   border: 1px solid #ff385c;
   color: #ff385c;

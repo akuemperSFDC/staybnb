@@ -9,7 +9,7 @@ import {
 } from '../../store/searchResults';
 import AutocompleteCityState from './AutocompleteCityState';
 import Guests from './Guests';
-
+import { MdClear } from 'react-icons/md';
 import DatePick from './DatePick';
 import '../CreateListing/CreateListing.css';
 import './Home.css';
@@ -68,7 +68,6 @@ const Home = () => {
   };
 
   const handleShowGuests = () => {
-    console.log('triggered handleShowGuests');
     if (showGuestSelect === 'false') {
       setShowGuestSelect('true');
     } else {
@@ -83,12 +82,51 @@ const Home = () => {
     } else if (!bookings.start_date && !bookings.end_date) {
       dispatch(searchListingsCityStateGuests(bookings));
       history.push(`/search/${city}--${state}/guests=${guests}`);
+    } else {
+      dispatch(searchListingsCityState(bookings));
+      history.push(`/search/${city}--${state}`);
     }
     // dispatch(searchListingsCityStateGuestsStartDateEndDate(bookings));
   };
 
+  const handleClickOutside = (e) => {
+    let concernedElement = document.querySelector(
+      '.home-page-container'
+    ).className;
+    document.addEventListener('click', (e) => {
+      if (
+        (concernedElement === e.target.className &&
+          showDatePicker === 'true') ||
+        (e.target.className === 'location-input' &&
+          showDatePicker === 'true') ||
+        (e.target.className === 'navbar-container' &&
+          showDatePicker === 'true') ||
+        (e.target.className === 'search-bar-label' &&
+          showDatePicker === 'true') ||
+        (e.target.className === 'search-input-guests-container' &&
+          showDatePicker === 'true')
+        // (e.target.className.includes('date-container') &&
+        //   showGuestSelect === 'true') ||
+        // (e.target.className.includes('search-bar-placeholder-label') &&
+        //   showGuestSelect === 'true')
+      ) {
+        // e.stopPropagation();
+        if (showDatePicker === 'false') {
+          setShowDatePicker('true');
+        } else {
+          setShowDatePicker('false');
+        }
+        // if (showGuestSelect === 'false') {
+        //   setShowGuestSelect('true');
+        // } else {
+        //   setShowGuestSelect('false');
+        // }
+      }
+    });
+  };
+
   return (
-    <div className='home-page-container'>
+    <div className='home-page-container' onClick={handleClickOutside}>
       <div className='search-input-bar-container'>
         <div
           className={`location-input-container search-label-input-container ${focus}`}
@@ -103,17 +141,24 @@ const Home = () => {
         <div
           className={`verticle-divider ${checkInDateVerticleDiv} ${locationVerticleDiv}`}
         ></div>
-        <div className='start-end-date-input-container '>
+        <div className='start-end-date-input-container date-container'>
           <div
-            className='start-date-container'
+            className='start-date-container date-container'
             onMouseEnter={() => setCheckInDateVerticleDiv('hidden')}
             onMouseLeave={() => setCheckInDateVerticleDiv('')}
             onClick={handleShowDatePicker}
           >
-            <div className='start-label search-bar-label'>Check in</div>
+            <div
+              onClick={handleShowDatePicker}
+              className='start-label search-bar-label'
+            >
+              Check in
+            </div>
             <div
               className={`start-button search-bar-placeholder-label ${
-                bookings.start_date && bookings.start_date ? 'bold' : null
+                bookings.start_date_object && bookings.start_date_object
+                  ? 'bold'
+                  : ''
               }`}
             >
               {bookings.start_date_object && bookings.start_date_object
@@ -127,22 +172,30 @@ const Home = () => {
           <div
             className={`verticle-divider ${checkInDateVerticleDiv} ${checkOutDateVerticleDiv}`}
           ></div>
-          <label
-            className='end-date-container'
+          <div
+            className='end-date-container date-container'
             onMouseEnter={() => setCheckOutDateVerticleDiv('hidden')}
             onMouseLeave={() => setCheckOutDateVerticleDiv('')}
+            onClick={handleShowDatePicker}
           >
-            <div className='end-label search-bar-label'>Check out</div>
+            <div
+              onClick={handleShowDatePicker}
+              className='end-label search-bar-label'
+            >
+              Check out
+            </div>
             <div
               className={`end-button search-bar-placeholder-label ${
-                bookings.end_date && bookings.end_date ? 'bold' : null
+                bookings.end_date_object && bookings.end_date_object
+                  ? 'bold'
+                  : ''
               }`}
             >
               {bookings.end_date_object && bookings.end_date_object
                 ? bookings?.end_date_object.toLocaleDateString('en-us', options)
                 : 'Add dates'}
             </div>
-          </label>
+          </div>
         </div>
         <div
           className={`verticle-divider ${checkOutDateVerticleDiv} ${guestsDateVerticleDiv}`}
@@ -153,7 +206,12 @@ const Home = () => {
           onMouseLeave={() => setGuestsDateVerticleDiv('')}
           onClick={handleShowGuests}
         >
-          <div className='guests-label search-bar-label'>Guests</div>
+          <div
+            onClick={handleShowGuests}
+            className='guests-label search-bar-label'
+          >
+            Guests
+          </div>
           <div
             className={`end-button search-bar-placeholder-label ${
               bookings.guestCount && bookings.guestCount ? 'bold' : null

@@ -16,4 +16,4 @@ export const typeOfPlace = [
   'Bed and breakfast',
 ];
 
-export const typeOfSpace = ['Entire Place', 'A private room', 'A shared room'];
+export const typeOfSpace = ['Entire place', 'A private room', 'A shared room'];

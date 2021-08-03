@@ -130,6 +130,7 @@ def listings_from_listing_id(listing_id):
     listing = Listing.query.get(listing_id)
     listing_dict = listing.to_dict()
     listing_images = [list.to_dict() for list in listing.listing_images]
+    listing_dict['Listing_User'] = listing.user.to_dict()
     listing_dict['listing_images'] = listing_images
 
 

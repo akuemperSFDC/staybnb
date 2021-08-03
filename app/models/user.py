@@ -12,7 +12,6 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     img_url = db.Column(db.VARCHAR, default='https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png')
 
-    listings = db.relationship("Listing", back_populates="users")
     reviews = db.relationship('Review', back_populates='user')
     bookings = db.relationship('Booking', back_populates='user')
 

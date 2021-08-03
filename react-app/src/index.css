@@ -8,4 +8,8 @@
 :root {
   --divider-color: rgba(0, 0, 0, 0.125);
   --light-text-color: #a9a9a9;
+  --med-text-color: #4d4d4dbb;
+  --heading-font-size: 28px;
+  --light-box-shadow: 0 0 2px rgba(0, 0, 0, 0.379);
+  --heavy-box-shadow: 4px 4px 20px 1px rgba(0, 0, 0, 0.5);
 }

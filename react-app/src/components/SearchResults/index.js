@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
-import ImageSlider from '../ImageSlider';
+import { useParams, Link } from 'react-router-dom';
+import SmallImageSlider from '../ImageSlider/SmallImageSlider';
 
 import './SearchResults.css';
 
@@ -15,6 +15,8 @@ const SearchResults = () => {
   const city = bookings.city;
   const state = bookings.state;
 
+  const options = { month: 'short', day: 'numeric' };
+
   return (
     <div className='search_results__container'>
       <div className='search-results__listings_container'>
@@ -26,7 +28,13 @@ const SearchResults = () => {
 
             {!bookings.start_date
               ? ''
-              : `· ${bookings.start_date} - ${bookings.end_date} `}
+              : `· ${bookings.start_date_object.toLocaleDateString(
+                  'en-us',
+                  options
+                )} - ${bookings.end_date_object.toLocaleDateString(
+                  'en-us',
+                  options
+                )} `}
             {!bookings.guestCount
               ? ''
               : bookings.guestCount > 1
@@ -41,28 +49,32 @@ const SearchResults = () => {
           {searchResultListings &&
             searchResultListings.map((listing) => (
               <>
-                <Link
-                  to={`/listings/view/${listing.title}`}
+                <div
+                  to={`/listings/view/${listing.title}/${listing.id}`}
                   className='search-results__listings'
                 >
                   <div className='search-results__listing-photo-container'>
                     <div className='search-results__listing-photo'>
                       {listing?.listing_images.length &&
                       listing?.listing_images.length >= 1 ? (
-                        <ImageSlider
-                          className='search_results-listings-slider'
+                        <SmallImageSlider
+                          className='small-listing-image'
                           images={listing?.listing_images}
+                          listing={listing}
                         />
                       ) : (
                         <img
                           src='https://lahousing.lacity.org/AAHR/Images/No_Image_Available.jpg'
                           alt=''
-                          className='listing-image'
+                          className='small-listing-image'
                         />
                       )}
                     </div>
                   </div>
-                  <div className='search-results__listing-details'>
+                  <Link
+                    to={`/listings/view/${listing.title}`}
+                    className='search-results__listing-details'
+                  >
                     <div className='search-results__listing-header'>
                       <div className='search-results__listing-type-city'>
                         {listing.space} in {listing.city}
@@ -145,8 +157,8 @@ const SearchResults = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
                 <div className='search-results__bottom-divider'></div>
               </>
             ))}

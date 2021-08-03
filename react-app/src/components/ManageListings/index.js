@@ -67,6 +67,7 @@ const ManageListings = () => {
               <ImageSlider
                 className='manage-listings-slider'
                 images={listing?.listing_images}
+                listing={listing}
               />
             ) : (
               <img

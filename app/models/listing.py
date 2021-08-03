@@ -28,7 +28,7 @@ class Listing(db.Model):
     bathrooms = db.Column(db.Float, nullable=False)
     sleeps = db.Column(db.Integer, nullable=False)
 
-    users = db.relationship("User", back_populates="listings")
+    user = db.relationship("User", backref="listings")
     reviews = db.relationship('Review', back_populates='listing')
     listing_images = db.relationship('Listing_Image', backref='listings')
     bookings = db.relationship('Booking', backref='listing')

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getListingByListingId } from '../../store/listing';
 import { setKey } from '../../store/createListing';
 import { editListingThunk } from '../../store/editListing';
-import { deleteListing } from '../../store/listings';
+import { deleteListing, getListings } from '../../store/listings';
 import EditType from './EditType';
 import EditSpace from './EditSpace';
 import EditGuests from './EditGuests';
@@ -19,6 +19,7 @@ const EditListing = () => {
 
   const listing = useSelector((state) => state.listing);
   let editListing = useSelector((state) => state.createListing);
+  const user = useSelector((state) => state.session.user);
 
   const listing_images = editListing.listing_images;
 
@@ -27,6 +28,7 @@ const EditListing = () => {
   const handleEditListing = () => {
     // e.preventDefault();
     dispatch(editListingThunk(editListing));
+    dispatch(getListings(user.id));
     history.push('/listings');
   };
 

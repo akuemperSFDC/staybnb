@@ -46,7 +46,10 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/listings/view/:listingTitle' exact={true}>
+        <ProtectedRoute
+          path='/listings/view/:listingTitle/:listingId'
+          exact={true}
+        >
           <ViewListing />
         </ProtectedRoute>
         <ProtectedRoute path='/create-listing'>

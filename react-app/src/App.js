@@ -13,6 +13,7 @@ import ManageListings from './components/ManageListings';
 import CreateListing from './components/CreateListing';
 import SearchResults from './components/SearchResults';
 import ViewListing from './components/ViewListing';
+import ViewReservations from './components/ViewReservations';
 import { authenticate } from './store/session';
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
           exact={true}
         >
           <ViewListing />
+        </ProtectedRoute>
+        <ProtectedRoute path='/reservations' exact={true}>
+          <ViewReservations />
         </ProtectedRoute>
         <ProtectedRoute path='/create-listing'>
           <CreateListing />

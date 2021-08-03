@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import { BsList } from 'react-icons/bs';
 
-
 const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -51,11 +50,11 @@ const ProfileButton = ({ user }) => {
               </div>
             </Link>
             <Link
-              to='/bookings'
+              to='/reservations'
               className='border-top-element profile-dropdown-element profile-links'
             >
-              <div className='link-decoration' to='/bookings'>
-                Manage bookings
+              <div className='link-decoration' to='/reservations'>
+                Manage reservations
               </div>
             </Link>
             <Link

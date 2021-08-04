@@ -6,7 +6,7 @@ import { GiHeatHaze } from 'react-icons/gi';
 import { IoIosSnow } from 'react-icons/io';
 import './CreateListing.css';
 
-const Amenities = () => {
+const Amenities = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
   const [ariaPressedWifi, setAriaPressedWifi] = useState(2);

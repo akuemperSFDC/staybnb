@@ -5,7 +5,7 @@ import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import './CreateListing.css';
 
-const Guests = () => {
+const Guests = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
   const [guestCount, setGuestCount] = useState(1);

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { typeOfSpace } from './data';
 import { useDispatch } from 'react-redux';
 import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
-const Type = () => {
+const Type = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
   const [selected, setSelected] = useState();
@@ -28,6 +28,14 @@ const Type = () => {
       dispatch(removeKey({ space: e.target.value }));
     }
   };
+
+  useEffect(() => {
+    if (ariaChecked === 'true') {
+      setNextButtonActive('');
+    } else {
+      setNextButtonActive('inactive');
+    }
+  }, [ariaChecked, setNextButtonActive]);
 
   return (
     <div className='answer-selection-container'>

@@ -22,6 +22,7 @@ const CreateListing = () => {
   const user = useSelector((state) => state.session.user);
   const [question, setQuestion] = useState(questions[0]);
   const [index, setIndex] = useState(0);
+  const [nextButtonActive, setNextButtonActive] = useState('inactive');
 
   const handleNext = (e) => {
     if (pathname === '/create-listing/type') {
@@ -109,32 +110,50 @@ const CreateListing = () => {
       <div className='right-side-selection-container'>
         {question === questions[0] ? (
           <ProtectedRoute path='/create-listing/type'>
-            <Type />
+            <Type
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[1] ? (
           <ProtectedRoute path='/create-listing/space'>
-            <Space />
+            <Space
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[2] ? (
           <ProtectedRoute path='/create-listing/address'>
-            <Autocomplete />
+            <Autocomplete
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[3] ? (
           <ProtectedRoute path='/create-listing/guests'>
-            <Guests />
+            <Guests
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[4] ? (
           <ProtectedRoute path='/create-listing/amenities'>
-            <Amenities />
+            <Amenities
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[5] ? (
           <ProtectedRoute path='/create-listing/details'>
-            <Details />
+            <Details
+              setNextButtonActive={setNextButtonActive}
+              nextButtonActive={nextButtonActive}
+            />
           </ProtectedRoute>
         ) : null}
         {question === questions[6] ? (
@@ -148,7 +167,7 @@ const CreateListing = () => {
           </div>
           <div
             id='next'
-            className={`bottom-buttons next-btn`}
+            className={`bottom-buttons next-btn ${nextButtonActive}`}
             onClick={handleNext}
           >
             Next

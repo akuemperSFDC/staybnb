@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
-const Type = () => {
+const Type = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
   const { type } = useSelector((state) => state.createListing);
 
@@ -15,7 +15,6 @@ const Type = () => {
 
   const handleSelection = (e, i) => {
     if (i === Number(e.target.id)) {
-      console.log(e.target.value);
       setActive('active');
       setAriaChecked('true');
       setSelectedElementIndex(-1);
@@ -30,6 +29,18 @@ const Type = () => {
       dispatch(removeKey({ type: e.target.value }));
     }
   };
+
+  useEffect(() => {
+    if (ariaChecked === 'true') {
+      setNextButtonActive('');
+    } else {
+      setNextButtonActive('inactive');
+    }
+  }, [ariaChecked, setNextButtonActive]);
+
+  useEffect(() => {
+    console.log(selected, ariaChecked, active, selectedElementIndex);
+  }, [selected, ariaChecked, active, selectedElementIndex]);
 
   return (
     <div className='answer-selection-container'>

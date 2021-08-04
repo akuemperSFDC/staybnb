@@ -4,11 +4,11 @@ import {
   geocodeByPlaceId,
   getLatLng,
 } from 'react-places-autocomplete';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';
 
-const AutocompleteCityState = () => {
+const AutocompleteCityState = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
   const [address, setAddress] = useState('');
@@ -60,6 +60,14 @@ const AutocompleteCityState = () => {
     }
   };
 
+  useEffect(() => {
+    if (address && city && state && country) {
+      setNextButtonActive('');
+    } else {
+      setNextButtonActive('inactive');
+    }
+  }, [address, city, state, country, setNextButtonActive]);
+
   return (
     <PlacesAutocomplete
       value={address}
@@ -106,24 +114,28 @@ const AutocompleteCityState = () => {
               className='apt-number-input address-form-inputs'
               placeholder='Apt, suitm etc. (Optional)'
               autoComplete='new-password'
+              readOnly={true}
             />
             <input
               className='city-input address-form-inputs'
               placeholder='City'
               autoComplete='new-password'
               value={city}
+              readOnly={true}
             />
             <input
               className='state-input address-form-inputs'
               placeholder='State'
               autoComplete='new-password'
               value={state}
+              readOnly={true}
             />
             <input
               className='country-input address-form-inputs'
               placeholder='Country/Region'
               autoComplete='new-password'
               value={country}
+              readOnly={true}
             />
           </div>
         </div>

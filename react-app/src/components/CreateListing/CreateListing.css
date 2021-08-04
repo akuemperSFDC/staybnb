@@ -21,6 +21,7 @@
     rgba(121, 9, 106, 1) 51%,
     rgba(0, 212, 255, 1) 100%
   );
+  user-select: none;
 }
 
 .right-side-selection-container {
@@ -89,6 +90,11 @@
   color: white;
   margin-right: 4rem;
   border-radius: 10px;
+}
+
+.next-btn.inactive {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .next-btn:hover {

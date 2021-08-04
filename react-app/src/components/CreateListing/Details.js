@@ -5,16 +5,41 @@ import TextField from '@material-ui/core/TextField';
 
 import './CreateListing.css';
 
-const Details = () => {
+const Details = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [pricePerNight, setPricePerNight] = useState('1');
-  const [cleaningFee, setCleaningFee] = useState('1');
+  const [pricePerNight, setPricePerNight] = useState('');
+  const [cleaningFee, setCleaningFee] = useState('');
   const [checkInTime, setCheckInTime] = useState('15:00');
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
+
+  useEffect(() => {
+    if (
+      title &&
+      description &&
+      pricePerNight &&
+      cleaningFee &&
+      checkInTime &&
+      checkInType &&
+      parking
+    ) {
+      setNextButtonActive('');
+    } else {
+      setNextButtonActive('inactive');
+    }
+  }, [
+    title,
+    description,
+    pricePerNight,
+    cleaningFee,
+    checkInTime,
+    checkInType,
+    parking,
+    setNextButtonActive,
+  ]);
 
   useEffect(() => {
     dispatch(
@@ -78,6 +103,7 @@ const Details = () => {
             className='details-inputs'
             type='number'
             placeholder='Nightly price'
+            min={1}
             max={99999}
           ></input>
           <input
@@ -93,7 +119,6 @@ const Details = () => {
             label='Check-in time'
             type='time'
             onChange={(e) => setCheckInTime(e.target.value)}
-            defaultValue='03:00 PM'
             value={!checkInTime ? '15:00' : checkInTime}
             className='details-inputs'
             InputLabelProps={{

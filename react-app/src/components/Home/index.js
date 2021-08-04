@@ -79,7 +79,7 @@ const Home = () => {
     if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
       dispatch(searchListingsCityState(bookings));
       history.push(`/search/${city}--${state}`);
-    } else if (!bookings.start_date && !bookings.end_date) {
+    } else if (bookings.guestCount) {
       dispatch(searchListingsCityStateGuests(bookings));
       history.push(`/search/${city}--${state}/guests=${guests}`);
     } else {

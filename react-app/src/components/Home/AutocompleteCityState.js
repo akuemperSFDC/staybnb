@@ -38,7 +38,6 @@ const AutocompleteCityState = ({ setShowDatePicker }) => {
   };
 
   const handleOnKeyDown = (e) => {
-    console.log(e.key);
     if (e.key === 'Enter') {
       setShowDatePicker('true');
     }

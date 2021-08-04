@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBooking } from '../../store/bookings';
 import { currentReservation } from '../../store/reservations';
 import DatePicker from 'react-datepicker';
-import { parseISO } from 'date-fns';
+import { parseISO, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Home/DatePick.css';
 
-const DatePick = ({ setShowDatePicker, res }) => {
+const DatePick = ({ setShowDatePicker, res, currRes }) => {
   const dispatch = useDispatch();
 
   const bookings = useSelector((state) => state.bookings);
 
   const [dateRange, setDateRange] = useState([
-    parseISO(res.start_date),
-    parseISO(res.end_date),
+    parseISO(currRes.start_date),
+    parseISO(currRes.end_date),
   ]);
+
   const [startDate, endDate] = dateRange;
   const [clickedOutside, setClickedOutside] = useState(false);
 
@@ -35,27 +35,46 @@ const DatePick = ({ setShowDatePicker, res }) => {
   };
 
   const handleDates = () => {
-    const dates = {
-      ...res,
-      start_date: startDate,
-      end_date: endDate,
-    };
-    dispatch(currentReservation(dates));
+    setDateRange([
+      new Date(startDate).toISOString(),
+      new Date(Date.now() + 3600 * 1000 * 24).toISOString(),
+    ]);
+    // const dates = {
+    //   ...res,
+    //   start_date: new Date(startDate).toISOString(),
+    //   end_date: new Date(endDate).toISOString(),
+    // };
+    // dispatch(currentReservation(dates));
   };
 
   const handleClearDates = (e) => {
-    const dateRange = {
-      ...res,
-      start_date: '',
-      end_date: '',
-    };
-    dispatch(currentReservation(dateRange));
-    setClickedOutside(!clickedOutside);
+    // const dateRange = {
+    //   ...res,
+    //   start_date: new Date().toISOString(),
+    //   end_date: new Date(Date.now() + 3600 * 1000 * 24).toISOString(),
+    // };
+    setDateRange([
+      new Date(Date.now()),
+      new Date(Date.now() + 3600 * 1000 * 24),
+    ]);
+    // const dateRange = {
+    //   ...res,
+    //   start_date: new Date(startDate).toISOString(),
+    //   end_date: new Date(endDate).toISOString(),
+    // };
+    // dispatch(currentReservation(dateRange));
+    // setClickedOutside(!clickedOutside);
   };
 
   useEffect(() => {
     if (clickedOutside) {
       setShowDatePicker('');
+      const dates = {
+        ...res,
+        start_date: new Date(startDate).toISOString(),
+        end_date: new Date(endDate).toISOString(),
+      };
+      dispatch(currentReservation(dates));
       setTimeout(() => {
         setShowDatePicker('false');
       }, 100);
@@ -65,18 +84,18 @@ const DatePick = ({ setShowDatePicker, res }) => {
   useEffect(() => {
     const dates = {
       ...res,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: new Date(startDate).toISOString(),
+      end_date: new Date(endDate).toISOString(),
     };
     dispatch(currentReservation(dates));
-  }, [dispatch, startDate, endDate, res.start_date, res.end_date, res]);
+  }, [dispatch, res]);
 
   return (
     <>
       <div className='react-datepicker-calendar-container'>
         <DatePicker
           selected={null}
-          shouldCloseOnSelect={true}
+          // shouldCloseOnSelect={true}
           // value={res.start_date}
           monthsShown={2}
           onChange={(update) => {
@@ -87,14 +106,15 @@ const DatePick = ({ setShowDatePicker, res }) => {
           endDate={endDate}
           selectsRange={true}
           inline
-          onCalendarClose={handleDates}
+          // onCalendarClose={handleDates}
           // onCalendarOpen={handleShowDatePicker}
           minDate={new Date()}
-          onClickOutside={() => setClickedOutside(!clickedOutside)}
+          // onClickOutside={() => setClickedOutside(!clickedOutside)}
           calendarClassName='calendar-css'
           dayClassName={() => 'calendar-days'}
-          dateFormat='dd/MM/yyyy'
+          dateFormat='yyyy/MM/dd'
           isClearable={true}
+          // excludeDates={[new Date(startDate), new Date(startDate)]}
         />
         <div
           className='react-datepicker-calendar-container react-calendar-submit-button'

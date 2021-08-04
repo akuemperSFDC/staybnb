@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CgSearch } from 'react-icons/cg';
 import { useHistory } from 'react-router-dom';
+import { setBooking } from '../../store/bookings';
 import {
   searchListingsCityState,
   searchListingsCityStateGuests,
@@ -124,6 +125,23 @@ const Home = () => {
     });
   };
 
+  useEffect(() => {
+    dispatch(
+      setBooking({
+        listing_id: null,
+        user_id: null,
+        guestCount: null,
+        start_date: null,
+        end_date: null,
+        start_date_object: null,
+        end_date_object: null,
+        cityState: null,
+        city: null,
+        state: null,
+      })
+    );
+  }, []);
+
   return (
     <div className='home-page-container' onClick={handleClickOutside}>
       <div className='search-input-bar-container'>
@@ -159,7 +177,10 @@ const Home = () => {
               }`}
             >
               {bookings.start_date && bookings.start_date
-                ? bookings.start_date.toLocaleDateString('en-us', options)
+                ? `${new Date(bookings.start_date).toLocaleDateString(
+                    'en-us',
+                    options
+                  )}`
                 : 'Add dates'}
             </div>
           </div>
@@ -184,7 +205,10 @@ const Home = () => {
               }`}
             >
               {bookings.end_date && bookings.end_date
-                ? bookings?.end_date.toLocaleDateString('en-us', options)
+                ? `${new Date(bookings.end_date).toLocaleDateString(
+                    'en-us',
+                    options
+                  )}`
                 : 'Add dates'}
             </div>
           </div>

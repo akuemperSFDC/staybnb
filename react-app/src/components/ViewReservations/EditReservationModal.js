@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReservations } from '../../store/reservations';
+import { editReservation } from '../../store/reservations';
 import DatePick from './DatePick';
+import EditReservationGuests from './EditReservationGuests';
 import './EditReservationModal.css';
 
 const EditReservationModal = ({ res, setShowEditModal }) => {
@@ -9,10 +10,11 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
 
   const { id } = useSelector((state) => state.session.user);
 
+  const reservations = useSelector((state) => state.reservations);
+
+  const currRes = reservations[res.id];
+
   const [showDatePicker, setShowDatePicker] = useState('false');
-  const [checkInDateVerticleDiv, setCheckInDateVerticleDiv] = useState('');
-  const [checkOutDateVerticleDiv, setCheckOutDateVerticleDiv] = useState('');
-  const [guestsDateVerticleDiv, setGuestsDateVerticleDiv] = useState('');
 
   const options = { month: 'long', day: 'numeric' };
 
@@ -24,9 +26,12 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
     }
   };
 
-  useEffect(() => {
-    dispatch(getReservations(id));
-  }, [dispatch, res.start_date, res.end_date, res, id]);
+  const handleUpdateReservation = () => {
+    dispatch(editReservation(currRes));
+    setShowEditModal(false);
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className='edit-res-modal__page-container'>
@@ -48,7 +53,10 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
               }`}
             >
               {res?.start_date && res?.start_date
-                ? new Date(res?.start_date).toLocaleDateString('en-us', options)
+                ? new Date(currRes?.start_date).toLocaleDateString(
+                    'en-us',
+                    options
+                  )
                 : 'Add dates'}
             </div>
           </div>
@@ -64,18 +72,26 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
             </div>
             <div
               className={`end-button search-bar-placeholder-label edit-res-modal__placeholder-text ${
-                res?.end_date && res?.end_date ? 'bold' : ''
+                currRes?.end_date && currRes?.end_date ? 'bold' : ''
               }`}
             >
-              {res?.end_date && res?.end_date
-                ? new Date(res?.end_date).toLocaleDateString('en-us', options)
+              {currRes?.end_date && currRes?.end_date
+                ? new Date(currRes?.end_date).toLocaleDateString(
+                    'en-us',
+                    options
+                  )
                 : 'Add dates'}
             </div>
           </div>
         </div>
-        <div className='edit-res-modal__guests-container'></div>
+        <div className='edit-res-modal__guests-container'>
+          <EditReservationGuests res={res} currRes={currRes} />
+        </div>
         <div className='edit-res-modal__buttons'>
-          <div className='edit-res-modal__update-button reservation-card__buttons'>
+          <div
+            onClick={handleUpdateReservation}
+            className='edit-res-modal__update-button reservation-card__buttons'
+          >
             Update
           </div>
           <div
@@ -90,6 +106,7 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
         <div className='edit-res-modal__date-picker'>
           <DatePick
             res={res}
+            currRes={currRes}
             showDatePicker={showDatePicker}
             setShowDatePicker={setShowDatePicker}
           />

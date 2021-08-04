@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getListingByListingId } from '../../store/listing';
 import { createBooking, setBooking } from '../../store/bookings';
+import { getReservations } from '../../store/reservations';
 import { IoIosArrowDown } from 'react-icons/io';
 import LargeImageSlider from '../ImageSlider/LargeImageSlider';
 import BookingDatePick from './BookingDatePick';
@@ -72,24 +73,32 @@ const ViewListing = () => {
 
   const handleReservationSubmit = () => {
     dispatch(createBooking(bookings));
+    dispatch(getReservations(id));
     history.push('/reservations');
-    dispatch(
-      setBooking({
-        listing_id: '',
-        user_id: '',
-        guestCount: '',
-        start_date: '',
-        end_date: '',
-        start_date_object: '',
-        end_date_object: '',
-      })
-    );
+    setTimeout(() => {
+      dispatch(
+        setBooking({
+          listing_id: null,
+          user_id: null,
+          guestCount: null,
+          start_date: null,
+          end_date: null,
+          start_date_object: null,
+          end_date_object: null,
+          cityState: null,
+          city: null,
+          state: null,
+        })
+      );
+    }, 100);
   };
 
   useEffect(() => {
     dispatch(getListingByListingId(Number(listingId)));
-    dispatch(setBooking({ listing_id: Number(listingId), user_id: id }));
-  }, []);
+    dispatch(
+      setBooking({ ...bookings, listing_id: Number(listingId), user_id: id })
+    );
+  }, [bookings.guestCount]);
 
   return (
     <div className='view-listing__page-wrapper'>
@@ -231,9 +240,9 @@ const ViewListing = () => {
                     <div className='booking-form__guests-amount'>
                       {bookings.guestCount && bookings.guestCount
                         ? `${
-                            bookings.guestCount === 1
-                              ? `${bookings.guestCount} guest`
-                              : `${bookings.guestCount} guests`
+                            bookings.guestCount > 1
+                              ? `${bookings.guestCount} guests`
+                              : `${bookings.guestCount} guest`
                           }`
                         : 'Add guests'}
                     </div>

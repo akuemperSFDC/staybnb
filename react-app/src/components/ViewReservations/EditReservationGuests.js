@@ -2,65 +2,62 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
-import { setBooking } from '../../store/bookings';
-import '../Home/Home.css';
+import { currentReservation } from '../../store/reservations';
 
-const EditGuests = () => {
+const EditGuests = ({ currRes }) => {
   const dispatch = useDispatch();
 
-  const bookings = useSelector((state) => state.bookings);
-
-  const [guestCount, setGuestCount] = useState();
+  const [guestCount, setGuestCount] = useState(currRes.number_of_guests);
 
   const handleCountDown = (e) => {
-    console.log(e.target.id);
     if (guestCount === 1) {
       setGuestCount(1);
-      dispatch(setBooking({ guestCount }));
+      dispatch(
+        currentReservation({ ...currRes, number_of_guests: guestCount })
+      );
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount - 1);
-      dispatch(setBooking({ guestCount }));
+      dispatch(
+        currentReservation({ ...currRes, number_of_guests: guestCount })
+      );
     }
   };
 
   const handleCountUp = (e) => {
     if (guestCount === 16) {
       setGuestCount(16);
-      dispatch(setBooking({ guestCount }));
+      dispatch(
+        currentReservation({ ...currRes, number_of_guests: guestCount })
+      );
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount + 1);
-      dispatch(setBooking({ guestCount }));
+      dispatch(
+        currentReservation({ ...currRes, number_of_guests: guestCount })
+      );
     }
   };
 
   useEffect(() => {
-    dispatch(
-      setBooking(
-        bookings.guestCount
-          ? { ...bookings, guestCount }
-          : { ...bookings, guestCount: 1 }
-      )
-    );
-  }, [dispatch, guestCount]);
-
-  useEffect(() => {
-    setGuestCount(bookings.guestCount ? bookings.guestCount : 1);
-  }, []);
+    dispatch(currentReservation({ ...currRes, number_of_guests: guestCount }));
+  }, [guestCount]);
 
   return (
-    <div className='view-listing__guests-container'>
-      <div className='edit-count-selector-container guests-answer'>
-        <div className='edit-choice-counter-text'>Guests</div>
+    <div className='edit-res-guests-container'>
+      <div className='edit-res-count-selector-container guests-answer'>
+        <div className='edit-choice-counter-text edit-res__guests-text'>
+          Guests
+        </div>
         <div className='count-buttons search'>
           <div
             id='guest'
             onClick={handleCountDown}
-            className={`bookings-minus-button ${
+            className={`edit-res__minus-button ${
               guestCount === 1 ? 'inactive' : ''
             } `}
           >
             <BiMinus
-              className={`bookings-minus-icon ${
+              // id='guest'
+              className={`edit-res__minus-icon ${
                 guestCount === 1 ? 'inactive' : ''
               } `}
             />
@@ -69,12 +66,13 @@ const EditGuests = () => {
           <div
             id='guest'
             onClick={handleCountUp}
-            className={`bookings-plus-button ${
+            className={`edit-res__plus-button ${
               guestCount === 16 ? 'inactive' : ''
             }`}
           >
             <BsPlus
-              className={`bookings-plus-icon ${
+              // id='guest'
+              className={`edit-res__plus-icon ${
                 guestCount === 16 ? 'inactive' : ''
               }`}
             />

@@ -66,7 +66,16 @@ def edit_booking(booking_id):
         exisiting_booking.end_date = form.data['end_date'],
 
         db.session.commit()
-        return exisiting_booking.to_dict()
+
+        booking = exisiting_booking.to_dict()
+        booking_listing = exisiting_booking.listing.to_dict()
+        booking_listing_user = exisiting_booking.listing.user.to_dict()
+        booking_listing_images = [image.to_dict() for image in exisiting_booking.listing.listing_images]
+        booking['Listing'] = booking_listing
+        booking['Listing_User'] = booking_listing_user
+        booking['Listing_Images'] = booking_listing_images
+        print(booking)
+        return booking
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 

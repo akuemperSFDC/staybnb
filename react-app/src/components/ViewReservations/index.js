@@ -27,11 +27,8 @@ const ViewReservations = () => {
     setShowEditModal(!showEditModal);
   };
 
-  const handleEditBooking = () => {
-    //
-  };
-
   const handleDeleteBooking = (e) => {
+    console.log(e.target.id);
     dispatch(deleteReservation(Number(e.target.id)));
   };
 
@@ -56,7 +53,7 @@ const ViewReservations = () => {
           ''
         )}
         <div className='view-reservations__reservations-container'>
-          {reservations.map((res) => (
+          {reservations.map((res, i) => (
             <div key={res.id} className='view-reservations__reservation-card'>
               <div className='reservation-card__photo-container'>
                 <img
@@ -104,11 +101,9 @@ const ViewReservations = () => {
                     )}`}
                   </div>
                 </div>
-                {new Date(res?.end_date).toDateString() <=
-                new Date().toDateString() ? (
+                {new Date(res?.end_date) > new Date() ? (
                   <div className='reservation-card__buttons-container'>
                     <div
-                      id={res.id}
                       onClick={() => handleShowEditModal(res)}
                       className='reservation-card__edit-button reservation-card__buttons'
                     >

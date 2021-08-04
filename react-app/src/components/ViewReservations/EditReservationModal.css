@@ -12,8 +12,8 @@
 }
 
 .edit-res-modal__form-container {
-  width: 500px;
-  height: 400px;
+  width: 450px;
+  height: 250px;
   background-color: white;
   position: absolute;
   border-radius: 12px;
@@ -89,4 +89,71 @@
   border: 1px solid #c70000;
   background-color: white;
   color: #c70000;
+}
+
+.edit-res-modal__guests-container {
+  display: flex;
+  box-shadow: var(--light-box-shadow);
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 70%;
+  height: 50px;
+}
+
+.edit-res-guests-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  z-index: 5;
+}
+
+.edit-res-count-selector-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.edit-res__guests-text {
+  /* margin-left: 50px; */
+}
+
+.edit-res__minus-button,
+.edit-res__plus-button {
+  height: 30px;
+  width: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.468);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  z-index: inherit;
+  position: relative;
+  cursor: pointer;
+}
+
+.edit-res__plus-button.inactive,
+.edit-res__minus-button.inactive {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
+.edit-res__minus-button:hover,
+.edit-res__plus-button:hover {
+  border: 1px solid rgba(19, 19, 19, 0.851);
+}
+
+.edit-res__plus-button.inactive:hover,
+.edit-res__minus-button.inactive:hover {
+  cursor: not-allowed;
+  border: 1px solid rgba(0, 0, 0, 0.468);
+  opacity: 0.2;
+}
+
+.edit-res__minus-icon,
+.edit-res__plus-icon {
+  color: black;
+  font-size: 20px;
+  z-index: -5;
 }

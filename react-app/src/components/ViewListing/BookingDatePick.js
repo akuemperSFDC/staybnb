@@ -22,8 +22,8 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
       setEndDate(end);
     }
     const dateRange = {
-      start_date_object: start,
-      end_date_object: end,
+      start_date: start,
+      end_date: end,
     };
     dispatch(setBooking(dateRange));
   };
@@ -34,22 +34,24 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     }
 
     const dates = {
-      start_date_object: startDate,
-      end_date_object: endDate,
+      start_date: startDate,
+      end_date: endDate,
     };
     dispatch(setBooking(dates));
   };
 
   const handleDates = () => {
     const dates = {
-      start_date_object: startDate,
-      end_date_object: endDate,
+      start_date: startDate,
+      end_date: endDate,
     };
     dispatch(setBooking(dates));
   };
 
   const handleClearDates = (e) => {
     const dateRange = {
+      start_date: '',
+      end_date: '',
       start_date_object: '',
       end_date_object: '',
     };
@@ -66,17 +68,19 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     }
   }, [clickedOutside, setShowDatePicker, dispatch]);
 
+  useEffect(() => {}, [bookings]);
+
   return (
     <>
       <div className='react-datepicker-calendar-container-bookings'>
         <DatePicker
           selected={null}
           // shouldCloseOnSelect={true}
-          value={bookings.start_date_object}
+          value={bookings.start_date}
           monthsShown={2}
           onChange={(dates) => onChange(dates)}
-          startDate={bookings.start_date_object}
-          endDate={bookings.end_date_object}
+          startDate={bookings.start_date}
+          endDate={bookings.end_date}
           selectsRange
           inline
           onCalendarClose={handleDates}

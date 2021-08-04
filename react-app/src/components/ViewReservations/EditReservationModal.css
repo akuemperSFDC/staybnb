@@ -1,0 +1,92 @@
+.edit-res-modal__page-container {
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.406);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-res-modal__form-container {
+  width: 500px;
+  height: 400px;
+  background-color: white;
+  position: absolute;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.edit-res-modal__date-container {
+  margin-top: 50px;
+  box-shadow: var(--light-box-shadow);
+  border-radius: 20px;
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+}
+
+.edit-res-modal__start-container,
+.edit-res-modal__end-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  border-radius: 20px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.edit-res-modal__start-container:hover,
+.edit-res-modal__end-container:hover {
+  box-shadow: var(--heavy-box-shadow);
+}
+
+.edit-res-modal__start-label,
+.edit-res-modal__end-label {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 0;
+}
+
+.edit-res-modal__buttons {
+  margin-top: 20px;
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+}
+
+.edit-res-modal__update-button {
+  border: 1px solid transparent;
+  background-color: green;
+  color: white;
+  transition: 0.35s;
+}
+
+.edit-res-modal__close-button {
+  border: 1px solid transparent;
+  background-color: #c70000;
+  color: white;
+  transition: 0.35s;
+}
+
+.edit-res-modal__update-button:hover {
+  border: 1px solid green;
+  background-color: white;
+  color: green;
+}
+
+.edit-res-modal__close-button:hover {
+  border: 1px solid #c70000;
+  background-color: white;
+  color: #c70000;
+}

@@ -110,7 +110,6 @@ def edit_listing(listing_id):
 @listing_routes.route('/users/<int:user_id>')
 def listings_from_user_id(user_id):
 
-    # listings = db.session.query(Listing).join(Listing_Image).filter(Listing.user_id == (user_id)).all()
     listings = Listing.query.filter(Listing.user_id == user_id).all()
 
     my_listings = []

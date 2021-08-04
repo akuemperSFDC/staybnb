@@ -28,10 +28,10 @@ const SearchResults = () => {
 
             {!bookings.start_date
               ? ''
-              : `· ${bookings.start_date_object.toLocaleDateString(
+              : `· ${bookings.start_date.toLocaleDateString(
                   'en-us',
                   options
-                )} - ${bookings.end_date_object.toLocaleDateString(
+                )} - ${bookings.end_date.toLocaleDateString(
                   'en-us',
                   options
                 )} `}

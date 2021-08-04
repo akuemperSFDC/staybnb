@@ -21,7 +21,7 @@ export const createBooking = (booking) => async (dispatch) => {
     listing_id,
     number_of_guests: guestCount,
   };
-  console.log(formattedBooking);
+
   const response = await fetch('/api/bookings/', {
     method: 'POST',
     headers: {
@@ -50,24 +50,24 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_BOOKING:
-      const options = {
-        day: '2-digit',
-        year: 'numeric',
-        month: '2-digit',
-      };
-      const { start_date_object, end_date_object } = action.booking;
-      if (start_date_object) {
-        action.booking['start_date'] = start_date_object.toLocaleDateString(
-          'en-us',
-          options
-        );
-      }
-      if (end_date_object) {
-        action.booking['end_date'] = end_date_object.toLocaleDateString(
-          'en-us',
-          options
-        );
-      }
+      // const options = {
+      //   day: '2-digit',
+      //   year: 'numeric',
+      //   month: '2-digit',
+      // };
+      // const { start_date_object, end_date_object } = action.booking;
+      // if (start_date_object) {
+      //   action.booking['start_date'] = start_date_object.toLocaleDateString(
+      //     'en-us',
+      //     options
+      //   );
+      // }
+      // if (end_date_object) {
+      //   action.booking['end_date'] = end_date_object.toLocaleDateString(
+      //     'en-us',
+      //     options
+      //   );
+      // }
       newState = { ...state, ...action.booking };
       return newState;
     default:

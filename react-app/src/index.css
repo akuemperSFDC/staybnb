@@ -11,5 +11,6 @@
   --med-text-color: #4d4d4dbb;
   --heading-font-size: 28px;
   --light-box-shadow: 0 0 2px rgba(0, 0, 0, 0.379);
+  --med-box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.146);
   --heavy-box-shadow: 4px 4px 20px 1px rgba(0, 0, 0, 0.5);
 }

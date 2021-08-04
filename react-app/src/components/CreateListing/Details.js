@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';
 import TextField from '@material-ui/core/TextField';
-import { InputNumber } from 'antd';
 
 import './CreateListing.css';
 

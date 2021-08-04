@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CgSearch } from 'react-icons/cg';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +9,6 @@ import {
 } from '../../store/searchResults';
 import AutocompleteCityState from './AutocompleteCityState';
 import Guests from './Guests';
-import { MdClear } from 'react-icons/md';
 import DatePick from './DatePick';
 import '../CreateListing/CreateListing.css';
 import './Home.css';
@@ -156,16 +155,11 @@ const Home = () => {
             </div>
             <div
               className={`start-button search-bar-placeholder-label ${
-                bookings.start_date_object && bookings.start_date_object
-                  ? 'bold'
-                  : ''
+                bookings.start_date && bookings.start_date ? 'bold' : ''
               }`}
             >
-              {bookings.start_date_object && bookings.start_date_object
-                ? bookings.start_date_object.toLocaleDateString(
-                    'en-us',
-                    options
-                  )
+              {bookings.start_date && bookings.start_date
+                ? bookings.start_date.toLocaleDateString('en-us', options)
                 : 'Add dates'}
             </div>
           </div>
@@ -186,13 +180,11 @@ const Home = () => {
             </div>
             <div
               className={`end-button search-bar-placeholder-label ${
-                bookings.end_date_object && bookings.end_date_object
-                  ? 'bold'
-                  : ''
+                bookings.end_date && bookings.end_date ? 'bold' : ''
               }`}
             >
-              {bookings.end_date_object && bookings.end_date_object
-                ? bookings?.end_date_object.toLocaleDateString('en-us', options)
+              {bookings.end_date && bookings.end_date
+                ? bookings?.end_date.toLocaleDateString('en-us', options)
                 : 'Add dates'}
             </div>
           </div>

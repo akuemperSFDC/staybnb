@@ -72,7 +72,7 @@ const ViewListing = () => {
 
   const handleReservationSubmit = () => {
     dispatch(createBooking(bookings));
-    history.push('/reservation');
+    history.push('/reservations');
     dispatch(
       setBooking({
         listing_id: '',
@@ -200,8 +200,8 @@ const ViewListing = () => {
                       CHECK-IN
                     </div>
                     <div className='booking-form__check-in-date-label'>
-                      {bookings.start_date_object
-                        ? bookings.start_date_object.toLocaleDateString(
+                      {bookings.start_date
+                        ? bookings.start_date.toLocaleDateString(
                             'en-us',
                             options
                           )
@@ -214,11 +214,8 @@ const ViewListing = () => {
                       CHECK-OUT
                     </div>
                     <div className='booking-form__check-out-date-label'>
-                      {bookings.end_date_object
-                        ? bookings.end_date_object.toLocaleDateString(
-                            'en-us',
-                            options
-                          )
+                      {bookings.end_date
+                        ? bookings.end_date.toLocaleDateString('en-us', options)
                         : 'End date'}
                     </div>
                   </div>

@@ -1,14 +1,15 @@
 from app.models import db, Booking
+import datetime
 
 
 def seed_bookings():
-    booking1 = Booking(listing_id=1, user_id=2, number_of_guests=1, start_date='08/02/2021', end_date='08/06/2021', check_in_day=2, check_in_month=8, check_in_year=21, check_out_day=6, check_out_month=8, check_out_year=21)
+    booking1 = Booking(listing_id=1, user_id=1, number_of_guests=1, start_date=datetime.datetime(2021, 8, 2).isoformat(), end_date=datetime.datetime(2021, 8, 6).isoformat())
 
-    booking2 = Booking(listing_id=1, user_id=3, number_of_guests=2, start_date='08/07/2021', end_date='08/12/2021', check_in_day=7, check_in_month=8, check_in_year=21, check_out_day=12, check_out_month=8, check_out_year=21)
+    booking2 = Booking(listing_id=2, user_id=1, number_of_guests=2, start_date=datetime.datetime(2021, 8, 7).isoformat(), end_date=datetime.datetime(2021, 8, 12).isoformat())
 
-    booking3 = Booking(listing_id=1, user_id=4, number_of_guests=3, start_date='08/12/2021', end_date='08/18/2021', check_in_day=12, check_in_month=8, check_in_year=21, check_out_day=18, check_out_month=8, check_out_year=21)
+    booking3 = Booking(listing_id=3, user_id=4, number_of_guests=3, start_date='2021-08-12', end_date='2021-08-18')
 
-    booking4 = Booking(listing_id=1, user_id=5, number_of_guests=4, start_date='08/20/2021', end_date='08/21/2021', check_in_day=20, check_in_month=8, check_in_year=21, check_out_day=21, check_out_month=8, check_out_year=21)
+    booking4 = Booking(listing_id=1, user_id=5, number_of_guests=4, start_date='2021-08-20', end_date='2021-08-21')
 
 
     db.session.add(booking1)

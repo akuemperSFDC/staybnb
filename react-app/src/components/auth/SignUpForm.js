@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -16,22 +16,48 @@ const SignUpForm = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    return () => {
+      setErrors();
+      setFirstName();
+      setLastName();
+      setEmail();
+      setPassword();
+      setRepeatPassword();
+      setImgUrl();
+    };
+  }, []);
+
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword && imgUrl) {
+    if (password !== repeatPassword) {
+      const data = await dispatch(
+        signUp(firstName, lastName, email, password, imgUrl)
+      );
+      if (data) {
+        setErrors(['Passwords do not match', ...data]);
+      }
+    } else if (
+      password === repeatPassword &&
+      imgUrl &&
+      password &&
+      email &&
+      lastName &&
+      firstName
+    ) {
+      setErrors([]);
       const data = await dispatch(
         signUp(firstName, lastName, email, password, imgUrl)
       );
       if (data) {
         setErrors(data);
       }
-    } else if (password === repeatPassword && !imgUrl) {
+    } else {
+      setErrors([]);
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         setErrors(data);
       }
-    } else {
-      setErrors(['Passwords do not match']);
     }
   };
 

@@ -1,0 +1,12 @@
+.logged-out__links-container {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logged-out_links {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}

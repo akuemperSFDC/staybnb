@@ -74,6 +74,7 @@ const ProfileButton = ({ user }) => {
               </div>
             </Link>
             <Link
+              to='/splash'
               onClick={logout}
               className='border-top-element profile-dropdown-element profile-links'
             >

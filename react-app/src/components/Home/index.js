@@ -9,6 +9,8 @@ import {
   searchListingsCityStateGuestsStartDateEndDate,
 } from '../../store/searchResults';
 import AutocompleteCityState from './AutocompleteCityState';
+import CrossfadeCarousel from '@notbaldrick/react-crossfade-carousel';
+import { backgroundImages } from './data';
 import Guests from './Guests';
 import DatePick from './DatePick';
 import '../CreateListing/CreateListing.css';

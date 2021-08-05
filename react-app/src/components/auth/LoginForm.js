@@ -8,7 +8,6 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -16,6 +15,7 @@ const LoginForm = () => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
+      console.log(data);
       setErrors(data);
     }
   };
@@ -32,10 +32,6 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
-  const handleShowModal = () => {
-    setShowModal(!showModal);
-  };
-
   return (
     <div className='login-form__page-container'>
       <div className='login-form__form-container'>
@@ -44,12 +40,13 @@ const LoginForm = () => {
         </div>
         <form onSubmit={onLogin}>
           <div className='login-form__errors-container'>
-            {errors.map((error, ind) => (
-              <div className='login-form__errors' key={ind}>
-                {error[0].toUpperCase()}
-                {error.substring(1)}
-              </div>
-            ))}
+            {errors &&
+              errors.map((error, ind) => (
+                <div className='login-form__errors' key={ind}>
+                  {error[0].toUpperCase()}
+                  {error.substring(1)}
+                </div>
+              ))}
           </div>
           <div className='login-form__email-container login-form__input-container'>
             <input
@@ -90,7 +87,7 @@ const LoginForm = () => {
           </div>
           <div className='login-form__goto-login'>
             <div className='goto-login__text'>Not a member?</div>
-            <Link className='go-to__link' to='/login'>
+            <Link className='go-to__link' to='/signup'>
               Signup
             </Link>
           </div>

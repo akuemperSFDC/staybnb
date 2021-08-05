@@ -15,6 +15,7 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
   const currRes = reservations[res.id];
 
   const [showDatePicker, setShowDatePicker] = useState('false');
+  const [updateButtonActive, setUpdateButtonActive] = useState('');
 
   const options = { month: 'long', day: 'numeric' };
 
@@ -30,6 +31,14 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
     dispatch(editReservation(currRes));
     setShowEditModal(false);
   };
+
+  useEffect(() => {
+    if (res.start_date && res.end_date && res.number_of_guests) {
+      setUpdateButtonActive('');
+    } else {
+      setUpdateButtonActive('inactive');
+    }
+  }, [res.start_date, res.end_date, res.number_of_guests]);
 
   useEffect(() => {}, []);
 
@@ -90,7 +99,7 @@ const EditReservationModal = ({ res, setShowEditModal }) => {
         <div className='edit-res-modal__buttons'>
           <div
             onClick={handleUpdateReservation}
-            className='edit-res-modal__update-button reservation-card__buttons'
+            className={`edit-res-modal__update-button reservation-card__buttons ${updateButtonActive}`}
           >
             Update
           </div>

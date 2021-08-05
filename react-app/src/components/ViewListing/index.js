@@ -24,6 +24,7 @@ const ViewListing = () => {
 
   const [showDatePicker, setShowDatePicker] = useState('false');
   const [showGuestSelect, setShowGuestSelect] = useState('false');
+  const [reserveButtonActive, setReserveButtonActive] = useState('');
 
   const options = { month: 'short', day: 'numeric' };
 
@@ -99,6 +100,14 @@ const ViewListing = () => {
       setBooking({ ...bookings, listing_id: Number(listingId), user_id: id })
     );
   }, [bookings.guestCount]);
+
+  useEffect(() => {
+    if (bookings.start_date && bookings.end_date && bookings.guestCount) {
+      setReserveButtonActive('');
+    } else {
+      setReserveButtonActive('inactive');
+    }
+  }, [bookings.start_date, bookings.end_date, bookings.guestCount]);
 
   return (
     <div className='view-listing__page-wrapper'>
@@ -256,7 +265,7 @@ const ViewListing = () => {
               </div>
               <div
                 onClick={handleReservationSubmit}
-                className='view-listing__reserve-button'
+                className={`view-listing__reserve-button ${reserveButtonActive}`}
               >
                 Reserve
               </div>

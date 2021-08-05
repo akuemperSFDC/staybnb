@@ -72,6 +72,13 @@
   transition: 0.35s;
 }
 
+.edit-res-modal__update-button.inactive {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.413);
+  color: black;
+}
+
 .edit-res-modal__close-button {
   border: 1px solid transparent;
   background-color: #c70000;

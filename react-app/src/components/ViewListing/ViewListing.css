@@ -201,6 +201,13 @@
   transition: 0.35s;
 }
 
+.view-listing__reserve-button.inactive {
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.413);
+  color: black;
+  opacity: 0.7;
+}
+
 .view-listing__reserve-button:hover {
   color: #ff385c;
   background-color: white;

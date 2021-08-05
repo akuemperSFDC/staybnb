@@ -8,6 +8,8 @@ def user_exists(form, field):
     # Checking if user exists
     email = field.data
     user = User.query.filter(User.email == email).first()
+    print('------------------------------', email)
+    print('------------------------------', user.to_dict())
     if user:
         raise ValidationError('Email address is already in use.')
 
@@ -21,7 +23,8 @@ def username_exists(form, field):
 
 
 class SignUpForm(FlaskForm):
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+    first_name = StringField('first_name', validators=[DataRequired()])
+    last_name = StringField('last_name', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
+    img_url = StringField('img_url', default='https://previews.123rf.com/images/martialred/martialred1608/martialred160800018/61263271-user-account-profile-circle-flat-icon-for-apps-and-websites.jpg')

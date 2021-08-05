@@ -3,47 +3,35 @@ import { NavLink, useHistory, Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store/session';
 import ProfileButton from './ProfileButton';
+import LoggedOutLinks from './LoggedOutLinks';
 import './NavBar.css';
 
 const NavBar = ({ loaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const email = 'demo@aa.io';
-  const password = 'password';
   const { pathname } = useLocation();
 
   const [absolute, setAbsolute] = useState('');
 
   useEffect(() => {
-    if (pathname === '/' || pathname.includes('/create-listing/')) {
+    if (
+      pathname === '/' ||
+      pathname.includes('/create-listing/') ||
+      pathname === '/login' ||
+      pathname === '/signup' ||
+      pathname === '/splash'
+    ) {
       setAbsolute('absolute');
     } else {
       setAbsolute('');
     }
   }, [pathname, dispatch]);
 
-  const onDemoSignIn = async (e) => {
-    e.preventDefault();
-    const data = await dispatch(login(email, password));
-    history.push('/');
-  };
-
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
   } else {
-    sessionLinks = (
-      <div className='session-links'>
-        <NavLink to='/login'>Log In</NavLink>
-        <i className='fal fa-horizontal-rule fa-6x pipechar'></i>
-        <NavLink to='/signup'>Sign Up</NavLink>
-        <i className='fal fa-horizontal-rule fa-6x pipechar'></i>
-        <button className='demo-btn' onClick={onDemoSignIn} to='/'>
-          Demo
-        </button>
-      </div>
-    );
+    sessionLinks = <LoggedOutLinks />;
   }
 
   return (

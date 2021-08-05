@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    img_url = db.Column(db.VARCHAR, default='https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png')
+    img_url = db.Column(db.VARCHAR)
 
     reviews = db.relationship('Review', back_populates='user')
     bookings = db.relationship('Booking', back_populates='user')

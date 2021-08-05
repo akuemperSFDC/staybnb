@@ -1,0 +1,42 @@
+.splash-page__container-image {
+  background: no-repeat center center fixed;
+  background-size: cover;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  opacity: 0.4;
+}
+
+.splash-page__container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: black;
+  position: absolute;
+  z-index: 1;
+}
+
+.splash-page__welcome-container {
+  display: flex;
+  justify-content: center;
+  /* height: 100%; */
+  width: 100%;
+  margin-top: 250px;
+  position: absolute;
+}
+
+.splash-page__welcome-message {
+  font-size: 112px;
+  background: -webkit-linear-gradient(left, #ff385c, #ff113c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Dancing Script', cursive;
+  z-index: 10;
+}

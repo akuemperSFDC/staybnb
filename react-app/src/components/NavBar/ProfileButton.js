@@ -73,11 +73,14 @@ const ProfileButton = ({ user }) => {
                 Manage listings
               </div>
             </Link>
-            <div className='border-top-element profile-dropdown-element profile-links'>
+            <Link
+              onClick={logout}
+              className='border-top-element profile-dropdown-element profile-links'
+            >
               <div className='btn-logout' onClick={logout}>
                 Log out
               </div>
-            </div>
+            </Link>
           </div>
         )}
       </div>

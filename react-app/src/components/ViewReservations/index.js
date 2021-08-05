@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReservations, deleteReservation } from '../../store/reservations';
-import { setBooking } from '../../store/bookings';
 import EditReservationModal from './EditReservationModal';
-import states from 'us-state-converter';
 import './ViewReservations.css';
+import states from './us-state-converter';
 
 const ViewReservations = () => {
   const dispatch = useDispatch();

@@ -1,0 +1,27 @@
+{
+  "name": "us-state-converter",
+  "version": "1.0.5",
+  "description": "A package that converts U.S. state abbreviations to full names and back",
+  "main": "index.js",
+  "author": {
+    "name": "Kevin Smith",
+    "email": "kevin@iridigital.com",
+    "url": "https://www.iridigital.com"
+  },
+  "contributors": [
+    {
+      "name": "Kevin Smith",
+      "email": "kevin@iridigital.com",
+      "url": "https://www.iridigital.com"
+    }
+  ],
+  "bugs": "https://github.com/keveightysev/us-state-converter/issues",
+  "repository": "github:keveightysev/us-state-converter",
+  "license": "MIT",
+  "keywords": [
+    "united states",
+    "states",
+    "abbreviation",
+    "convert"
+  ]
+}

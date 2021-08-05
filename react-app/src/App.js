@@ -15,6 +15,7 @@ import ViewReservations from './components/ViewReservations';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import SplashPage from './components/SplashPage';
+import Footer from './components/Footer';
 import { authenticate } from './store/session';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar loaded={loaded} />
+      <Footer />
       <Switch>
         <Route path='/splash' exact={true}>
           <SplashPage />

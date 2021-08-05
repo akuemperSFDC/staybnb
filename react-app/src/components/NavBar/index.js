@@ -39,10 +39,11 @@ const NavBar = ({ loaded }) => {
       <div className={`navbar-container ${absolute}`}>
         <div className='navbar-container-left'>
           <Link className='site-name' to='/'>
-            <div className='site-name'>staybnb</div>
+            <div className={`site-name ${absolute}`}>staybnb</div>
           </Link>
         </div>
         <div className='navbar-container-right'>{loaded && sessionLinks}</div>
+        {/* <div className={`opacity-faker-navbar ${absolute}`}></div> */}
       </div>
     </nav>
   );

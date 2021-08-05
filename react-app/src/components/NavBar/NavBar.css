@@ -3,14 +3,19 @@
   display: flex;
   padding: 1rem;
   justify-content: space-between;
-  background: rgba(0, 0, 0, 0.105);
   z-index: 2;
   padding-top: 2rem;
+  border-bottom: 1px solid var(--divider-color);
 }
 
 .navbar-container.absolute {
   position: fixed;
   background: transparent;
+  color: var(--primary color);
+}
+
+.site-name.absolute {
+  color: white;
 }
 
 .navbar-container-left {
@@ -44,14 +49,14 @@
 }
 
 .site-name {
-  color: white;
+  color: var(--primary-color);
   font-size: 30px;
   text-decoration: none;
   transition: 0.35s;
   user-select: none;
 }
 
-.site-name:hover {
+.site-name.absolute:hover {
   color: #ff385c;
 }
 

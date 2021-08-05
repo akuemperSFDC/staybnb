@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getListingByListingId } from '../../store/listing';
@@ -20,6 +20,8 @@ const EditListing = () => {
   const listing = useSelector((state) => state.listing);
   let editListing = useSelector((state) => state.createListing);
   const user = useSelector((state) => state.session.user);
+
+  const [submitButtonActive, setSumitButtonActive] = useState('');
 
   const listing_images = editListing.listing_images;
 
@@ -45,11 +47,11 @@ const EditListing = () => {
 
   return (
     <div className='edit-listing-container'>
-      <EditType />
-      <EditSpace />
+      <EditType setSumitButtonActive={setSumitButtonActive} />
+      <EditSpace setSumitButtonActive={setSumitButtonActive} />
       <EditGuests />
       <EditAmenities />
-      <EditDetails />
+      <EditDetails setSumitButtonActive={setSumitButtonActive} />
       <div className='edit-form-button-container'>
         <div
           onClick={handleDeleteListing}
@@ -59,7 +61,7 @@ const EditListing = () => {
         </div>
         <div
           onClick={handleEditListing}
-          className='edit-button edit-form-buttons'
+          className={`edit-button edit-form-buttons ${submitButtonActive}`}
         >
           Submit
         </div>

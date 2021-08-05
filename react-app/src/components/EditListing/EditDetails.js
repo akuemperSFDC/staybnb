@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 import './EditListing.css';
 
-const EditDetails = () => {
+const EditDetails = ({ setSumitButtonActive }) => {
   const dispatch = useDispatch();
 
   const listing = useSelector((state) => state.listing);
@@ -65,6 +65,31 @@ const EditDetails = () => {
     checkInTime,
     checkInType,
     parking,
+  ]);
+
+  useEffect(() => {
+    if (
+      title &&
+      description &&
+      pricePerNight &&
+      cleaningFee &&
+      checkInTime &&
+      checkInType &&
+      parking
+    ) {
+      setSumitButtonActive('');
+    } else {
+      setSumitButtonActive('inactive');
+    }
+  }, [
+    title,
+    description,
+    pricePerNight,
+    cleaningFee,
+    checkInTime,
+    checkInType,
+    parking,
+    setSumitButtonActive,
   ]);
 
   return (

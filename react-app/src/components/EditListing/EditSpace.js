@@ -4,7 +4,7 @@ import { questions, typeOfSpace } from '../CreateListing/data';
 import { setKey, removeKey } from '../../store/createListing';
 import './EditListing.css';
 
-const EditSpace = () => {
+const EditSpace = ({ setSumitButtonActive }) => {
   const dispatch = useDispatch();
 
   const listing = useSelector((state) => state.listing);
@@ -27,6 +27,14 @@ const EditSpace = () => {
       dispatch(removeKey({ space: e.target.value }));
     }
   };
+
+  useEffect(() => {
+    if (ariaChecked === 'true') {
+      setSumitButtonActive('');
+    } else {
+      setSumitButtonActive('inactive');
+    }
+  }, [setSumitButtonActive, ariaChecked]);
 
   useEffect(() => {
     const matchingElement = (element) => element === listing.space;

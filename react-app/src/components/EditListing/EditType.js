@@ -1,10 +1,10 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { questions, typeOfPlace } from '../CreateListing/data';
 import { setKey, removeKey } from '../../store/createListing';
 import './EditListing.css';
 
-const EditType = () => {
+const EditType = ({ setSumitButtonActive }) => {
   const dispatch = useDispatch();
 
   const listing = useSelector((state) => state.listing);
@@ -28,6 +28,14 @@ const EditType = () => {
       dispatch(removeKey({ type: e.target.value }));
     }
   };
+
+  useEffect(() => {
+    if (ariaChecked === 'true') {
+      setSumitButtonActive('');
+    } else {
+      setSumitButtonActive('inactive');
+    }
+  }, [setSumitButtonActive, ariaChecked]);
 
   useLayoutEffect(() => {
     const matchingElement = (element) => element === listing.type;

@@ -26,6 +26,14 @@ def seed_listing_images():
 
     image12 = Listing_Image(listing_id=3, img_url='https://a0.muscache.com/im/pictures/a14534bb-a6b7-49ad-bab8-3eb8c670cbcc.jpg?im_w=1200')
 
+    image13 = Listing_Image(listing_id=4, img_url='https://a0.muscache.com/im/pictures/7566809c-d02b-414f-84df-349545d03077.jpg?im_w=1200')
+
+    image14 = Listing_Image(listing_id=4, img_url='https://a0.muscache.com/im/pictures/9ad7f3ba-1aa8-4a75-a10c-1d689f7fe80c.jpg?im_w=720')
+
+    image15 = Listing_Image(listing_id=4, img_url='https://a0.muscache.com/im/pictures/7665532b-3ef2-4dba-9805-a374f76c4bed.jpg?im_w=720')
+
+    image16 = Listing_Image(listing_id=4, img_url='https://a0.muscache.com/im/pictures/e34bf2f5-f811-407f-87dc-f0bc3831033c.jpg?im_w=720')
+
     db.session.add(image1)
     db.session.add(image2)
     db.session.add(image3)
@@ -38,6 +46,10 @@ def seed_listing_images():
     db.session.add(image10)
     db.session.add(image11)
     db.session.add(image12)
+    db.session.add(image13)
+    db.session.add(image14)
+    db.session.add(image15)
+    db.session.add(image16)
 
     db.session.commit()
 

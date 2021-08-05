@@ -51,7 +51,7 @@ const NavBar = ({ loaded }) => {
       <div className={`navbar-container ${absolute}`}>
         <div className='navbar-container-left'>
           <Link className='site-name' to='/'>
-            <div>staybnb</div>
+            <div className='site-name'>staybnb</div>
           </Link>
         </div>
         <div className='navbar-container-right'>{loaded && sessionLinks}</div>

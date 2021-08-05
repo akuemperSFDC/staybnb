@@ -82,7 +82,7 @@ const ViewReservations = () => {
                       optionOne
                     )} - ${new Date(res.end_date).toLocaleDateString(
                       'en-us',
-                      optionTwo
+                      optionOne
                     )}, ${new Date(res.start_date).toLocaleDateString(
                       'en-us',
                       optionThree

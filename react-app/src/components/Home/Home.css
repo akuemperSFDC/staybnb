@@ -135,6 +135,13 @@
   transition: 0.35s;
 }
 
+.search-button-container.inactive {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.413);
+  color: black;
+}
+
 .search-button-container:hover {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.934);
   background-color: white;

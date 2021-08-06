@@ -29,6 +29,7 @@ const Home = () => {
   const [checkOutDateVerticleDiv, setCheckOutDateVerticleDiv] = useState('');
   const [guestsDateVerticleDiv, setGuestsDateVerticleDiv] = useState('');
   const [showGuestSelect, setShowGuestSelect] = useState('false');
+  const [searchButtonActive, setSearchButtonActive] = useState('inactice');
 
   const options = { month: 'long', day: 'numeric' };
   const guests = bookings.guestCount;
@@ -155,7 +156,10 @@ const Home = () => {
           onBlur={handleFocus}
         >
           <div className='location-label search-bar-label'>Location</div>
-          <AutocompleteCityState setShowDatePicker={setShowDatePicker} />
+          <AutocompleteCityState
+            setSearchButtonActive={setSearchButtonActive}
+            setShowDatePicker={setShowDatePicker}
+          />
         </div>
         <div
           className={`verticle-divider ${checkInDateVerticleDiv} ${locationVerticleDiv}`}
@@ -245,7 +249,10 @@ const Home = () => {
           </div>
         </div>
         <div className='search-button-wrapper'>
-          <div onClick={handleSearch} className='search-button-container'>
+          <div
+            onClick={handleSearch}
+            className={`search-button-container ${searchButtonActive}`}
+          >
             <CgSearch className='search-button-icon' />
           </div>
         </div>

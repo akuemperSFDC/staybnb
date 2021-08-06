@@ -8,7 +8,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBooking } from '../../store/bookings';
 
-const AutocompleteCityState = ({ setShowDatePicker }) => {
+const AutocompleteCityState = ({
+  setSearchButtonActive,
+  setShowDatePicker,
+}) => {
   const dispatch = useDispatch();
   const [cityState, setCityState] = useState('');
   const [city, setCity] = useState('');
@@ -35,6 +38,11 @@ const AutocompleteCityState = ({ setShowDatePicker }) => {
       dispatch(setBooking({ city: split[1].trim() }));
       dispatch(setBooking({ state: split[2].trim() }));
     }
+    if (cityState) {
+      setSearchButtonActive('');
+    } else {
+      setSearchButtonActive('inactive');
+    }
   };
 
   const handleOnKeyDown = (e) => {
@@ -48,6 +56,14 @@ const AutocompleteCityState = ({ setShowDatePicker }) => {
     // dispatch(setBooking({ city }));
     // dispatch(setBooking({ state }));
   }, [dispatch, cityState]);
+
+  useEffect(() => {
+    if (cityState.includes(',')) {
+      setSearchButtonActive('');
+    } else {
+      setSearchButtonActive('inactive');
+    }
+  }, [cityState, setSearchButtonActive]);
 
   return (
     <PlacesAutocomplete

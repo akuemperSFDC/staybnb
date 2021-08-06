@@ -29,7 +29,7 @@ const Footer = () => {
         <a
           target='_blank'
           rel='noopener noreferrer'
-          href='https://www.linkedin.com/in/austin-kuemper-0b471b84/'
+          href='https://angel.co/u/austin-kuemper'
           className='footer__link-container'
         >
           <SiAngellist className='footer__link-icon' />

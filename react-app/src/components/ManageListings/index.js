@@ -107,7 +107,7 @@ const ManageListings = () => {
                   <div className='space-details-fetch'>{listing?.space}</div>
                 </div>
                 <div className='right-details space-details'>
-                  {listing?.space === 'Entire Place'
+                  {listing?.space === 'Entire place'
                     ? 'Guests share all areas'
                     : 'Common areas shared with tenants'}
                 </div>

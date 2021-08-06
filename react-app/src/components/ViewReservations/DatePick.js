@@ -76,12 +76,6 @@ const DatePick = ({ setShowDatePicker, res, currRes }) => {
     dispatch(currentReservation(dates));
   }, [dispatch, res]);
 
-  useEffect(() => {
-    if (currRes.end_date) {
-      setClickedOutside(false);
-    }
-  }, [currRes.end_date]);
-
   return (
     <>
       <div className='react-datepicker-calendar-container edit'>
@@ -109,13 +103,13 @@ const DatePick = ({ setShowDatePicker, res, currRes }) => {
           // excludeDates={[new Date(startDate), new Date(startDate)]}
         />
         <div
-          className='react-datepicker-calendar-container react-calendar-submit-button'
+          className='react-datepicker-calendar-container react-calendar-submit-button edit-dates-buttons'
           onClick={() => setClickedOutside(!clickedOutside)}
         >
           Submit
         </div>
         <div
-          className='react-datepicker-calendar-container react-calendar-clear-button'
+          className='react-datepicker-calendar-container react-calendar-clear-button edit-dates-buttons'
           onClick={handleClearDates}
         >
           Clear

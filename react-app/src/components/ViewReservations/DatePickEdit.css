@@ -1,4 +1,10 @@
 .react-datepicker-calendar-container.edit {
-  top: 25vh;
+  top: 30vh;
   left: 215px;
+  position: absolute;
+}
+
+.edit-dates-buttons {
+  position: absolute;
+  top: 440px;
 }

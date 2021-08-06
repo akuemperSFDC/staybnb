@@ -6,6 +6,8 @@
   z-index: 2;
   padding-top: 2rem;
   border-bottom: 1px solid var(--divider-color);
+  position: absolute;
+  top: 0px;
 }
 
 .navbar-container.absolute {

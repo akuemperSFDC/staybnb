@@ -1,6 +1,9 @@
 .search_results__container {
   width: 100vw;
   min-height: 100vh;
+  position: relative;
+  top: 91px;
+  margin-bottom: 300px;
 }
 
 .search-results__listings_container {

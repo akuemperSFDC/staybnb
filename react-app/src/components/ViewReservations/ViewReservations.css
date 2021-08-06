@@ -1,11 +1,13 @@
 .view-reservations__main-container {
   width: 100vw;
-  height: 90vh;
+  min-height: 1125px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   position: relative;
-  top: 0;
-  margin-bottom: 150px;
+  top: 91px;
+  /* margin-bottom: 150px; */
+  /* bottom: 800px; */
 }
 
 .view-reservations__showcase-container {

@@ -3,11 +3,11 @@
   display: flex;
   position: relative;
   width: 100vw;
-  min-height: 1000px;
-  height: 100vh;
-  margin-bottom: 50px;
-  /* bottom: 150px; */
-  top: -100px;
+  min-height: 1150px;
+  height: calc(100vh - 150px);
+  margin-bottom: 150px;
+  /* bottom: 150; */
+  /* top: 0; */
 }
 
 .left-side-question-container {

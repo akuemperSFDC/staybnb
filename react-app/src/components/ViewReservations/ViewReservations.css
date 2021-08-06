@@ -3,6 +3,9 @@
   height: 90vh;
   display: flex;
   justify-content: center;
+  position: relative;
+  top: 0;
+  margin-bottom: 150px;
 }
 
 .view-reservations__showcase-container {

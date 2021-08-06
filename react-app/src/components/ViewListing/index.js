@@ -115,7 +115,7 @@ const ViewListing = () => {
         <div className='view-listing__header-container'>
           <div className='view-listing__main-header'>{listing?.title}</div>
           <div className='view-listing__sub-header-container'>
-            <div className='view-listing__sub-header-rating'>(rating)</div>
+            <div className='view-listing__sub-header-rating'>{''}</div>
             <div className='view-listing__sub-header-location'>
               <div className='sub-header__city sub-header__location'>
                 {listing?.city},

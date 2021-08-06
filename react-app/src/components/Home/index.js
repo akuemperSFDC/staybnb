@@ -7,6 +7,7 @@ import {
   searchListingsCityState,
   searchListingsCityStateGuests,
   searchListingsCityStateGuestsStartDateEndDate,
+  searchAllListings,
 } from '../../store/searchResults';
 import AutocompleteCityState from './AutocompleteCityState';
 import CrossfadeCarousel from '@notbaldrick/react-crossfade-carousel';
@@ -30,6 +31,7 @@ const Home = () => {
   const [guestsDateVerticleDiv, setGuestsDateVerticleDiv] = useState('');
   const [showGuestSelect, setShowGuestSelect] = useState('false');
   const [searchButtonActive, setSearchButtonActive] = useState('inactice');
+  const [clickedOutside, setClickedOutside] = useState(false);
 
   const options = { month: 'long', day: 'numeric' };
   const guests = bookings.guestCount;
@@ -79,54 +81,84 @@ const Home = () => {
   };
 
   const handleSearch = () => {
-    if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
-      dispatch(searchListingsCityState(bookings));
-      history.push(`/search/${city}--${state}`);
-    } else if (bookings.guestCount) {
-      dispatch(searchListingsCityStateGuests(bookings));
-      history.push(`/search/${city}--${state}/guests=${guests}`);
-    } else {
-      dispatch(searchListingsCityState(bookings));
-      history.push(`/search/${city}--${state}`);
-    }
+    // if (!bookings.guestCount && !bookings.start_date && !bookings.end_date) {
+    //   dispatch(searchListingsCityState(bookings));
+    //   history.push(`/search/${city}/${state}`);
+    // } else if (bookings.guestCount) {
+    //   dispatch(searchListingsCityStateGuests(bookings));
+    //   history.push(`/search/${city}/${state}/guests=${guests}`);
+    // } else {
+    //   dispatch(searchListingsCityState(bookings));
+    //   history.push(`/search/${city}/${state}`);
+    // }
     // dispatch(searchListingsCityStateGuestsStartDateEndDate(bookings));
+    dispatch(searchListingsCityState(bookings));
+    history.push(`/search/${city}/${state}`);
   };
 
-  const handleClickOutside = (e) => {
-    let concernedElement = document.querySelector(
-      '.home-page-container'
-    ).className;
-    document.addEventListener('click', (e) => {
-      if (
-        (concernedElement === e.target.className &&
-          showDatePicker === 'true') ||
-        (e.target.className === 'location-input' &&
-          showDatePicker === 'true') ||
-        (e.target.className === 'navbar-container' &&
-          showDatePicker === 'true') ||
-        (e.target.className === 'search-bar-label' &&
-          showDatePicker === 'true') ||
-        (e.target.className === 'search-input-guests-container' &&
-          showDatePicker === 'true')
-        // (e.target.className.includes('date-container') &&
-        //   showGuestSelect === 'true') ||
-        // (e.target.className.includes('search-bar-placeholder-label') &&
-        //   showGuestSelect === 'true')
-      ) {
-        // e.stopPropagation();
-        if (showDatePicker === 'false') {
-          setShowDatePicker('true');
-        } else {
-          setShowDatePicker('false');
-        }
-        // if (showGuestSelect === 'false') {
-        //   setShowGuestSelect('true');
-        // } else {
-        //   setShowGuestSelect('false');
-        // }
-      }
-    });
+  const handleRandomSearch = () => {
+    dispatch(searchAllListings());
+    localStorage.setItem('city', null);
+    localStorage.setItem('state', null);
+    localStorage.setItem('start_date', null);
+    localStorage.setItem('end_date', null);
+    localStorage.setItem('guests', null);
+    history.push(`/search/${city}/${state}`);
+    history.push(`/search/random/`);
   };
+
+  // const handleClickOutside = (e) => {
+  //   let concernedElement = document.querySelector(
+  //     '.home-page-container'
+  //   ).className;
+  //   document.addEventListener('click', (e) => {
+  //     if (
+  //       (e.target.className === 'location-input' &&
+  //         showDatePicker === 'true') ||
+  //       (e.target.className === 'navbar-container' &&
+  //         showDatePicker === 'true') ||
+  //       (e.target.className === 'search-bar-label' &&
+  //         showDatePicker === 'true') ||
+  //       (e.target.className === 'search-input-guests-container' &&
+  //         showDatePicker === 'true') ||
+  //       (e.target.className.includes('search-bar-label') &&
+  //         showDatePicker === 'true') ||
+  //       (e.target.className.includes('search-bar-placeholder-label') &&
+  //         showDatePicker === 'true')
+  //     ) {
+  //       if (showDatePicker === 'false') {
+  //         setShowDatePicker('true');
+  //       } else {
+  //         setShowDatePicker('false');
+  //       }
+  //     }
+
+  // if (
+  //   (concernedElement === e.target.className &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className === 'location-input' &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className === 'navbar-container' &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className === 'search-bar-label' &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className === 'search-input-guests-container' &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className.includes('search-bar-label') &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className.includes('search-bar-placeholder-label') &&
+  //     showGuestSelect === 'true') ||
+  //   (e.target.className.includes('date-container') &&
+  //     showGuestSelect === 'true')
+  // ) {
+  //   if (showGuestSelect === 'false') {
+  //     setShowGuestSelect('true');
+  //   } else {
+  //     setShowGuestSelect('false');
+  //   }
+  // }
+  //   });
+  // };
 
   useEffect(() => {
     dispatch(
@@ -145,8 +177,22 @@ const Home = () => {
     );
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('city', bookings.city);
+    localStorage.setItem('state', bookings.state);
+    localStorage.setItem('start_date', bookings.start_date);
+    localStorage.setItem('end_date', bookings.end_date);
+    localStorage.setItem('guests', bookings.guestCount);
+  }, [
+    bookings.city,
+    bookings.state,
+    bookings.start_date,
+    bookings.end_date,
+    bookings.guestCount,
+  ]);
+
   return (
-    <div className='home-page-container' onClick={handleClickOutside}>
+    <div className='home-page-container'>
       <div className='search-input-bar-container'>
         <div
           className={`location-input-container search-label-input-container ${focus}`}
@@ -255,6 +301,14 @@ const Home = () => {
           >
             <CgSearch className='search-button-icon' />
           </div>
+        </div>
+      </div>
+      <div className='home-page__random-search'>
+        <div
+          onClick={handleRandomSearch}
+          className='home-page__random-search-button'
+        >
+          Random Listings
         </div>
       </div>
       {showDatePicker === 'true' ? (

@@ -25,7 +25,6 @@ const NavBar = ({ loaded }) => {
   useEffect(() => {
     if (
       pathname === '/' ||
-      pathname.includes('/create-listing/') ||
       pathname === '/login' ||
       pathname === '/signup' ||
       pathname === '/splash'

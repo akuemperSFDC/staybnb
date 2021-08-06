@@ -4,6 +4,9 @@
   height: auto;
   display: flex;
   justify-content: center;
+  position: relative;
+  top: 0px;
+  margin-bottom: 300px;
 }
 
 .view-listing__container {
@@ -342,7 +345,7 @@
   cursor: pointer;
   transition: 0.35s;
   position: absolute;
-  bottom: -75px;
+  top: 450px;
   left: -150px;
 }
 
@@ -361,7 +364,7 @@
   cursor: pointer;
   transition: 0.35s;
   position: absolute;
-  bottom: -75px;
+  top: 450px;
   right: 300px;
 }
 
@@ -376,6 +379,19 @@
   border: 1px solid #ff385c;
   color: #ff385c;
 }
+
+/* .react-calendar-clear-button-bookings {
+  position: absolute;
+  bottom: -100px;
+  left: -180px;
+  z-index: 15;
+}
+
+.react-calendar-submit-button-bookings {
+  position: absolute;
+  bottom: -100px;
+  z-index: 15;
+} */
 
 .viewlisting__listing-owner-picture {
   width: 50px;

@@ -7,6 +7,24 @@ const setSearchListings = (listings) => ({
   listings,
 });
 
+export const searchAllListings = () => async (dispatch) => {
+  const response = await fetch(`/api/listings/`);
+
+  if (response.ok) {
+    const listings = await response.json();
+    console.log(listings);
+    dispatch(setSearchListings(listings));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.'];
+  }
+};
+
 export const searchListingsCityState = (search) => async (dispatch) => {
   const { city, state } = search;
   const response = await fetch(`/api/listings/${city}+${state}`);
@@ -46,7 +64,6 @@ export const searchListingsCityStateGuests = (search) => async (dispatch) => {
 export const searchListingsCityStateGuestsStartDateEndDate =
   (search) => async (dispatch) => {
     const { city, state, guestCount } = search;
-    console.log(search);
     let { start_date, end_date } = search;
     start_date = start_date.split('/').join('-');
     end_date = end_date.split('/').join('-');
@@ -56,7 +73,6 @@ export const searchListingsCityStateGuestsStartDateEndDate =
 
     if (response.ok) {
       const listings = await response.json();
-      console.log(listings);
       dispatch(setSearchListings(listings));
       return null;
     } else if (response.status < 500) {
@@ -77,21 +93,29 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH:
       let { listings } = action.listings;
-      if (action.listings.listings !== -1) {
-        const newListings = {};
-
-        listings.forEach((listing) => {
-          newListings[listing.id] = listing;
-        });
-
-        newState = { ...state, ...newListings };
-      } else if (action.listings.listings === -1) {
+      if (
+        action.listings.listings === -1 ||
+        action.listings.listings.length === 0
+      ) {
         oldState = { ...state };
         const oldStateKeys = Object.keys(oldState);
         oldStateKeys.forEach((key) => {
           delete oldState[key];
         });
         newState = { ...oldState };
+      } else if (action.listings.listings !== -1) {
+        oldState = { ...state };
+        const oldStateKeys = Object.keys(oldState);
+        oldStateKeys.forEach((key) => {
+          delete oldState[key];
+        });
+
+        const newListings = {};
+        listings.forEach((listing) => {
+          newListings[listing.id] = listing;
+        });
+
+        newState = { ...oldState, ...newListings };
       }
       return newState;
     default:

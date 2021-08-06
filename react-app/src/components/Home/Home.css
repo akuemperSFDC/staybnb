@@ -4,7 +4,7 @@
   background-size: cover;
   min-width: 100vw;
   min-height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,6 +222,8 @@
   margin-left: 550px;
   border-radius: 20px;
   z-index: 100;
+  position: absolute;
+  top: 150px;
 }
 
 .search-minus-button,
@@ -290,5 +292,34 @@
 
 .clear-button:hover {
   background-color: #ff385c;
+  color: white;
+}
+
+.home-page__random-search {
+  display: flex;
+  margin-top: 50px;
+}
+
+.home-page__random-search-button {
+  width: 180px;
+  height: 60px;
+  background-color: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: 0.35s;
+  cursor: pointer;
+  user-select: none;
+  color: var(--primary-color);
+}
+
+.home-page__random-search-button:hover {
+  background-color: var(--primary-color);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
 }

@@ -1,8 +1,13 @@
 .create-listing-container {
   background: none;
   display: flex;
+  position: relative;
   width: 100vw;
+  min-height: 1000px;
   height: 100vh;
+  margin-bottom: 50px;
+  /* bottom: 150px; */
+  top: -100px;
 }
 
 .left-side-question-container {

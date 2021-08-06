@@ -16,15 +16,16 @@
 .login-form__form-container {
   width: 568px;
   min-height: 450px;
-  height: auto;
+  max-height: 200vh;
   display: flex;
   flex-direction: column;
   border: 1px solid transparent;
   background-color: white;
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   z-index: 10;
+  bottom: 150px;
+  top: 0;
 }
 
 .login-form__header-container {

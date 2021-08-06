@@ -74,7 +74,6 @@ const CreateListing = () => {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        console.log(formData.get('listing_id'));
         const res = await fetch('/api/images', {
           method: 'POST',
           body: formData,
@@ -87,7 +86,7 @@ const CreateListing = () => {
           setImageLoading(false);
           // a real app would probably use more advanced
           // error handling
-          console.log('error');
+          // console.log('error');
         }
       };
       uploadImage();

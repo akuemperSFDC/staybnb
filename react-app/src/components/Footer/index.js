@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AiFillGithub } from 'react-icons/ai';
 import { TiSocialLinkedinCircular } from 'react-icons/ti';
 import { SiAngellist } from 'react-icons/si';
@@ -5,8 +7,20 @@ import { CgWebsite } from 'react-icons/cg';
 import './Footer.css';
 
 const Footer = () => {
+  const { pathname } = useLocation();
+
+  const [inactive, setInactive] = useState('');
+
+  // useEffect(() => {
+  //   if (pathname === '/' || pathname === '/reservations') {
+  //     setInactive('inactive');
+  //   } else {
+  //     setInactive('');
+  //   }
+  // }, [pathname]);
+
   return (
-    <div className='footer__container'>
+    <div className={`footer__container ${inactive}`}>
       <div className='footer__link-container-all'>
         <a
           target='_blank'
@@ -35,7 +49,7 @@ const Footer = () => {
           <SiAngellist className='footer__link-icon' />
           <div className='footer__links footer__angellist-link'>AngelList</div>
         </a>
-        <a
+        {/* <a
           target='_blank'
           rel='noopener noreferrer'
           href='/'
@@ -43,7 +57,7 @@ const Footer = () => {
         >
           <CgWebsite className='footer__link-icon' />
           <div className='footer__links footer__portfolio-link'>Portfolio</div>
-        </a>
+        </a> */}
       </div>
       {/* <div className='opacity-faker'></div> */}
     </div>

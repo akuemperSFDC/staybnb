@@ -70,6 +70,12 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
 
   useEffect(() => {}, [bookings]);
 
+  useEffect(() => {
+    if (endDate) {
+      setClickedOutside(!clickedOutside);
+    }
+  }, [endDate]);
+
   return (
     <>
       <div className='react-datepicker-calendar-container-bookings'>

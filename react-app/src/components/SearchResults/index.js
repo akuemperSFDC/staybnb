@@ -1,16 +1,25 @@
-import { useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+  searchListingsCityState,
+  searchAllListings,
+} from '../../store/searchResults';
 import SmallImageSlider from '../ImageSlider/SmallImageSlider';
 
 import './SearchResults.css';
 
 const SearchResults = () => {
-  const { cityName, stateName } = useParams();
+  const dispatch = useDispatch();
 
-  const bookings = useSelector((state) => state.bookings);
   const searchResultListings = useSelector((state) =>
     Object.values(state.searchResults)
   );
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [guests, setGuests] = useState('');
 
   const getNumberOfDays = (start, end) => {
     const date1 = new Date(start);
@@ -32,10 +41,40 @@ const SearchResults = () => {
     return days * ppn;
   };
 
-  console.log(getNumberOfDays(bookings.start_date, bookings.end_date));
+  // const city = bookings.city;
+  // const state = bookings.state;
 
-  const city = bookings.city;
-  const state = bookings.state;
+  useEffect(() => {
+    if (city !== 'null' && state !== 'null' && city && state) {
+      const location = { city, state };
+      dispatch(searchListingsCityState(location));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      city === 'null' &&
+      state === 'null' &&
+      startDate === 'null' &&
+      endDate === 'null' &&
+      guests === 'null'
+    ) {
+      dispatch(searchAllListings());
+    }
+  }, [dispatch, city, state, startDate, endDate, guests]);
+
+  useEffect(() => {
+    const pCity = localStorage.getItem('city');
+    const pState = localStorage.getItem('state');
+    const pStartDate = localStorage.getItem('start_date');
+    const pEndDate = localStorage.getItem('end_date');
+    const pGuests = localStorage.getItem('guests');
+    setCity(pCity);
+    setState(pState);
+    setStartDate(pStartDate);
+    setEndDate(pEndDate);
+    setGuests(pGuests);
+  }, [city, state, startDate, endDate, guests]);
 
   const options = { month: 'short', day: 'numeric' };
 
@@ -44,33 +83,35 @@ const SearchResults = () => {
       <div className='search-results__listings_container'>
         <div className='search-results__heading-container'>
           <div className='search-results__heading-details'>
-            {searchResultListings.length > 1
-              ? `${searchResultListings.length} stays `
-              : `${searchResultListings.length} stay `}
+            {searchResultListings.length === 1
+              ? `${searchResultListings.length} stay `
+              : `${searchResultListings.length} stays `}
 
-            {!bookings.start_date
+            {startDate === 'null'
               ? ''
-              : `· ${bookings.start_date.toLocaleDateString(
+              : `· ${new Date(startDate).toLocaleDateString(
                   'en-us',
                   options
-                )} - ${bookings.end_date.toLocaleDateString(
+                )} - ${new Date(endDate).toLocaleDateString(
                   'en-us',
                   options
                 )} `}
-            {!bookings.guestCount
+            {guests === 'null'
               ? ''
-              : bookings.guestCount > 1
-              ? `· ${bookings.guestCount} guests `
-              : `· ${bookings.guestCount} guest `}
+              : guests > 1
+              ? `· ${guests} guests `
+              : `· ${guests} guest `}
           </div>
-          <div className='search-results__heading-city'>{`Stays in ${cityName}`}</div>
+          <div className='search-results__heading-city'>
+            {city === 'null' ? 'Random stays' : `Stays in ${city}`}
+          </div>
         </div>
         <div className='search-results__bottom-divider'></div>
 
         <div className='search-results__listings-container'>
           {searchResultListings &&
             searchResultListings.map((listing) => (
-              <>
+              <div key={listing.id}>
                 <div
                   to={`/listings/view/${listing.title}/${listing.id}`}
                   className='search-results__listings'
@@ -150,14 +191,15 @@ const SearchResults = () => {
                     </div>
                     <div className='search-results_listing-dates-container'>
                       <div className='search-results__listing-next-available-dates'>
-                        {!bookings.start_date && !bookings.end_date
+                        {startDate === 'null' && endDate === 'null'
                           ? 'No dates selected'
-                          : `${new Date(bookings.start_date).toLocaleDateString(
+                          : `${new Date(startDate).toLocaleDateString(
                               'en-us',
                               options
-                            )} - ${new Date(
-                              bookings.end_date
-                            ).toLocaleDateString('en-us', options)}`}
+                            )} - ${new Date(endDate).toLocaleDateString(
+                              'en-us',
+                              options
+                            )}`}
                       </div>
                     </div>
                     <div className='search-results__listing-price-container'>
@@ -171,38 +213,30 @@ const SearchResults = () => {
                     <div className='search-results__listing-rating-total-container'>
                       <div className='search-results__listing-ratings-container'>
                         <div className='search-results__listing-star-icon  search-results__listing-ratings-text'>
-                          (star)
+                          {' '}
                         </div>
                         <div className='search-results__listing-rating search-results__listing-ratings-text'>
-                          (rating)
+                          {' '}
                         </div>
                         <div className='search-results__listing-total-reviews search-results__listing-ratings-text'>
-                          (# reviews)
+                          {' '}
                         </div>
                       </div>
                       <div className='search-results__listing-total-container'>
                         <div className='search-results__listing-total-text'>
-                          {isNaN(
-                            getNumberOfDays(
-                              bookings.start_date,
-                              bookings.end_date
-                            )
-                          ) === false
+                          {isNaN(getNumberOfDays(startDate, endDate)) === false
                             ? `$${getTotal(
-                                getNumberOfDays(
-                                  bookings.start_date,
-                                  bookings.end_date
-                                ),
+                                getNumberOfDays(startDate, endDate),
                                 listing.price_per_night
                               )} total`
-                            : '0'}
+                            : '$0 total'}
                         </div>
                       </div>
                     </div>
                   </Link>
                 </div>
                 <div className='search-results__bottom-divider'></div>
-              </>
+              </div>
             ))}
         </div>
       </div>

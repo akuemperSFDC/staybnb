@@ -35,8 +35,6 @@ export const editListingThunk = (listing) => async (dispatch) => {
   if (!latitude) latitude = '';
   if (!longitude) longitude = '';
 
-  console.log(listing);
-
   const cleaningFeeNum = Number(cleaning_fee);
   const pricePerNightNum = Number(price_per_night);
 
@@ -92,7 +90,6 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case EDIT_LISTING:
-      // console.log(action.type);
       newState = { ...state, ...action.listing };
       return newState;
     default:

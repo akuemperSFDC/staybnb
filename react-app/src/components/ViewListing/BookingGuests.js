@@ -11,14 +11,16 @@ const EditGuests = () => {
   const bookings = useSelector((state) => state.bookings);
 
   const [guestCount, setGuestCount] = useState();
+  const [clickedOutsideGuests, setClickedOutsideGuests] = useState(false);
 
   const handleCountDown = (e) => {
-    console.log(e.target.id);
     if (guestCount === 1) {
       setGuestCount(1);
+      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount - 1);
+      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
     }
   };
@@ -26,25 +28,39 @@ const EditGuests = () => {
   const handleCountUp = (e) => {
     if (guestCount === 16) {
       setGuestCount(16);
+      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount + 1);
+      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
     }
   };
 
-  useEffect(() => {
-    dispatch(
-      setBooking(
-        bookings.guestCount
-          ? { ...bookings, guestCount }
-          : { ...bookings, guestCount: 1 }
-      )
-    );
-  }, [dispatch, guestCount]);
+  // useEffect(() => {
+  //   dispatch(
+  //     setBooking(
+  //       bookings.guestCount
+  //         ? { ...bookings, guestCount }
+  //         : { ...bookings, guestCount: 1 }
+  //     )
+  //   );
+  // }, [dispatch, guestCount]);
 
   useEffect(() => {
-    setGuestCount(bookings.guestCount ? bookings.guestCount : 1);
+    const pGuests = localStorage.getItem('guests');
+    if (pGuests !== 'null') {
+      setGuestCount(Number(pGuests));
+    }
+    if (pGuests === 'null') {
+      setGuestCount(1);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (guestCount) {
+      setClickedOutsideGuests(!clickedOutsideGuests);
+    }
   }, []);
 
   return (
@@ -65,7 +81,7 @@ const EditGuests = () => {
               } `}
             />
           </div>
-          <div className='total'>{guestCount}</div>
+          <div className='total'>{guestCount !== 1 ? guestCount : 1}</div>
           <div
             id='guest'
             onClick={handleCountUp}

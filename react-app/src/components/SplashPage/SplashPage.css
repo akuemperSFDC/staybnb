@@ -18,7 +18,7 @@
   height: 100vh;
   background-color: black;
   color: black;
-  position: absolute;
+  /* position: absolute; */
   z-index: 1;
 }
 

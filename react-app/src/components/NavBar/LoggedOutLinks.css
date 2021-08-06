@@ -9,4 +9,9 @@
   color: white;
   text-decoration: none;
   font-size: 18px;
+  transition: 0.35s;
+}
+
+.logged-out_links:hover {
+  color: var(--primary-color);
 }

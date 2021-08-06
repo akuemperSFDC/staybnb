@@ -1,6 +1,5 @@
 .login-form__page-container {
-  background: url('https://images.unsplash.com/photo-1499363536502-87642509e31b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80')
-    no-repeat center center fixed;
+  background: no-repeat center center fixed;
   background-size: cover;
   min-width: 100vw;
   min-height: 100vh;
@@ -8,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +15,8 @@
 
 .login-form__form-container {
   width: 568px;
-  height: 400px;
+  min-height: 450px;
+  height: auto;
   display: flex;
   flex-direction: column;
   border: 1px solid transparent;
@@ -24,6 +24,7 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  z-index: 10;
 }
 
 .login-form__header-container {
@@ -97,12 +98,35 @@
   width: 516px;
   height: 48px;
   border-radius: 12px;
-  background-color: var(--primary-color);
   border: 1px solid transparent;
-  color: white;
   font-size: 16px;
   cursor: pointer;
+  color: white;
+  transition: 0.35s;
+}
+
+.login-form__login-button,
+.login-form__signup-button {
   margin: 24px 0 0 0;
+  background-color: var(--primary-color);
+}
+
+.login-form__login-button:hover,
+.login-form__signup-button:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.login-form__demo-button {
+  margin: 12px 0 0 0;
+  background-color: #09b165;
+}
+
+.login-form__demo-button:hover {
+  background-color: white;
+  color: #09b165;
+  border: 1px solid #09b165;
 }
 
 .login-form__errors-container {
@@ -114,6 +138,7 @@
 .login-form__goto-login {
   display: flex;
   justify-content: center;
+  margin: 24px 0;
 }
 
 .goto-login__text {
@@ -131,5 +156,5 @@
 }
 
 .go-to__link:hover {
-  color: #3d4961;
+  color: var(--primary-color);
 }

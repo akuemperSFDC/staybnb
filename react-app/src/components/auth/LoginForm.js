@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const demoEmail = 'demo@aa.io';
+  const demoPassword = 'password';
+  const user = useSelector((state) => state.session.user);
+
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -18,6 +22,12 @@ const LoginForm = () => {
       console.log(data);
       setErrors(data);
     }
+  };
+
+  const onDemoSignIn = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login(demoEmail, demoPassword));
+    history.push('/');
   };
 
   const updateEmail = (e) => {
@@ -81,8 +91,18 @@ const LoginForm = () => {
             </label>
           </div>
           <div className='login-form__button-container'>
-            <button className='login-form__button' type='submit'>
+            <button
+              className='login-form__button login-form__login-button'
+              type='submit'
+            >
               Login
+            </button>
+            <button
+              className='login-form__button login-form__demo-button'
+              onClick={onDemoSignIn}
+              to='/'
+            >
+              Demo
             </button>
           </div>
           <div className='login-form__goto-login'>

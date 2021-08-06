@@ -36,16 +36,15 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar loaded={loaded} />
-      {/* <Footer /> */}
       <Switch>
         <Route path='/splash' exact={true}>
           <SplashPage />
         </Route>
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <SplashPage />
         </Route>
         <Route path='/signup' exact={true}>
-          <SignUpForm />
+          <SplashPage />
         </Route>
         <ProtectedRoute path='/users' exact={true}>
           <UsersList />
@@ -84,6 +83,7 @@ function App() {
           <Home />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

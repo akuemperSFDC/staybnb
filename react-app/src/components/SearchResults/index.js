@@ -12,6 +12,28 @@ const SearchResults = () => {
     Object.values(state.searchResults)
   );
 
+  const getNumberOfDays = (start, end) => {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = date2.getTime() - date1.getTime();
+
+    // Calculating the no. of days between two dates
+    const diffInDays = Math.round(diffInTime / oneDay);
+
+    return diffInDays;
+  };
+
+  const getTotal = (days, ppn) => {
+    return days * ppn;
+  };
+
+  console.log(getNumberOfDays(bookings.start_date, bookings.end_date));
+
   const city = bookings.city;
   const state = bookings.state;
 
@@ -72,7 +94,7 @@ const SearchResults = () => {
                     </div>
                   </div>
                   <Link
-                    to={`/listings/view/${listing.title}`}
+                    to={`/listings/view/${listing.title}/${listing.id}`}
                     className='search-results__listing-details'
                   >
                     <div className='search-results__listing-header'>
@@ -128,7 +150,14 @@ const SearchResults = () => {
                     </div>
                     <div className='search-results_listing-dates-container'>
                       <div className='search-results__listing-next-available-dates'>
-                        Dates Available within specified start date and end date
+                        {!bookings.start_date && !bookings.end_date
+                          ? 'No dates selected'
+                          : `${new Date(bookings.start_date).toLocaleDateString(
+                              'en-us',
+                              options
+                            )} - ${new Date(
+                              bookings.end_date
+                            ).toLocaleDateString('en-us', options)}`}
                       </div>
                     </div>
                     <div className='search-results__listing-price-container'>
@@ -153,7 +182,20 @@ const SearchResults = () => {
                       </div>
                       <div className='search-results__listing-total-container'>
                         <div className='search-results__listing-total-text'>
-                          $(total) total
+                          {isNaN(
+                            getNumberOfDays(
+                              bookings.start_date,
+                              bookings.end_date
+                            )
+                          ) === false
+                            ? `$${getTotal(
+                                getNumberOfDays(
+                                  bookings.start_date,
+                                  bookings.end_date
+                                ),
+                                listing.price_per_night
+                              )} total`
+                            : '0'}
                         </div>
                       </div>
                     </div>

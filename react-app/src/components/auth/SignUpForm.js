@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { login } from '../../store/session';
 import './SignupForm.css';
 import './LoginForm.css';
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const demoEmail = 'demo@aa.io';
+  const demoPassword = 'password';
+
+  const user = useSelector((state) => state.session.user);
+
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,8 +21,6 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
-  const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
@@ -59,6 +65,12 @@ const SignUpForm = () => {
         setErrors(data);
       }
     }
+  };
+
+  const onDemoSignIn = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login(demoEmail, demoPassword));
+    history.push('/');
   };
 
   const humanize = (str) => {
@@ -189,8 +201,18 @@ const SignUpForm = () => {
             </label>
           </div>
           <div className='login-form__button-container'>
-            <button className='login-form__button' type='submit'>
+            <button
+              className='login-form__button login-form__signup-button'
+              type='submit'
+            >
               Signup
+            </button>
+            <button
+              className='login-form__button login-form__demo-button'
+              onClick={onDemoSignIn}
+              to='/'
+            >
+              Demo
             </button>
           </div>
           <div className='login-form__goto-login'>

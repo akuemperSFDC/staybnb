@@ -148,3 +148,10 @@
   background-color: white;
   color: #c70000;
 }
+
+.previous-reservation-text {
+  font-style: oblique;
+  /* font-weight: 300; */
+  margin-top: 10px;
+  color: var(--primary-color);
+}

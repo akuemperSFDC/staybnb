@@ -115,20 +115,20 @@ const SearchResults = () => {
                       <div className='search-results__listing-info-text'>·</div>
                       <div className='search-results__listing-info-text'>
                         {listing.bedrooms > 1
-                          ? `${listing.sleeps} bedrooms`
-                          : `${listing.sleeps} bedroom`}
+                          ? `${listing.bedrooms} bedrooms`
+                          : `${listing.bedrooms} bedroom`}
                       </div>
                       <div className='search-results__listing-info-text'>·</div>
                       <div className='search-results__listing-info-text'>
                         {listing.beds > 1
-                          ? `${listing.sleeps} beds`
-                          : `${listing.sleeps} bed`}
+                          ? `${listing.beds} beds`
+                          : `${listing.beds} bed`}
                       </div>
                       <div className='search-results__listing-info-text'>·</div>
                       <div className='search-results__listing-info-text'>
                         {listing.bathrooms > 1
-                          ? `${listing.sleeps} baths`
-                          : `${listing.sleeps} bath`}
+                          ? `${listing.bathrooms} baths`
+                          : `${listing.bathrooms} bath`}
                       </div>
                     </div>
                     <div className='search-results_listing-amenities'>

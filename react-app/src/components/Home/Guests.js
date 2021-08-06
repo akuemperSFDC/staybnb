@@ -10,7 +10,6 @@ const EditGuests = () => {
   const [guestCount, setGuestCount] = useState(1);
 
   const handleCountDown = (e) => {
-    console.log(e.target.id);
     if (guestCount === 1) {
       setGuestCount(1);
       dispatch(setBooking({ guestCount }));

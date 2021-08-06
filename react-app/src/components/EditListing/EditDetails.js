@@ -18,14 +18,6 @@ const EditDetails = ({ setSumitButtonActive }) => {
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
 
-  // const formatTimeBack = (time) => {
-  //   console.log(time);
-  //   const [hour, minutes] = time.split(':');
-  //   console.log(hour);
-  //   // if (time.contains('PM')) {
-  //   // }
-  // };
-
   useEffect(() => {
     // setCheckInTime(listing.check_in_time);
     setTitle(listing.title);

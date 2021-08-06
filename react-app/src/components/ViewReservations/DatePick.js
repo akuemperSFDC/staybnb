@@ -19,21 +19,6 @@ const DatePick = ({ setShowDatePicker, res, currRes }) => {
   const [startDate, endDate] = dateRange;
   const [clickedOutside, setClickedOutside] = useState(false);
 
-  const onChange = (dates) => {
-    // const [start, end] = dates;
-    // console.log(start, end);
-    // if (start && end) {
-    //   setStartDate(start);
-    //   setEndDate(end);
-    // }
-    // const dateRange = {
-    //   ...res,
-    //   start_date: start,
-    //   end_date: end,
-    // };
-    // dispatch(currentReservation(dateRange));
-  };
-
   const handleDates = () => {
     setDateRange([
       new Date(startDate).toISOString(),

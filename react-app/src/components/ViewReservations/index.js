@@ -27,7 +27,6 @@ const ViewReservations = () => {
   };
 
   const handleDeleteBooking = (e) => {
-    console.log(e.target.id);
     dispatch(deleteReservation(Number(e.target.id)));
   };
 

@@ -22,7 +22,6 @@ const SplashPage = () => {
     history.push('/');
   };
 
-  console.log(pathname);
   let render;
   if (pathname === '/login') {
     render = <LoginForm />;

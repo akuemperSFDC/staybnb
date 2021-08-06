@@ -80,8 +80,11 @@ export const createListing = (listing) => async (dispatch) => {
     }),
   });
 
+  console.log(response);
+
   if (response.ok) {
     const listing = await response.json();
+    console.log(listing);
     dispatch(setListing(listing));
     return null;
   } else if (response.status < 500) {
@@ -110,7 +113,8 @@ export default function reducer(state = initialState, action) {
       });
       return newState;
     case SET_LISTING:
-      newState = { ...state, ...action.listing.listing };
+      console.log(action);
+      newState = { ...state, ...action.listing };
       return newState;
     default:
       return state;

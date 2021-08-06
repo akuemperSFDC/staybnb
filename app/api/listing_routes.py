@@ -36,6 +36,7 @@ def post_listing():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_listing = Listing(
+            id = form.data['id'],
             user_id = form.data['user_id'],
             type = form.data['type'],
             space = form.data['space'],
@@ -62,8 +63,14 @@ def post_listing():
         )
 
         db.session.add(new_listing)
+        db.session.flush()
+        db.session.refresh(new_listing)
         db.session.commit()
-        return new_listing.to_dict()
+
+        new_listing_id = {'id': new_listing.id}
+        new_listing = new_listing.to_dict()
+        new_listing.update(new_listing_id)
+        return new_listing
 
     return {'errors': form.errors}
 

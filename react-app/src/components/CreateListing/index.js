@@ -67,7 +67,6 @@ const CreateListing = () => {
 
     if (createdListing) {
       const uploadImage = async () => {
-        console.log(createdListing);
         const formData = new FormData();
         formData.append('listing_id', createdListing);
         formData.append('image', image);

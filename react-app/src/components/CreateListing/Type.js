@@ -38,9 +38,7 @@ const Type = ({ setNextButtonActive }) => {
     }
   }, [ariaChecked, setNextButtonActive]);
 
-  useEffect(() => {
-    console.log(selected, ariaChecked, active, selectedElementIndex);
-  }, [selected, ariaChecked, active, selectedElementIndex]);
+  useEffect(() => {}, [selected, ariaChecked, active, selectedElementIndex]);
 
   return (
     <div className='answer-selection-container'>

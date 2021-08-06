@@ -63,7 +63,7 @@ const ManageListings = () => {
             <div className='top-border-info'></div>
             <div className='photos-heading '>Photos</div>
             {listing?.listing_images.length &&
-            listing?.listing_images.length >= 1 ? (
+            listing?.listing_images.length > 0 ? (
               <ImageSlider
                 className='manage-listings-slider'
                 images={listing?.listing_images}

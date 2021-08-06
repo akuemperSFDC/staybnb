@@ -15,7 +15,6 @@ def upload_image():
 
     image = request.files["image"]
     id = request.form['listing_id']
-    print('----------------------', int(request.form['listing_id']))
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400

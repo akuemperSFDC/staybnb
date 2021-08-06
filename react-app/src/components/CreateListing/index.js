@@ -200,11 +200,21 @@ const CreateListing = () => {
         ) : null}
         {question === questions[6] ? (
           <ProtectedRoute path='/create-listing/photos'>
-            <form encType='multipart/form-data' onSubmit={handleNext}>
-              <input type='file' accept='image/*' onChange={updateImage} />
-              <button type='submit'>Submit</button>
-              {imageLoading && <p>Loading...</p>}
-            </form>
+            <div className='create-listing__add-photo-container'>
+              <form
+                className='create-listing__add-photo-form'
+                encType='multipart/form-data'
+                onSubmit={handleNext}
+              >
+                <input
+                  className='create-listing__add-photo-input'
+                  type='file'
+                  accept='image/*'
+                  onChange={updateImage}
+                />
+                {imageLoading && <p>Loading...</p>}
+              </form>
+            </div>
           </ProtectedRoute>
         ) : null}
         <div className='bottom-buttons-container'>
@@ -213,8 +223,7 @@ const CreateListing = () => {
           </div>
           <div
             id='next'
-            // ${nextButtonActive}
-            className={`bottom-buttons next-btn `}
+            className={`bottom-buttons next-btn ${nextButtonActive}`}
             onClick={handleNext}
           >
             Next

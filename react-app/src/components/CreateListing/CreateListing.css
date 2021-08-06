@@ -5,9 +5,9 @@
   width: 100vw;
   min-height: 1000px;
   height: 100vh;
-  margin-bottom: 150px;
-  bottom: 150px;
-  top: 0px;
+  margin-bottom: 50px;
+  /* bottom: 150px; */
+  top: -100px;
 }
 
 .left-side-question-container {

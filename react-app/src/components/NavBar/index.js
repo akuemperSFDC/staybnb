@@ -12,6 +12,15 @@ const NavBar = ({ loaded }) => {
   const { pathname } = useLocation();
 
   const [absolute, setAbsolute] = useState('');
+  const [profileBtnColor, setProfileBtnColor] = useState('');
+
+  useEffect(() => {
+    if (pathname.includes('/create-listing/')) {
+      setProfileBtnColor('offset');
+    } else {
+      setProfileBtnColor('');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (
@@ -29,7 +38,13 @@ const NavBar = ({ loaded }) => {
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = (
+      <ProfileButton
+        profileBtnColor={profileBtnColor}
+        absolute={absolute}
+        user={sessionUser}
+      />
+    );
   } else {
     sessionLinks = <LoggedOutLinks />;
   }

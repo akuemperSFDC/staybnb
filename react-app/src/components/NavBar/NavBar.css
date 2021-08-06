@@ -38,7 +38,7 @@
 .profile-button {
   display: flex;
   width: 77px;
-  background-color: white;
+  background-color: var(--primary-color);
   height: 42px;
   border-radius: 50px;
   align-items: center;
@@ -46,6 +46,14 @@
   user-select: none;
   position: relative;
   cursor: pointer;
+}
+
+.profile-button.absolute {
+  background-color: white;
+}
+
+.profile-button.offset {
+  background-color: var(--primary-color);
 }
 
 .site-name {

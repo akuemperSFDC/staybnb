@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import { BsList } from 'react-icons/bs';
 
-const ProfileButton = ({ user }) => {
+const ProfileButton = ({ user, absolute, profileBtnColor }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -31,7 +31,10 @@ const ProfileButton = ({ user }) => {
   };
   return (
     <div>
-      <div className='profile-button' onClick={openMenu}>
+      <div
+        className={`profile-button ${absolute} ${profileBtnColor}`}
+        onClick={openMenu}
+      >
         <BsList className='list-icon' />
         <img className='profile-img' src={user.img_url} alt='' />
       </div>

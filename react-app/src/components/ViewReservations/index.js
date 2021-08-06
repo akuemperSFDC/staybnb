@@ -117,9 +117,7 @@ const ViewReservations = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className='previous-reservation-text'>
-                    Past reservation
-                  </div>
+                  <div className='past-reservation-text'>Past reservation</div>
                 )}
               </div>
             </div>

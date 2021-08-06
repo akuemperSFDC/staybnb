@@ -27,28 +27,6 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
     dispatch(setBooking(dateRange));
   };
 
-  const handleClickOutside = (e) => {
-    // const concernedElement = document.querySelector('.home-page-container');
-    // console.log(e);
-
-    // document.addEventListener('mousedown', (e) => {
-    //   console.log(e);
-    //   if (concernedElement.includes(e.target)) {
-    //     setClickedOutside(!clickedOutside);
-    //   }
-    // });
-
-    if (!clickedOutside) {
-      setClickedOutside(!clickedOutside);
-    }
-
-    const dates = {
-      start_date: startDate,
-      end_date: endDate,
-    };
-    dispatch(setBooking(dates));
-  };
-
   const handleDates = () => {
     const dates = {
       start_date: startDate,
@@ -67,6 +45,12 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
   };
 
   useEffect(() => {
+    if (endDate) {
+      setClickedOutside(!clickedOutside);
+    }
+  }, [endDate]);
+
+  useEffect(() => {
     if (clickedOutside) {
       setShowDatePicker('');
       setTimeout(() => {
@@ -80,13 +64,13 @@ const DatePick = ({ showDatePicker, setShowDatePicker }) => {
       <div className='react-datepicker-calendar-container'>
         <DatePicker
           selected={null}
-          // shouldCloseOnSelect={true}
           value={bookings.start_date}
           monthsShown={2}
           onChange={(dates) => onChange(dates)}
           startDate={bookings.start_date}
           endDate={bookings.end_date}
           selectsRange
+          shouldCloseOnSelect={true}
           inline
           onCalendarClose={handleDates}
           // onCalendarOpen={handleShowDatePicker}

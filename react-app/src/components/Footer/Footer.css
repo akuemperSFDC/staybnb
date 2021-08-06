@@ -1,6 +1,6 @@
 .footer__container {
   position: relative;
-  z-index: 2;
+  z-index: 12;
   width: 100%;
   bottom: 0;
   height: 150px;
@@ -8,6 +8,10 @@
   justify-content: center;
   /* top: 100vh; */
   background-color: black;
+  position: fixed;
+}
+
+.footer__container.inactive {
 }
 /*
 .opacity-faker {

@@ -6,6 +6,8 @@
   width: 100vw;
   min-height: 100vh;
   height: auto;
+  bottom: 150px;
+  position: relative;
   /* justify-content: center; */
 }
 

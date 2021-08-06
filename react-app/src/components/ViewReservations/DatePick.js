@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { parseISO, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Home/DatePick.css';
+import './DatePickEdit.css';
 
 const DatePick = ({ setShowDatePicker, res, currRes }) => {
   const dispatch = useDispatch();
@@ -75,9 +76,15 @@ const DatePick = ({ setShowDatePicker, res, currRes }) => {
     dispatch(currentReservation(dates));
   }, [dispatch, res]);
 
+  useEffect(() => {
+    if (currRes.end_date) {
+      setClickedOutside(false);
+    }
+  }, [currRes.end_date]);
+
   return (
     <>
-      <div className='react-datepicker-calendar-container'>
+      <div className='react-datepicker-calendar-container edit'>
         <DatePicker
           selected={null}
           // shouldCloseOnSelect={true}

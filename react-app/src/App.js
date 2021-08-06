@@ -72,11 +72,14 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute
           exact={true}
-          path='/search/:cityName--:stateName/guests=:guests/'
+          path='/search/:cityName/:stateName/guests=:guests/'
         >
           <SearchResults />
         </ProtectedRoute>
-        <ProtectedRoute exact={true} path='/search/:cityName--:stateName/'>
+        <ProtectedRoute exact={true} path='/search/:city/:state/'>
+          <SearchResults />
+        </ProtectedRoute>
+        <ProtectedRoute exact={true} path='/search/random/'>
           <SearchResults />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true}>

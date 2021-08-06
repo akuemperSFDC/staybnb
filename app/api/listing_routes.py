@@ -24,7 +24,16 @@ def validation_errors_to_error_messages(validation_errors):
 def listings():
     listings = Listing.query.all()
 
-    return {'listings': [listing.to_dict() for listing in listings]}
+    my_listings = []
+    for listing in listings:
+        listing_dict = listing.to_dict()
+        listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_dict['listing_images'] = listing_images
+        listing_bookings = [list.to_dict() for list in listing.bookings]
+        listing_dict['listing_bookings'] = listing_bookings
+        my_listings.append(listing_dict)
+
+    return {'listings': my_listings}
 
 
 # Create a new listing
@@ -146,6 +155,7 @@ def listings_from_listing_id(listing_id):
 # Returns listings for specified city and state
 @listing_routes.route('/<city>+<state>')
 def listings_search_city_state(city, state):
+    print('-----------------------------------', city)
     city = city.lower()
     state = state.lower()
     city_listings = Listing.query.filter(func.lower(Listing.city) == city).all()

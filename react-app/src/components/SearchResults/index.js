@@ -45,11 +45,11 @@ const SearchResults = () => {
   // const state = bookings.state;
 
   useEffect(() => {
-    if (city !== 'null' && state !== 'null' && city && state) {
+    if (city && state !== 'null') {
       const location = { city, state };
       dispatch(searchListingsCityState(location));
     }
-  }, []);
+  }, [city, state]);
 
   useEffect(() => {
     if (

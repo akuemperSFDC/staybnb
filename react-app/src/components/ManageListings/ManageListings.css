@@ -4,12 +4,11 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  /* overflow: hidden; */
   position: relative;
   min-height: 100vh;
   height: auto;
   margin-bottom: 150px;
-  top: 0;
+  top: 91px;
 }
 
 /* .total-listings-container {

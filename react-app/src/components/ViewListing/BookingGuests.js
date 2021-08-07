@@ -5,23 +5,20 @@ import { BiMinus } from 'react-icons/bi';
 import { setBooking } from '../../store/bookings';
 import '../Home/Home.css';
 
-const EditGuests = () => {
+const EditGuests = ({ guestCount, setGuestCount }) => {
   const dispatch = useDispatch();
 
-  const bookings = useSelector((state) => state.bookings);
-
-  const [guestCount, setGuestCount] = useState();
   const [clickedOutsideGuests, setClickedOutsideGuests] = useState(false);
 
   const handleCountDown = (e) => {
     if (guestCount === 1) {
       setGuestCount(1);
-      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
+      localStorage.setItem('guests', guestCount);
     } else if (e.target.id === 'guest') {
       setGuestCount((prevGuestCount) => prevGuestCount - 1);
-      localStorage.setItem('guests', guestCount);
       dispatch(setBooking({ guestCount }));
+      localStorage.setItem('guests', guestCount);
     }
   };
 
@@ -51,17 +48,18 @@ const EditGuests = () => {
     const pGuests = localStorage.getItem('guests');
     if (pGuests !== 'null') {
       setGuestCount(Number(pGuests));
+      dispatch(setBooking({ guestCount }));
     }
     if (pGuests === 'null') {
       setGuestCount(1);
+      dispatch(setBooking({ guestCount }));
+      localStorage.setItem('guests', 1);
     }
   }, []);
 
   useEffect(() => {
-    if (guestCount) {
-      setClickedOutsideGuests(!clickedOutsideGuests);
-    }
-  }, []);
+    localStorage.setItem('guests', guestCount);
+  }, [guestCount]);
 
   return (
     <div className='view-listing__guests-container'>
@@ -81,7 +79,9 @@ const EditGuests = () => {
               } `}
             />
           </div>
-          <div className='total'>{guestCount !== 1 ? guestCount : 1}</div>
+          <div className='total'>
+            {guestCount && guestCount !== 1 ? guestCount : 1}
+          </div>
           <div
             id='guest'
             onClick={handleCountUp}

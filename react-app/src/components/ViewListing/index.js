@@ -25,6 +25,7 @@ const ViewListing = () => {
   const [showDatePicker, setShowDatePicker] = useState('false');
   const [showGuestSelect, setShowGuestSelect] = useState('false');
   const [reserveButtonActive, setReserveButtonActive] = useState('');
+  const [guestCount, setGuestCount] = useState();
 
   const options = { month: 'short', day: 'numeric' };
 
@@ -97,9 +98,34 @@ const ViewListing = () => {
   useEffect(() => {
     dispatch(getListingByListingId(Number(listingId)));
     dispatch(
-      setBooking({ ...bookings, listing_id: Number(listingId), user_id: id })
+      setBooking({
+        ...bookings,
+        listing_id: Number(listingId),
+        user_id: id,
+        guestCount,
+      })
     );
-  }, [bookings.guestCount]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const pGuests = localStorage.getItem('guests');
+    if (bookings.guestCount && pGuests !== 'null') {
+      localStorage.setItem('guests', bookings.guestCount);
+      setGuestCount(bookings.guestCount);
+      dispatch(setBooking({ guestCount }));
+    } else if (bookings.guestCount && pGuests === 'null') {
+      setGuestCount(bookings.guestCount);
+      localStorage.setItem('guests', bookings.guestCount);
+      dispatch(setBooking({ guestCount }));
+    } else if (!bookings.guestCount && pGuests !== 'null') {
+      setGuestCount(pGuests);
+      dispatch(setBooking({ guestCount: pGuests }));
+    } else {
+      setGuestCount(1);
+      localStorage.setItem('guests', 1);
+      dispatch(setBooking({ guestCount }));
+    }
+  }, []);
 
   useEffect(() => {
     if (bookings.start_date && bookings.end_date && bookings.guestCount) {
@@ -247,11 +273,11 @@ const ViewListing = () => {
                       GUESTS
                     </div>
                     <div className='booking-form__guests-amount'>
-                      {bookings.guestCount && bookings.guestCount
+                      {guestCount && guestCount
                         ? `${
-                            bookings.guestCount > 1
-                              ? `${bookings.guestCount} guests`
-                              : `${bookings.guestCount} guest`
+                            guestCount > 1
+                              ? `${guestCount} guests`
+                              : `${guestCount} guest`
                           }`
                         : 'Add guests'}
                     </div>
@@ -377,7 +403,12 @@ const ViewListing = () => {
                   setShowDatePicker={setShowDatePicker}
                 />
               ) : null}
-              {showGuestSelect === 'true' ? <BookingGuests /> : null}
+              {showGuestSelect === 'true' ? (
+                <BookingGuests
+                  setGuestCount={setGuestCount}
+                  guestCount={guestCount}
+                />
+              ) : null}
             </div>
           </div>
         </div>

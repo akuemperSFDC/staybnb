@@ -2,6 +2,7 @@ import { backgroundImages } from './data';
 import { useHistory, Redirect, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/session';
+import { useEffect } from 'react';
 import CrossfadeCarousel from '@notbaldrick/react-crossfade-carousel';
 import LoginForm from '../auth/LoginForm';
 import SignupForm from '../auth/SignUpForm';
@@ -21,6 +22,8 @@ const SplashPage = () => {
     const data = await dispatch(login(email, password));
     history.push('/');
   };
+
+  useEffect(() => {}, [backgroundImages]);
 
   let render;
   if (pathname === '/login') {

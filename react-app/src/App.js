@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import ProtectedEditListingRoute from './components/auth/ProtectedEditListingRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Home from './components/Home';
@@ -12,8 +13,6 @@ import CreateListing from './components/CreateListing';
 import SearchResults from './components/SearchResults';
 import ViewListing from './components/ViewListing';
 import ViewReservations from './components/ViewReservations';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import SplashPage from './components/SplashPage';
 import Footer from './components/Footer';
 import { authenticate } from './store/session';
@@ -64,9 +63,9 @@ function App() {
         <ProtectedRoute path='/create-listing'>
           <CreateListing />
         </ProtectedRoute>
-        <ProtectedRoute path='/listings/:listingId/edit'>
+        <ProtectedEditListingRoute path='/listings/:listingId/edit'>
           <EditListing />
-        </ProtectedRoute>
+        </ProtectedEditListingRoute>
         <ProtectedRoute path='/listings'>
           <ManageListings />
         </ProtectedRoute>

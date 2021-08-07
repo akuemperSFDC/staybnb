@@ -132,10 +132,15 @@ def listings_from_user_id(user_id):
     for listing in listings:
         listing_dict = listing.to_dict()
         listing_images = [list.to_dict() for list in listing.listing_images]
+        listing_user = listing.user.to_dict()
         listing_dict['listing_images'] = listing_images
+        listing_dict['Listing_User'] = listing_user
         my_listings.append(listing_dict)
 
-    return {'listings': my_listings}
+    if (my_listings):
+        return {'listings': my_listings}
+    else:
+        return {'listings': -1}
 
 
 #Get listing by listingId

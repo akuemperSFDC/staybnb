@@ -52,14 +52,31 @@ const initialState = {};
 
 export default function reducer(state = initialState, action) {
   let newState;
+  let oldState;
   switch (action.type) {
     case SET_LISTINGS:
       const { listings } = action.listings;
-      const newListings = {};
-      listings.forEach((listing) => {
-        newListings[listing.id] = listing;
-      });
-      newState = { ...state, ...newListings };
+      if (listings === -1 || listings.length === 0) {
+        oldState = { ...state };
+        const oldStateKeys = Object.keys(oldState);
+        oldStateKeys.forEach((key) => {
+          delete oldState[key];
+        });
+        newState = { ...oldState };
+      } else if (listings !== -1) {
+        oldState = { ...state };
+        const oldStateKeys = Object.keys(oldState);
+        oldStateKeys.forEach((key) => {
+          delete oldState[key];
+        });
+
+        const newListings = {};
+        listings.forEach((listing) => {
+          newListings[listing.id] = listing;
+        });
+
+        newState = { ...oldState, ...newListings };
+      }
       return newState;
     case DELETE_LISTING:
       newState = { ...state };

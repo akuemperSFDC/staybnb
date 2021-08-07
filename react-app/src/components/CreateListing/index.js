@@ -7,7 +7,6 @@ import Autocomplete from './Autocomplete';
 import Guests from './Guests';
 import Amenities from './Amenities';
 import Details from './Details';
-import UploadPicture from '../UploadPicture';
 import { createListing } from '../../store/createListing';
 import { questions } from './data';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +26,6 @@ const CreateListing = () => {
   const [nextButtonActive, setNextButtonActive] = useState('inactive');
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
-  const [newListing, setNewListing] = useState();
 
   const handleNext = async (e) => {
     if (pathname === '/create-listing/type') {
@@ -84,14 +82,13 @@ const CreateListing = () => {
           history.push('/listings');
         } else {
           setImageLoading(false);
-          // a real app would probably use more advanced
           // error handling
           // console.log('error');
         }
       };
       uploadImage();
     }
-  }, [createdListing]);
+  }, [createdListing, history, image]);
 
   useEffect(() => {
     listing.user_id = user.id;

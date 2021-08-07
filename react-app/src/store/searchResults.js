@@ -12,7 +12,6 @@ export const searchAllListings = () => async (dispatch) => {
 
   if (response.ok) {
     const listings = await response.json();
-    console.log(listings);
     dispatch(setSearchListings(listings));
     return null;
   } else if (response.status < 500) {

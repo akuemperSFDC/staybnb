@@ -23,8 +23,6 @@ const EditListing = () => {
 
   const [submitButtonActive, setSumitButtonActive] = useState('');
 
-  const listing_images = editListing.listing_images;
-
   delete editListing['listing_images'];
 
   const handleEditListing = () => {

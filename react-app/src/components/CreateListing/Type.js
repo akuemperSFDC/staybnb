@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { typeOfPlace } from './data';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
 const Type = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
-  const { type } = useSelector((state) => state.createListing);
 
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState();

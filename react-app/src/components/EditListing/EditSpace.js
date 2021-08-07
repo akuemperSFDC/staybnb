@@ -38,7 +38,7 @@ const EditSpace = ({ setSumitButtonActive }) => {
 
   useEffect(() => {
     const matchingElement = (element) => element === listing.space;
-    console.log(setSelected(typeOfSpace.findIndex(matchingElement)));
+    setSelected(typeOfSpace.findIndex(matchingElement));
   }, [listing.space]);
 
   return (

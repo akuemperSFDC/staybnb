@@ -11,6 +11,37 @@
   top: 91px;
 }
 
+.no-listings__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  margin-bottom: 150px;
+  top: 91px;
+}
+
+.no-listings__header-container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.no-listings__header {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.no-listings__details {
+  font-size: 18px;
+  font-style: oblique;
+}
+
 /* .total-listings-container {
   display: flex;
   border-bottom: 2px solid rgba(0, 0, 0, 0.29);

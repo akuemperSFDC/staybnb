@@ -1,9 +1,5 @@
 import PlacesAutocomplete from 'react-places-autocomplete';
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from 'react-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setKey } from '../../store/createListing';

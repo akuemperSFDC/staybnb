@@ -12,29 +12,23 @@ const EditDetails = ({ setSumitButtonActive }) => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [pricePerNight, setPricePerNight] = useState();
-  const [cleaningFee, setCleaningFee] = useState();
-  const [checkInTime, setCheckInTime] = useState('14:00');
+  const [pricePerNight, setPricePerNight] = useState('');
+  const [cleaningFee, setCleaningFee] = useState('');
+  const [checkInTime, setCheckInTime] = useState('');
   const [checkInType, setCheckInType] = useState('');
   const [parking, setParking] = useState('');
 
   useEffect(() => {
-    // setCheckInTime(listing.check_in_time);
-    setTitle(listing.title);
-    setDescription(listing.description);
-    setPricePerNight(listing.price_per_night);
-    setCleaningFee(listing.cleaning_fee);
-    setCheckInType(listing.check_in_type);
-    setParking(listing.parking);
-  }, [
-    listing.title,
-    listing.description,
-    listing.price_per_night,
-    listing.cleaning_fee,
-    listing.check_in_time,
-    listing.check_in_type,
-    listing.parking,
-  ]);
+    if (listing) {
+      setTitle(listing.title);
+      setDescription(listing.description);
+      setPricePerNight(listing.price_per_night);
+      setCleaningFee(listing.cleaning_fee);
+      setCheckInTime(listing.check_in_time);
+      setCheckInType(listing.check_in_type);
+      setParking(listing.parking);
+    }
+  }, [listing]);
 
   useEffect(() => {
     dispatch(
@@ -90,14 +84,14 @@ const EditDetails = ({ setSumitButtonActive }) => {
         <div className='edit-details-header'>Property details</div>
         <input
           onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          value={title ? title : ''}
           className='details-inputs edit'
           type='text'
           placeholder='Eye-catching title'
         ></input>
         <textarea
           onChange={(e) => setDescription(e.target.value)}
-          value={description}
+          value={description ? description : ''}
           className='details-inputs edit textarea'
           type='number'
           placeholder='Describe your property'
@@ -105,7 +99,7 @@ const EditDetails = ({ setSumitButtonActive }) => {
         <div className='costs-container'>
           <input
             onChange={(e) => setPricePerNight(e.target.value)}
-            value={pricePerNight}
+            value={pricePerNight ? pricePerNight : ''}
             className='details-inputs edit cost-inputs'
             type='number'
             placeholder='Nightly price'
@@ -113,7 +107,7 @@ const EditDetails = ({ setSumitButtonActive }) => {
           ></input>
           <input
             onChange={(e) => setCleaningFee(e.target.value)}
-            value={cleaningFee}
+            value={cleaningFee ? cleaningFee : ''}
             className='details-inputs edit cost-inputs'
             type='number'
             placeholder='Cleaning fee'
@@ -124,8 +118,7 @@ const EditDetails = ({ setSumitButtonActive }) => {
             label='Check-in time'
             type='time'
             onChange={(e) => setCheckInTime(e.target.value)}
-            defaultValue='03:00 PM'
-            value={!checkInTime ? '15:00' : checkInTime}
+            value={checkInTime ? checkInTime : ''}
             className='details-inputs edit'
             InputLabelProps={{
               shrink: true,
@@ -137,7 +130,7 @@ const EditDetails = ({ setSumitButtonActive }) => {
         </div>
         <input
           onChange={(e) => setCheckInType(e.target.value)}
-          value={checkInType}
+          value={checkInType ? checkInType : ''}
           className='details-inputs edit'
           type='text'
           placeholder='Check in type (Meet host, lockbox, etc.)'
@@ -145,7 +138,7 @@ const EditDetails = ({ setSumitButtonActive }) => {
 
         <input
           onChange={(e) => setParking(e.target.value)}
-          value={parking}
+          value={parking ? parking : ''}
           className='details-inputs edit'
           type='text'
           placeholder='Parking (Free stree parking, Private driveway, etc...) '

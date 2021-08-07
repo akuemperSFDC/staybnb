@@ -28,7 +28,7 @@ const UploadPicture = () => {
       setImageLoading(false);
       // a real app would probably use more advanced
       // error handling
-      console.log('error');
+      // console.log('error');
     }
   };
 

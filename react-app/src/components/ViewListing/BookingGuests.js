@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { setBooking } from '../../store/bookings';
@@ -7,8 +7,6 @@ import '../Home/Home.css';
 
 const EditGuests = ({ guestCount, setGuestCount }) => {
   const dispatch = useDispatch();
-
-  const [clickedOutsideGuests, setClickedOutsideGuests] = useState(false);
 
   const handleCountDown = (e) => {
     if (guestCount === 1) {
@@ -33,16 +31,6 @@ const EditGuests = ({ guestCount, setGuestCount }) => {
       dispatch(setBooking({ guestCount }));
     }
   };
-
-  // useEffect(() => {
-  //   dispatch(
-  //     setBooking(
-  //       bookings.guestCount
-  //         ? { ...bookings, guestCount }
-  //         : { ...bookings, guestCount: 1 }
-  //     )
-  //   );
-  // }, [dispatch, guestCount]);
 
   useEffect(() => {
     const pGuests = localStorage.getItem('guests');

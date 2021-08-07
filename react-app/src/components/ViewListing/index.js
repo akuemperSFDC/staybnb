@@ -121,8 +121,7 @@ const ViewListing = () => {
       setGuestCount(pGuests);
       dispatch(setBooking({ guestCount: pGuests }));
     } else {
-      setGuestCount(1);
-      localStorage.setItem('guests', 1);
+      localStorage.setItem('guests', null);
       dispatch(setBooking({ guestCount }));
     }
   }, []);

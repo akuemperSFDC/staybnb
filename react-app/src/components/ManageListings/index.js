@@ -52,7 +52,7 @@ const ManageListings = () => {
             </Link>
           </div>
           <div className='title-subheading '>
-            <p>Rating</p>
+            <p> </p>
             <div className='subheading-location'>
               <p>
                 {listing.city}, {listing.state}, {listing.country}

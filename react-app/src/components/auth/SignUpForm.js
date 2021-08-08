@@ -219,9 +219,9 @@ const SignUpForm = () => {
               Repeat Password
             </label>
           </div>
-          <div className='login-form__input-container'>
+          <div className='login-form__input-container signup-form__input-bottom'>
             <input
-              className='create-listing__add-photo-input'
+              className='create-listing__add-photo-input login-form__input signup-form__photo-input'
               type='file'
               accept='image/*'
               onChange={updateImage}

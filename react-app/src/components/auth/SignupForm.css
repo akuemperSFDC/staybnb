@@ -23,3 +23,17 @@
   flex-direction: column;
   z-index: 10;
 }
+
+.signup-form__add-photo-container {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.signup-form__photo-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 5px;
+}

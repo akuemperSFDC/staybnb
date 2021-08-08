@@ -105,21 +105,21 @@ const ViewListing = () => {
         guestCount,
       })
     );
-  }, [dispatch]);
+  }, [dispatch, guestCount]);
 
   useEffect(() => {
     const pGuests = localStorage.getItem('guests');
     if (bookings.guestCount && pGuests !== 'null') {
       localStorage.setItem('guests', bookings.guestCount);
-      setGuestCount(bookings.guestCount);
+      setGuestCount(Number(pGuests));
       dispatch(setBooking({ guestCount }));
     } else if (bookings.guestCount && pGuests === 'null') {
-      setGuestCount(bookings.guestCount);
+      setGuestCount(Number(pGuests));
       localStorage.setItem('guests', bookings.guestCount);
       dispatch(setBooking({ guestCount }));
     } else if (!bookings.guestCount && pGuests !== 'null') {
-      setGuestCount(pGuests);
-      dispatch(setBooking({ guestCount: pGuests }));
+      setGuestCount(Number(pGuests));
+      dispatch(setBooking({ guestCount: Number(pGuests) }));
     } else {
       localStorage.setItem('guests', null);
       dispatch(setBooking({ guestCount }));
@@ -133,6 +133,8 @@ const ViewListing = () => {
       setReserveButtonActive('inactive');
     }
   }, [bookings.start_date, bookings.end_date, bookings.guestCount]);
+
+  useEffect(() => {}, [guestCount]);
 
   return (
     <div className='view-listing__page-wrapper'>

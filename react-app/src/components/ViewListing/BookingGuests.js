@@ -34,9 +34,9 @@ const EditGuests = ({ guestCount, setGuestCount }) => {
 
   useEffect(() => {
     const pGuests = localStorage.getItem('guests');
-    if (pGuests !== 'null') {
+    if (pGuests && pGuests !== 'null') {
       setGuestCount(Number(pGuests));
-      dispatch(setBooking({ guestCount }));
+      dispatch(setBooking({ pGuests }));
     }
     if (pGuests === 'null') {
       setGuestCount(1);
@@ -47,6 +47,7 @@ const EditGuests = ({ guestCount, setGuestCount }) => {
 
   useEffect(() => {
     localStorage.setItem('guests', guestCount);
+    console.log(guestCount);
   }, [guestCount]);
 
   return (

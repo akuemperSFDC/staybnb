@@ -60,7 +60,7 @@ function App() {
         <ProtectedRoute path='/reservations' exact={true}>
           <ViewReservations />
         </ProtectedRoute>
-        <ProtectedRoute path='/create-listing'>
+        <ProtectedRoute exact={true} path='/create-listing'>
           <CreateListing />
         </ProtectedRoute>
         <ProtectedEditListingRoute path='/listings/:listingId/edit'>

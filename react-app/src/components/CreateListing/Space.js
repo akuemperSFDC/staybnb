@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { typeOfSpace } from './data';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
-const Type = ({ setNextButtonActive }) => {
+const Space = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
+
+  const listing = useSelector((state) => state.createListing);
 
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState();
@@ -28,6 +30,37 @@ const Type = ({ setNextButtonActive }) => {
       dispatch(removeKey({ space: e.target.value }));
     }
   };
+
+  useEffect(() => {
+    const pSpace = localStorage.getItem('space');
+    const pSpaceIndex = localStorage.getItem('spaceIndex');
+    const pSpaceIndexChange = localStorage.getItem('spaceIndexChange');
+    if (pSpace !== 'null') {
+      dispatch(setKey({ space: pSpace }));
+      setSelected(Number(pSpaceIndex));
+      setSelectedElementIndex(pSpaceIndexChange);
+      const selection = document.getElementById(Number(pSpaceIndex));
+      if (selection) {
+        selection.id = pSpaceIndexChange;
+      }
+
+      if (selection && selection.id === selectedElementIndex) {
+        setActive('active');
+        setAriaChecked('true');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (listing.space) {
+      localStorage.setItem('space', listing.space);
+      localStorage.setItem('spaceIndex', selected);
+      localStorage.setItem('spaceIndexChange', selectedElementIndex);
+      setActive('active');
+      setAriaChecked('true');
+      setSelectedElementIndex(-1);
+    }
+  }, [listing.space, selected, selectedElementIndex]);
 
   useEffect(() => {
     if (ariaChecked === 'true') {
@@ -60,4 +93,4 @@ const Type = ({ setNextButtonActive }) => {
   );
 };
 
-export default Type;
+export default Space;

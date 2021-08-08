@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { typeOfPlace } from './data';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey, removeKey } from '../../store/createListing';
 import './CreateListing.css';
 
 const Type = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
+
+  const listing = useSelector((state) => state.createListing);
 
   const [selected, setSelected] = useState();
   const [ariaChecked, setAriaChecked] = useState();
@@ -30,14 +32,43 @@ const Type = ({ setNextButtonActive }) => {
   };
 
   useEffect(() => {
+    const pType = localStorage.getItem('type');
+    const pTypeIndex = localStorage.getItem('typeIndex');
+    const pTypeIndexChange = localStorage.getItem('typeIndexChange');
+    if (pType !== 'null') {
+      dispatch(setKey({ type: pType }));
+      setSelected(Number(pTypeIndex));
+      setSelectedElementIndex(pTypeIndexChange);
+      const selection = document.getElementById(Number(pTypeIndex));
+      if (selection) {
+        selection.id = pTypeIndexChange;
+      }
+
+      if (selection && selection.id === selectedElementIndex) {
+        setActive('active');
+        setAriaChecked('true');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (listing.type) {
+      localStorage.setItem('type', listing.type);
+      localStorage.setItem('typeIndex', selected);
+      localStorage.setItem('typeIndexChange', selectedElementIndex);
+      setActive('active');
+      setAriaChecked('true');
+      setSelectedElementIndex(-1);
+    }
+  }, [listing.type, selected, selectedElementIndex]);
+
+  useEffect(() => {
     if (ariaChecked === 'true') {
       setNextButtonActive('');
     } else {
       setNextButtonActive('inactive');
     }
   }, [ariaChecked, setNextButtonActive]);
-
-  useEffect(() => {}, [selected, ariaChecked, active, selectedElementIndex]);
 
   return (
     <div className='answer-selection-container'>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey } from '../../store/createListing';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { GiHeatHaze } from 'react-icons/gi';
@@ -8,6 +8,8 @@ import './CreateListing.css';
 
 const Amenities = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
+
+  const listing = useSelector((state) => state.createListing);
 
   const [ariaPressedWifi, setAriaPressedWifi] = useState(2);
   const [ariaPressedAC, setAriaPressedAC] = useState(2);
@@ -47,7 +49,42 @@ const Amenities = ({ setNextButtonActive }) => {
     dispatch(setKey({ wifi: 2 }));
     dispatch(setKey({ air_conditioning: 2 }));
     dispatch(setKey({ heat: 2 }));
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    const pWifi = localStorage.getItem('wifi');
+    const pAirConditioning = localStorage.getItem('airConditioning');
+    const pHeat = localStorage.getItem('heat');
+
+    if (
+      pWifi &&
+      pAirConditioning &&
+      pHeat &&
+      pWifi !== 'null' &&
+      pAirConditioning !== 'null' &&
+      pHeat !== 'null'
+    ) {
+      dispatch(
+        setKey({
+          wifi: Number(pWifi),
+          air_conditioning: Number(pAirConditioning),
+          heat: Number(pHeat),
+        })
+      );
+
+      setAriaPressedWifi(Number(pWifi));
+      setAriaPressedAC(Number(pAirConditioning));
+      setAriaPressedHeat(Number(pHeat));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (listing.wifi && listing.air_conditioning && listing.heat) {
+      localStorage.setItem('wifi', listing.wifi);
+      localStorage.setItem('airConditioning', listing.air_conditioning);
+      localStorage.setItem('heat', listing.heat);
+    }
+  }, [listing.wifi, listing.air_conditioning, listing.heat]);
 
   return (
     <div className='amenity-selection-container'>

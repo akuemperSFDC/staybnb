@@ -107,59 +107,6 @@ const Home = () => {
     history.push(`/search/random/`);
   };
 
-  // const handleClickOutside = (e) => {
-  //   let concernedElement = document.querySelector(
-  //     '.home-page-container'
-  //   ).className;
-  //   document.addEventListener('click', (e) => {
-  //     if (
-  //       (e.target.className === 'location-input' &&
-  //         showDatePicker === 'true') ||
-  //       (e.target.className === 'navbar-container' &&
-  //         showDatePicker === 'true') ||
-  //       (e.target.className === 'search-bar-label' &&
-  //         showDatePicker === 'true') ||
-  //       (e.target.className === 'search-input-guests-container' &&
-  //         showDatePicker === 'true') ||
-  //       (e.target.className.includes('search-bar-label') &&
-  //         showDatePicker === 'true') ||
-  //       (e.target.className.includes('search-bar-placeholder-label') &&
-  //         showDatePicker === 'true')
-  //     ) {
-  //       if (showDatePicker === 'false') {
-  //         setShowDatePicker('true');
-  //       } else {
-  //         setShowDatePicker('false');
-  //       }
-  //     }
-
-  // if (
-  //   (concernedElement === e.target.className &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className === 'location-input' &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className === 'navbar-container' &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className === 'search-bar-label' &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className === 'search-input-guests-container' &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className.includes('search-bar-label') &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className.includes('search-bar-placeholder-label') &&
-  //     showGuestSelect === 'true') ||
-  //   (e.target.className.includes('date-container') &&
-  //     showGuestSelect === 'true')
-  // ) {
-  //   if (showGuestSelect === 'false') {
-  //     setShowGuestSelect('true');
-  //   } else {
-  //     setShowGuestSelect('false');
-  //   }
-  // }
-  //   });
-  // };
-
   useEffect(() => {
     dispatch(
       setBooking({

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import ProtectedRoute from '../auth/ProtectedRoute';
 import Type from './Type';
 import Space from './Space';
 import Autocomplete from './Autocomplete';
@@ -26,38 +25,43 @@ const CreateListing = () => {
   const [nextButtonActive, setNextButtonActive] = useState('inactive');
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
+  const [pageIndex, setPageIndex] = useState(0);
 
   const handleNext = async (e) => {
-    if (pathname === '/create-listing/type') {
-      history.push('/create-listing/space');
-      setIndex((prevIndex) => prevIndex + 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/space') {
-      history.push('/create-listing/address');
-      setIndex((prevIndex) => prevIndex + 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/address') {
-      history.push('/create-listing/guests');
-      setIndex((prevIndex) => prevIndex + 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/guests') {
-      history.push('/create-listing/amenities');
-      setIndex((prevIndex) => prevIndex + 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/amenities') {
-      history.push('/create-listing/details');
-      setIndex((prevIndex) => prevIndex + 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/details') {
-      history.push('/create-listing/photos');
-      setIndex((prevIndex) => prevIndex + 1);
+    if (pageIndex === 5) {
       setQuestion(questions[index]);
       e.target.innerHTML = 'Submit';
-    } else if (pathname === '/create-listing/photos') {
+    }
+    if (pageIndex === 6) {
       e.preventDefault();
       dispatch(createListing(listing));
       dispatch(getListings(user.id));
+      localStorage.setItem('pageIndex', 0);
+      localStorage.setItem('type', null);
+      localStorage.setItem('space', null);
+      localStorage.setItem('address', null);
+      localStorage.setItem('city', null);
+      localStorage.setItem('country', null);
+      localStorage.setItem('latitude', null);
+      localStorage.setItem('longitude', null);
+      localStorage.setItem('sleeps', null);
+      localStorage.setItem('beds', null);
+      localStorage.setItem('bedrooms', null);
+      localStorage.setItem('bathrooms', null);
+      localStorage.setItem('wifi', null);
+      localStorage.setItem('air_conditioning', null);
+      localStorage.setItem('heat', null);
+      localStorage.setItem('title', null);
+      localStorage.setItem('description', null);
+      localStorage.setItem('pricePerNight', null);
+      localStorage.setItem('cleaningFee', null);
+      localStorage.setItem('checkInTime', null);
+      localStorage.setItem('checkInType', null);
+      localStorage.setItem('parking', null);
     }
+    setIndex((prevIndex) => prevIndex + 1);
+    setQuestion(questions[index]);
+    setPageIndex((prevPageIndex) => prevPageIndex + 1);
   };
 
   useEffect(() => {
@@ -95,36 +99,22 @@ const CreateListing = () => {
   }, [dispatch, listing, user.id, pathname]);
 
   const handleBack = (e) => {
-    if (pathname === '/create-listing/type') {
+    setNextButtonActive('');
+    setPageIndex((prevPageIndex) => prevPageIndex - 1);
+    if (pageIndex === 0) {
       history.push('/');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/space') {
-      history.push('/create-listing/type');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/address') {
-      history.push('/create-listing/space');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/guests') {
-      history.push('/create-listing/address');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/amenities') {
-      history.push('/create-listing/guests');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/details') {
-      history.push('/create-listing/amenities');
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
-    } else if (pathname === '/create-listing/photos') {
-      history.push('/create-listing/details');
-      changeSubmitToNextOnBackButtonPress();
-      setIndex((prevIndex) => prevIndex - 1);
-      setQuestion(questions[index]);
+      return;
     }
+
+    if (pageIndex === 6) {
+      setIndex((prevIndex) => prevIndex - 1);
+      setQuestion(questions[index]);
+      changeSubmitToNextOnBackButtonPress();
+      return;
+    }
+
+    setIndex((prevIndex) => prevIndex - 1);
+    setQuestion(questions[index]);
   };
 
   const changeSubmitToNextOnBackButtonPress = (e) => {
@@ -141,76 +131,71 @@ const CreateListing = () => {
     setQuestion(questions[index]);
   }, [index]);
 
+  useEffect(() => {
+    const pPageIndex = Number(localStorage.getItem('pageIndex') || 0);
+    setPageIndex(pPageIndex);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('pageIndex', Number(pageIndex));
+  }, [pageIndex]);
+
   return (
     <div className='create-listing-container'>
       <div className='left-side-question-container'>{question}</div>
       <div className='right-side-selection-container'>
-        {question === questions[0] ? (
-          <ProtectedRoute path='/create-listing/type'>
-            <Type
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 0 ? (
+          <Type
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[1] ? (
-          <ProtectedRoute path='/create-listing/space'>
-            <Space
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 1 ? (
+          <Space
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[2] ? (
-          <ProtectedRoute path='/create-listing/address'>
-            <Autocomplete
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 2 ? (
+          <Autocomplete
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[3] ? (
-          <ProtectedRoute path='/create-listing/guests'>
-            <Guests
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 3 ? (
+          <Guests
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[4] ? (
-          <ProtectedRoute path='/create-listing/amenities'>
-            <Amenities
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 4 ? (
+          <Amenities
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[5] ? (
-          <ProtectedRoute path='/create-listing/details'>
-            <Details
-              setNextButtonActive={setNextButtonActive}
-              nextButtonActive={nextButtonActive}
-            />
-          </ProtectedRoute>
+        {pageIndex === 5 ? (
+          <Details
+            setNextButtonActive={setNextButtonActive}
+            nextButtonActive={nextButtonActive}
+          />
         ) : null}
-        {question === questions[6] ? (
-          <ProtectedRoute path='/create-listing/photos'>
-            <div className='create-listing__add-photo-container'>
-              <form
-                className='create-listing__add-photo-form'
-                encType='multipart/form-data'
-                onSubmit={handleNext}
-              >
-                <input
-                  className='create-listing__add-photo-input'
-                  type='file'
-                  accept='image/*'
-                  onChange={updateImage}
-                />
-                {imageLoading && <p>Loading...</p>}
-              </form>
-            </div>
-          </ProtectedRoute>
+        {pageIndex === 6 ? (
+          <div className='create-listing__add-photo-container'>
+            <form
+              className='create-listing__add-photo-form'
+              encType='multipart/form-data'
+              onSubmit={handleNext}
+            >
+              <input
+                className='create-listing__add-photo-input'
+                type='file'
+                accept='image/*'
+                onChange={updateImage}
+              />
+              {imageLoading && <p>Loading...</p>}
+            </form>
+          </div>
         ) : null}
         <div className='bottom-buttons-container'>
           <div className='bottom-buttons back-btn' onClick={handleBack}>

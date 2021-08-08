@@ -1,11 +1,13 @@
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey } from '../../store/createListing';
 
 const AutocompleteCityState = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
+
+  const listing = useSelector((state) => state.createListing);
 
   const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState({
@@ -63,6 +65,52 @@ const AutocompleteCityState = ({ setNextButtonActive }) => {
       setNextButtonActive('inactive');
     }
   }, [address, city, state, country, setNextButtonActive]);
+
+  useEffect(() => {
+    const pAddress = localStorage.getItem('address');
+    const pCity = localStorage.getItem('city');
+    const pState = localStorage.getItem('state');
+    const pCountry = localStorage.getItem('country');
+    const pLatitude = localStorage.getItem('latitude');
+    const pLongitude = localStorage.getItem('longitude');
+
+    if (pAddress && pAddress !== 'null') {
+      dispatch(
+        setKey({
+          address: pAddress,
+          city: pCity,
+          state: pState,
+          country: pCountry,
+          latitude: pLatitude,
+          longitude: pLongitude,
+        })
+      );
+      setAddress(pAddress);
+      setCity(pCity);
+      setState(pState);
+      setCountry(pCountry);
+      setCoordinates({ latitude: pLatitude, longitude: pLongitude });
+      console.log(address);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (listing.address) {
+      localStorage.setItem('address', listing.address);
+      localStorage.setItem('city', listing.city);
+      localStorage.setItem('state', listing.state);
+      localStorage.setItem('country', listing.country);
+      localStorage.setItem('latitude', listing.latitude);
+      localStorage.setItem('longitude', listing.longitude);
+    }
+  }, [
+    listing.address,
+    listing.city,
+    listing.state,
+    listing.country,
+    listing.latitude,
+    listing.longitude,
+  ]);
 
   return (
     <PlacesAutocomplete

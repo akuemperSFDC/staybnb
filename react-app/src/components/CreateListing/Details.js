@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey } from '../../store/createListing';
 import TextField from '@material-ui/core/TextField';
 
@@ -7,6 +7,8 @@ import './CreateListing.css';
 
 const Details = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
+
+  const listing = useSelector((state) => state.createListing);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -63,6 +65,81 @@ const Details = ({ setNextButtonActive }) => {
     checkInType,
     parking,
     dispatch,
+  ]);
+
+  useEffect(() => {
+    const pTitle = localStorage.getItem('title');
+    const pDescription = localStorage.getItem('description');
+    const pPricePerNight = localStorage.getItem('pricePerNight');
+    const pCleaningFee = localStorage.getItem('cleaningFee');
+    const pCheckInTime = localStorage.getItem('checkInTime');
+    const pCheckInType = localStorage.getItem('checkInType');
+    const pParking = localStorage.getItem('parking');
+
+    if (
+      pTitle &&
+      pDescription &&
+      pPricePerNight &&
+      pCleaningFee &&
+      pCheckInTime &&
+      pCheckInType &&
+      pParking &&
+      pTitle !== 'null' &&
+      pDescription !== 'null' &&
+      pPricePerNight !== 'null' &&
+      pCleaningFee !== 'null' &&
+      pCheckInTime !== 'null' &&
+      pCheckInType !== 'null' &&
+      pParking !== 'null'
+    ) {
+      dispatch(
+        setKey({
+          title: pTitle,
+          description: pDescription,
+          pricePerNight: Number(pPricePerNight),
+          cleaningFee: Number(pCleaningFee),
+          checkInTime: pCheckInTime,
+          checkInType: pCheckInType,
+          parking: pParking,
+        })
+      );
+
+      setTitle(pTitle);
+      setDescription(pDescription);
+      setPricePerNight(Number(pPricePerNight));
+      setCleaningFee(Number(pCleaningFee));
+      setCheckInTime(pCheckInTime);
+      setCheckInType(pCheckInType);
+      setParking(pParking);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      title ||
+      description ||
+      pricePerNight ||
+      cleaningFee ||
+      checkInTime ||
+      checkInType ||
+      parking
+    ) {
+      localStorage.setItem('title', title);
+      localStorage.setItem('description', description);
+      localStorage.setItem('pricePerNight', pricePerNight);
+      localStorage.setItem('cleaningFee', cleaningFee);
+      localStorage.setItem('checkInTime', checkInTime);
+      localStorage.setItem('checkInType', checkInType);
+      localStorage.setItem('parking', parking);
+    }
+  }, [
+    title,
+    description,
+    pricePerNight,
+    cleaningFee,
+    checkInTime,
+    checkInType,
+    parking,
   ]);
 
   return (

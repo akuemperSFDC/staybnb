@@ -61,10 +61,10 @@ const ProfileButton = ({ user, absolute, profileBtnColor }) => {
               </div>
             </Link>
             <Link
-              to='/create-listing/type'
+              to='/create-listing'
               className='border-top-element profile-dropdown-element profile-links'
             >
-              <div className='link-decoration' to='/create-listing/type'>
+              <div className='link-decoration' to='/create-listing'>
                 Create listing
               </div>
             </Link>

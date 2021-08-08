@@ -45,12 +45,6 @@ const AutocompleteCityState = ({
     }
   };
 
-  const handleOnKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      setShowDatePicker('true');
-    }
-  };
-
   useEffect(() => {
     dispatch(setBooking({ cityState }));
     // dispatch(setBooking({ city }));
@@ -75,7 +69,6 @@ const AutocompleteCityState = ({
         <div className='home-search-autocomplete-container'>
           <input
             autoComplete='new-password'
-            onKeyPress={handleOnKeyDown}
             value={cityState}
             {...getInputProps({
               placeholder: 'Where are you going?',

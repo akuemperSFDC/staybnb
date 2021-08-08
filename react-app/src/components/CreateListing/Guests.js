@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setKey } from '../../store/createListing';
 import { BsPlus } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
@@ -8,10 +8,12 @@ import './CreateListing.css';
 const Guests = ({ setNextButtonActive }) => {
   const dispatch = useDispatch();
 
-  const [guestCount, setGuestCount] = useState(1);
-  const [bedCount, setBedCount] = useState(1);
-  const [bedroomCount, setBedroomCount] = useState(1);
-  const [bathroomCount, setBathroomCount] = useState(1);
+  const listing = useSelector((state) => state.createListing);
+
+  const [guestCount, setGuestCount] = useState(null);
+  const [bedCount, setBedCount] = useState(null);
+  const [bedroomCount, setBedroomCount] = useState(null);
+  const [bathroomCount, setBathroomCount] = useState(null);
   const [update, setUpdate] = useState(false);
 
   const handleCountDown = (e) => {
@@ -97,6 +99,52 @@ const Guests = ({ setNextButtonActive }) => {
       );
     }
   }, [guestCount, bedCount, bedroomCount, bathroomCount, dispatch, update]);
+
+  useEffect(() => {
+    const pSleeps = localStorage.getItem('sleeps');
+    const pBeds = localStorage.getItem('beds');
+    const pBedrooms = localStorage.getItem('bedrooms');
+    const pBathrooms = localStorage.getItem('bathrooms');
+
+    if (
+      pSleeps &&
+      pBeds &&
+      pBedrooms &&
+      pBathrooms &&
+      pSleeps !== 'null' &&
+      pBeds !== 'null' &&
+      pBedrooms !== 'null' &&
+      pBathrooms !== 'null'
+    ) {
+      dispatch(
+        setKey({
+          sleeps: Number(pSleeps),
+          beds: Number(pBeds),
+          bedrooms: Number(pBedrooms),
+          bathrooms: Number(pBathrooms),
+        })
+      );
+
+      setGuestCount(Number(pSleeps));
+      setBedCount(Number(pBeds));
+      setBedroomCount(Number(pBedrooms));
+      setBathroomCount(Number(pBathrooms));
+    } else {
+      setGuestCount(1);
+      setBedCount(1);
+      setBedroomCount(1);
+      setBathroomCount(1);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (guestCount && bedCount && bedroomCount && bathroomCount) {
+      localStorage.setItem('sleeps', Number(guestCount));
+      localStorage.setItem('beds', Number(bedCount));
+      localStorage.setItem('bedrooms', Number(bedroomCount));
+      localStorage.setItem('bathrooms', Number(bathroomCount));
+    }
+  }, [guestCount, bedCount, bedroomCount, bathroomCount]);
 
   return (
     <div className='answer-selection-container'>

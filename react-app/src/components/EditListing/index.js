@@ -34,8 +34,9 @@ const EditListing = () => {
 
   const handleDeleteListing = () => {
     dispatch(deleteListing(listingId));
+    dispatch(getListings(user.id));
     history.push('/listings');
-    dispatch(getListingByListingId(listingId));
+    // dispatch(getListingByListingId(listingId));
   };
 
   useEffect(() => {

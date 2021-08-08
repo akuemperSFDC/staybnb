@@ -2,6 +2,7 @@
 const SET_KEY = 'createListing/SET_KEY';
 const SET_LISTING = 'createListing/SET_LISTING';
 const REMOVE_KEY = 'createListing/REMOVE_KEY';
+const REMOVE_ALL_KEYS = 'createListing/REMOVE_ALL_KEYS';
 
 export const setKey = (data) => ({
   type: SET_KEY,
@@ -16,6 +17,10 @@ export const setListing = (listing) => ({
 export const removeKey = (data) => ({
   type: REMOVE_KEY,
   data,
+});
+
+export const removeAllKeys = () => ({
+  type: REMOVE_KEY,
 });
 
 export const createListing = (listing) => async (dispatch) => {
@@ -83,6 +88,13 @@ export const createListing = (listing) => async (dispatch) => {
   if (response.ok) {
     const listing = await response.json();
     dispatch(setListing(listing));
+    dispatch(removeKey({ id: '' }));
+    dispatch(removeKey({ type: '' }));
+    dispatch(removeKey({ space: '' }));
+    dispatch(removeKey({ address: '' }));
+    dispatch(removeKey({ city: '' }));
+    dispatch(removeKey({ state: '' }));
+    dispatch(removeKey({ country: '' }));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -98,6 +110,7 @@ const initialState = {};
 
 export default function reducer(state = initialState, action) {
   let newState;
+  let oldState;
   switch (action.type) {
     case SET_KEY:
       newState = { ...state, ...action.data };
@@ -111,6 +124,14 @@ export default function reducer(state = initialState, action) {
       return newState;
     case SET_LISTING:
       newState = { ...state, ...action.listing };
+      return newState;
+    case REMOVE_ALL_KEYS:
+      oldState = { ...state };
+      const oldKeys = Object.keys(oldState);
+      oldKeys.forEach((key) => {
+        delete oldState[key];
+      });
+      newState = { ...oldState };
       return newState;
     default:
       return state;

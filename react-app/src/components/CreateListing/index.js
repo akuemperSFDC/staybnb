@@ -6,7 +6,7 @@ import Autocomplete from './Autocomplete';
 import Guests from './Guests';
 import Amenities from './Amenities';
 import Details from './Details';
-import { createListing } from '../../store/createListing';
+import { createListing, removeKey } from '../../store/createListing';
 import { questions } from './data';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListings } from '../../store/listings';
@@ -28,19 +28,25 @@ const CreateListing = () => {
   const [pageIndex, setPageIndex] = useState(0);
 
   const handleNext = async (e) => {
-    if (pageIndex === 5) {
+    if (pageIndex < 6) {
+      setIndex((prevIndex) => prevIndex + 1);
       setQuestion(questions[index]);
+      setPageIndex((prevPageIndex) => prevPageIndex + 1);
+    }
+    if (pageIndex === 5) {
       e.target.innerHTML = 'Submit';
     }
     if (pageIndex === 6) {
       e.preventDefault();
       dispatch(createListing(listing));
       dispatch(getListings(user.id));
+      setIndex(0);
       localStorage.setItem('pageIndex', 0);
       localStorage.setItem('type', null);
       localStorage.setItem('space', null);
       localStorage.setItem('address', null);
       localStorage.setItem('city', null);
+      localStorage.setItem('state', null);
       localStorage.setItem('country', null);
       localStorage.setItem('latitude', null);
       localStorage.setItem('longitude', null);
@@ -58,15 +64,19 @@ const CreateListing = () => {
       localStorage.setItem('checkInTime', null);
       localStorage.setItem('checkInType', null);
       localStorage.setItem('parking', null);
+      setTimeout(() => {
+        history.push('/listings');
+      }, 1000);
     }
-    setIndex((prevIndex) => prevIndex + 1);
-    setQuestion(questions[index]);
-    setPageIndex((prevPageIndex) => prevPageIndex + 1);
   };
 
-  useEffect(() => {
-    // setNewListing(createdListing);
+  // useEffect(() => {
+  //   if (pageIndex === 6 && !image) {
+  //     history.push('/listings');
+  //   }
+  // }, [history, image, pageIndex]);
 
+  useEffect(() => {
     if (createdListing) {
       const uploadImage = async () => {
         const formData = new FormData();

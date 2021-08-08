@@ -27,7 +27,7 @@ const Type = ({ setNextButtonActive }) => {
       setAriaChecked('false');
       setSelectedElementIndex(i);
       e.target.id = selectedElementIndex;
-      dispatch(removeKey({ type: e.target.value }));
+      dispatch(removeKey({ type: listing.type }));
     }
   };
 
@@ -35,7 +35,7 @@ const Type = ({ setNextButtonActive }) => {
     const pType = localStorage.getItem('type');
     const pTypeIndex = localStorage.getItem('typeIndex');
     const pTypeIndexChange = localStorage.getItem('typeIndexChange');
-    if (pType !== 'null') {
+    if (pType && pType !== 'null') {
       dispatch(setKey({ type: pType }));
       setSelected(Number(pTypeIndex));
       setSelectedElementIndex(pTypeIndexChange);

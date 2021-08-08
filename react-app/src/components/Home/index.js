@@ -103,7 +103,6 @@ const Home = () => {
     localStorage.setItem('start_date', null);
     localStorage.setItem('end_date', null);
     localStorage.setItem('guests', null);
-    history.push(`/search/${city}/${state}`);
     history.push(`/search/random/`);
   };
 

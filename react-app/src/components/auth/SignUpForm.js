@@ -83,7 +83,7 @@ const SignUpForm = () => {
     } else {
       setErrors([]);
       const data = await dispatch(signUp(firstName, lastName, email, password));
-      console.log(data);
+      // console.log(data);
       if (data) {
         setErrors(data);
       }
@@ -97,7 +97,7 @@ const SignUpForm = () => {
   };
 
   const humanize = (str) => {
-    console.log('hit humanize function');
+    // console.log('hit humanize function');
     let i,
       frags = str.split('_');
     for (i = 0; i < frags.length; i++) {
@@ -131,9 +131,9 @@ const SignUpForm = () => {
     setImage(file);
   };
 
-  useEffect(() => {
-    console.log(errors);
-  });
+  // useEffect(() => {
+  //   // console.log(errors);
+  // });
 
   if (user) {
     return <Redirect to='/' />;

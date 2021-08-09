@@ -90,7 +90,7 @@ const AutocompleteCityState = ({ setNextButtonActive }) => {
       setState(pState);
       setCountry(pCountry);
       setCoordinates({ latitude: pLatitude, longitude: pLongitude });
-      console.log(address);
+      // console.log(address);
     }
   }, []);
 

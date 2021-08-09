@@ -47,7 +47,7 @@ const EditGuests = ({ guestCount, setGuestCount }) => {
 
   useEffect(() => {
     localStorage.setItem('guests', guestCount);
-    console.log(guestCount);
+    // console.log(guestCount);
   }, [guestCount]);
 
   return (

@@ -86,7 +86,6 @@ const SearchResults = () => {
             {searchResultListings.length === 1
               ? `${searchResultListings.length} stay `
               : `${searchResultListings.length} stays `}
-
             {startDate === 'null'
               ? ''
               : `· ${new Date(startDate).toLocaleDateString(
@@ -103,7 +102,11 @@ const SearchResults = () => {
               : `· ${guests} guest `}
           </div>
           <div className='search-results__heading-city'>
-            {city === 'null' ? 'Random stays' : `Stays in ${city}`}
+            {city === 'null'
+              ? 'Random stays'
+              : searchResultListings.length > 0
+              ? `Stays in ${city}`
+              : `No availability in ${city}`}
           </div>
         </div>
         <div className='search-results__bottom-divider'></div>

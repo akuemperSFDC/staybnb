@@ -16,6 +16,10 @@
   color: var(--primary color);
 }
 
+.navbar-container.remove-border {
+  border: none;
+}
+
 .site-name.absolute {
   color: white;
 }

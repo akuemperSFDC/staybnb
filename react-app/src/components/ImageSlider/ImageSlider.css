@@ -49,6 +49,7 @@
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  margin-right: 10px;
 }
 
 .left-arrow {
@@ -60,4 +61,5 @@
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  margin-left: 10px;
 }

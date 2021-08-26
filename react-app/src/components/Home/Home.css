@@ -323,3 +323,9 @@
   align-items: center;
   color: white;
 }
+
+.splash-page__welcome-message.search {
+  margin-top: 5rem;
+  font-size: 88px;
+  margin-bottom: 5rem;
+}

@@ -35,6 +35,14 @@ const NavBar = ({ loaded }) => {
     }
   }, [pathname, dispatch]);
 
+  useEffect(() => {
+    if (pathname === '/splash') {
+      setAbsolute('remove-border');
+    } else {
+      setAbsolute('');
+    }
+  }, [pathname, dispatch]);
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (

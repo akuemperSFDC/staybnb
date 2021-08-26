@@ -249,6 +249,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className='home-page__slogan'>
+        <div className='splash-page__welcome-message search'>See the world</div>
+      </div>
       <div className='home-page__random-search'>
         <div
           onClick={handleRandomSearch}

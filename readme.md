@@ -48,6 +48,15 @@ The app was built using [Flask](https://flask.palletsprojects.com/en/2.0.x/) on 
 
 - [Google Maps API](https://developers.google.com/maps)
 
+## Documentation
+
+- [Wiki Home](https://github.com/AKuemper/staybnb/wiki/Staybnb)
+- [API Routes](https://github.com/AKuemper/staybnb/wiki/API-Routes)
+- [Database Schema](https://github.com/AKuemper/staybnb/wiki/Database-Schema)
+- [Frontend Routes](https://github.com/AKuemper/staybnb/wiki/Frontend-Routes)
+- [Feature List](https://github.com/AKuemper/staybnb/wiki/MVP-Features)
+- [User Stories](https://github.com/AKuemper/staybnb/wiki/User-Stories)
+
 ## Primary Components
 
 ### Authentication / Authorization

@@ -57,6 +57,8 @@ User input validations are handled for both the sign up and log in forms in Flas
 
 #### Home Page
 
+---
+
 Where users will navigate in order to search for places to visit / stay. There is also a button to generate random listings, bypassing the search altogether.
 
 ![home](/readme_images/home.png)

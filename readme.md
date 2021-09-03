@@ -4,6 +4,8 @@
 
 ![splash](/readme_images/splash.png)
 
+---
+
 ## Summary
 
 Staybnb is a single-page web application inspired by the peer-to-peer marketplace app, Airbnb. Built using React/Redux on the front end, and flask on the back end.
@@ -16,6 +18,8 @@ Staybnb is a single-page web application inspired by the peer-to-peer marketplac
 - Browse and reserve listings
 - Manage reservations by editing a or cancelling
 - Generate random set of listings for a spontaneous adventure
+
+---
 
 ## Technologies Used
 
@@ -55,9 +59,9 @@ User input validations are handled for both the sign up and log in forms in Flas
 
 ![login](/readme_images/login.png)
 
-### Search / Home Page
-
 ---
+
+### Search / Home Page
 
 #### Home Page
 
@@ -71,9 +75,9 @@ Search results display all listings that match user input criteria.
 
 ![searchresults](/readme_images/searchresults.png)
 
-### Listings
-
 ---
+
+### Listings
 
 #### Create Listing
 
@@ -93,9 +97,9 @@ Showcases all of the listings a user currently has listed for other users to boo
 
 ![managelistings](/readme_images/managelistings.png)
 
-### Reservations
-
 ---
+
+### Reservations
 
 #### Create Reservation
 
@@ -108,6 +112,8 @@ When navigating to a listing's page (from the search results page), users can re
 Allows users to view all of their past and current reservations. Current reservations can be edited and cancelled by the user.
 
 ![reservations](/readme_images/reservations.png)
+
+---
 
 ## Future Implementations
 

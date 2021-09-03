@@ -45,8 +45,6 @@ The app was built using [Flask](https://flask.palletsprojects.com/en/2.0.x/) on 
 
 ## Primary Components
 
----
-
 ### Authentication / Authorization
 
 User input validations are handled for both the sign up and log in forms in Flask using WTForms validations. Passwords are hashed when saved to the database using [Wrkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/).

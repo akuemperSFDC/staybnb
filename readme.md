@@ -48,6 +48,8 @@ The app was built using [Flask](https://flask.palletsprojects.com/en/2.0.x/) on 
 
 - [Google Maps API](https://developers.google.com/maps)
 
+---
+
 ## Documentation
 
 - [Wiki Home](https://github.com/AKuemper/staybnb/wiki/Staybnb)

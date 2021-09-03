@@ -41,6 +41,8 @@ The app was built using [Flask](https://flask.palletsprojects.com/en/2.0.x/) on 
 
 ## Primary Components
 
+---
+
 ### Authentication / Authorization
 
 User input validations are handled for both the sign up and log in forms in Flask using WTForms validations. Passwords are hashed when saved to the database using [Wrkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/).
@@ -55,9 +57,9 @@ User input validations are handled for both the sign up and log in forms in Flas
 
 ### Search / Home Page
 
-#### Home Page
-
 ---
+
+#### Home Page
 
 Where users will navigate in order to search for places to visit / stay. There is also a button to generate random listings, bypassing the search altogether.
 
@@ -70,6 +72,8 @@ Search results display all listings that match user input criteria.
 ![searchresults](/readme_images/searchresults.png)
 
 ### Listings
+
+---
 
 #### Create Listing
 
@@ -90,6 +94,8 @@ Showcases all of the listings a user currently has listed for other users to boo
 ![managelistings](/readme_images/managelistings.png)
 
 ### Reservations
+
+---
 
 #### Create Reservation
 

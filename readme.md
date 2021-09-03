@@ -21,7 +21,7 @@ Staybnb is a single-page web application inspired by the peer-to-peer marketplac
 
 #### Front End
 
-The app was built completely using [React.js](https://reactjs.org/)/[Redux](https://redux.js.org/) on the front end.
+The app was built completely using [React.js](https://reactjs.org/) / [Redux](https://redux.js.org/) on the front end.
 
 #### Back End
 
@@ -100,3 +100,10 @@ When navigating to a listing's page (from the search results page), users can re
 Allows users to view all of their past and current reservations. Current reservations can be edited and cancelled by the user.
 
 ![reservations](/readme_images/reservations.png)
+
+### Future Implementations
+
+- Google Maps API map on search result page to show general location for properties
+- Google Maps API map on listing page to show general location of property
+- Property reviews - 5 Star and Comment review system
+- Multiple image uploads when creating / editing listing

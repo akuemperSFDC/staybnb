@@ -131,7 +131,7 @@ Allows users to view all of their past and current reservations. Current reserva
 
 ## Future Implementations
 
-- Google Maps API map on search result page to show general location for properties
+- Google Maps API map on search results page to show general location for properties
 - Google Maps API map on listing page to show general location of property
 - Property reviews - 5 Star and Comment review system
 - Multiple image uploads when creating / editing listing

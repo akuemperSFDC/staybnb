@@ -42,6 +42,11 @@ The app was built using [Flask](https://flask.palletsprojects.com/en/2.0.x/) on 
 - [US State Converter](https://www.npmjs.com/package/us-state-converter)
 - [Material UI](https://material-ui.com/)
 - [Faker](https://faker.readthedocs.io/en/master/)
+- [AWS S3](https://aws.amazon.com/s3/)
+
+### 3rd Party API
+
+- [Google Maps API](https://developers.google.com/maps)
 
 ## Primary Components
 
